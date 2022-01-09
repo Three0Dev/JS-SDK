@@ -1,6 +1,6 @@
 import { IPFS } from 'ipfs';
 import { OrbitDB } from 'orbit-db';
-import { Config } from '../config';
+import { PID } from './config';
 
 export class Database {
     constructor() {
@@ -35,11 +35,14 @@ export class Database {
             throw new Error("DB is not initialized")
         }
 
-        const address = (await window.contract.getDatabaseAddress(name)).address
+        const address = (await window.contract.getDatabaseAddress({
+            pid: PID,
+            name: name
+        })).address
         
         let db = await orbitdb.open(address)
         await db.load()
-        
+
         return db
     }
 

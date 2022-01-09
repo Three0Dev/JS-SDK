@@ -1,6 +1,6 @@
 const CONTRACT_NAME = process.env.CONTRACT_NAME ||'DESI'
 
-function getConfig(env) {
+function getNearConfig(env) {
   switch (env) {
 
   case 'production':
@@ -60,5 +60,29 @@ function getConfig(env) {
   }
 }
 
-module.exports.getConfig = getConfig
+const IPFS_CONFIG = {
+  ipfs: {
+    preload: {
+      enabled: false
+    },
+    config: {
+      Addresses: {
+        Swarm: [
+          '/dns4/wrtc-star1.par.dwebops.pub/tcp/443/wss/p2p-webrtc-star/',
+          '/dns4/wrtc-star2.sjc.dwebops.pub/tcp/443/wss/p2p-webrtc-star/',
+          '/dns4/webrtc-star.discovery.libp2p.io/tcp/443/wss/p2p-webrtc-star/'
+        ]
+      }
+    }
+  }
+}
+
+let PID = ""
+
+function setPID(config_file) {
+  PID = require(config_file).pid
+}
+
+module.exports.IPFS_CONFIG = IPFS_CONFIG
+module.exports.getNearConfig = getNearConfig
 module.exports.CONTRACT_NAME = CONTRACT_NAME
