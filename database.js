@@ -7,7 +7,6 @@ export class Database {
         // OrbitDB instance
         this.orbitdb = null
         // Databases
-        this.programs = null
         this.#startDBServices()
     }
 
@@ -31,13 +30,16 @@ export class Database {
         }
     }
 
-    get = async (address) => {
-        
-        let db
-        if (orbitdb) {
-            db = await orbitdb.open(address)
-            await db.load()
+    get = async (name) => {
+        if(!this.orbitdb){
+            throw new Error("DB is not initialized")
         }
+
+        const address = (await window.contract.getDatabaseAddress(name)).address
+        
+        let db = await orbitdb.open(address)
+        await db.load()
+        
         return db
     }
 
