@@ -60,4 +60,5 @@ function getConfig(env) {
   }
 }
 
-module.exports = getConfig
+module.exports.getConfig = getConfig
+module.exports.CONTRACT_NAME = CONTRACT_NAME
