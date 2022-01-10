@@ -1,5 +1,5 @@
-import {initContract} from './utils'
-import {setPID} from './config'
+import { initContract } from './utils'
+import { setPID } from './config'
 import { Database } from './database'
 import { Auth } from './auth'
 

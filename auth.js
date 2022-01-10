@@ -1,10 +1,12 @@
-import { CONTRACT_NAME, PID } from "./config";
+import { CONTRACT_NAME, PID, NEAR_CONFIG } from "./config";
 
 export class Auth {
-    logout() {
+    logout(refresh = false) {
         window.walletConnection.signOut()
         // reload page
-        window.location.replace(window.location.origin + window.location.pathname)
+        if(refresh) {
+            window.location.replace(window.location.origin + window.location.pathname)
+        }
       }
       
     async login() {
@@ -13,6 +15,8 @@ export class Auth {
         // This works by creating a new access key for the user's account and storing
         // the private key in localStorage.
         window.walletConnection.requestSignIn(CONTRACT_NAME)
+
+
 
         if(!(await window.contract.userExists())) {
             try {
