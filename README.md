@@ -21,10 +21,10 @@ The database client can be found `DESI_CLIENT.DB` and the authentication client 
 ```
 const auth = DESI_CLIENT.AUTH
 ```
-* `auth.login()`
+* `auth.login():void`
     * Logs into dApp using NEAR Wallet
     * Creates new user on NEAR blockchain if user doesn't exist
-* `auth.logout([refresh]?)`
+* `auth.logout([refresh]:bool):void`
     * Logs out of dApp
     * Refreshes site after logout if `refresh` parameter is true (Default: `false`)
 ### Database
