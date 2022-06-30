@@ -4,7 +4,8 @@ import OrbitDB from 'orbit-db';
 import { v4 as uuidv4 } from 'uuid';
 import * as sha256 from 'js-sha256';
 import { NEAR_CONFIG } from './NEAR';
-import {initIPFS as initIPFSCore} from './IPFS';
+import { initIPFS } from './IPFS';
+const convertToBitArray = (data) => Uint8Array.from(sha256.array(data))
 
 class NearIdentityProvider extends IdentityProvider {
   // return type
@@ -19,6 +20,8 @@ class NearIdentityProvider extends IdentityProvider {
 
   // return a signature of data (signature of the OrbitDB public key)
   async signIdentity(data) {
+    const NEAR_CONFIG = getNearConfig(globalThis.projectConfig);
+
     const dataBuffer = convertToArray(data);
     const keyStore = new keyStores.BrowserLocalStorageKeyStore();
     const keyPair = await keyStore.getKey(NEAR_CONFIG.networkId, globalThis.accountId);
@@ -27,21 +30,23 @@ class NearIdentityProvider extends IdentityProvider {
 
   // return true if identity.signatures are valid
   static async verifyIdentity(identity) {
+    const NEAR_CONFIG = getNearConfig(globalThis.projectConfig);
+
     const keyStore = new keyStores.BrowserLocalStorageKeyStore();
     const keyPair = await keyStore.getKey(NEAR_CONFIG.networkId, globalThis.accountId);
-    return keyPair.verify(convertToArray(identity.publicKey + identity.signatures.id), identity.signatures.publicKey);
+    return keyPair.verify(convertToBitArray(identity.publicKey + identity.signatures.id), identity.signatures.publicKey);
   }
 }
 
 const isValidDatabase = (address) => globalThis.contract.valid_database(address);
-const createUUID = () => uuidv4();
+const createUUID = uuidv4;
 
 let orbitdb;
 
-export const initIPFS = async () => initIPFSCore();
-
 // Start OrbitDB
-export const initOrbitDB = async (ipfs, chainType, isLoggedIn = false) => {
+export const initOrbitDB = async (chainType, isLoggedIn = false) => {
+  const ipfs = await initIPFS();
+
   if (isLoggedIn) {
     if (chainType.contains('NEAR')) {
       IdentityProvider.addIdentityProvider(NearIdentityProvider);
@@ -84,7 +89,3 @@ export const fetchDB = async (db) => {
   }
   return null;
 };
-
-function convertToArray(data) {
-  return Uint8Array.from(sha256.sha256.array(data));
-}

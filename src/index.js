@@ -14,9 +14,7 @@ const init = async (projectConfig) => {
   globalThis.projectConfig = projectConfig
 
   await Auth.initAuth();
-
-  const ipfs = await Database.initIPFS();
-  await Database.initOrbitDB(ipfs, projectConfig.chainType, Auth.isLoggedIn());
+  await Database.initOrbitDB(projectConfig.chainType, Auth.isLoggedIn());
 };
 
 export {

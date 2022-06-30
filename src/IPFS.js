@@ -25,4 +25,6 @@ const initIPFS = async () => {
   return ipfs;
 };
 
-export default initIPFS;
+export {
+  initIPFS,
+};
