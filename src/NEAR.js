@@ -1,8 +1,7 @@
-/* eslint-disable import/prefer-default-export */
-
 import {
   connect, Contract, keyStores, WalletConnection,
 } from 'near-api-js';
+import { getBlockchainType } from './utils';
 
 // Initialize contract & set global variables
 export async function initContract(projectConfig) {
@@ -30,10 +29,10 @@ export async function initContract(projectConfig) {
   });
 }
 
-export function getNearConfig(env) {
-  const CONTRACT_NAME = env.contractName;
+export function getNearConfig() {
+  const CONTRACT_NAME = globalThis.contractName
 
-  switch (env) {
+  switch (getBlockchainType(globalThis.chainType)) {
     case 'production':
     case 'mainnet':
       return {
