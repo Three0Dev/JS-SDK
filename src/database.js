@@ -1,12 +1,10 @@
 import IdentityProvider from 'orbit-db-identity-provider';
-import Identities from 'orbit-db-identity-provider';
 import { keyStores } from 'near-api-js';
-import * as IPFS from 'ipfs-core';
 import OrbitDB from 'orbit-db';
 import { v4 as uuidv4 } from 'uuid';
 import * as sha256 from 'js-sha256';
 import { NEAR_CONFIG } from './NEAR';
-import { IPFS_CONFIG } from './config';
+import {initIPFS as initIPFSCore} from './IPFS';
 
 class NearIdentityProvider extends IdentityProvider {
   // return type
@@ -16,43 +14,38 @@ class NearIdentityProvider extends IdentityProvider {
 
   // return identifier of external id (eg. a public key)
   async getId() {
-    return window.accountId;
+    return globalThis.accountId;
   }
 
   // return a signature of data (signature of the OrbitDB public key)
   async signIdentity(data) {
     const dataBuffer = convertToArray(data);
     const keyStore = new keyStores.BrowserLocalStorageKeyStore();
-    const keyPair = await keyStore.getKey(NEAR_CONFIG.networkId, window.accountId);
+    const keyPair = await keyStore.getKey(NEAR_CONFIG.networkId, globalThis.accountId);
     return keyPair.sign(dataBuffer).signature;
   }
 
   // return true if identity.signatures are valid
   static async verifyIdentity(identity) {
     const keyStore = new keyStores.BrowserLocalStorageKeyStore();
-    const keyPair = await keyStore.getKey(NEAR_CONFIG.networkId, window.accountId);
+    const keyPair = await keyStore.getKey(NEAR_CONFIG.networkId, globalThis.accountId);
     return keyPair.verify(convertToArray(identity.publicKey + identity.signatures.id), identity.signatures.publicKey);
   }
 }
 
-const isValidDatabase = (address) => window.contract.valid_database(address);
+const isValidDatabase = (address) => globalThis.contract.valid_database(address);
+const createUUID = () => uuidv4();
 
 let orbitdb;
 
-let ipfs;
-
-export const initIPFS = async () => {
-  if (ipfs) return ipfs;
-  ipfs = await IPFS.create(IPFS_CONFIG.ipfs);
-  return ipfs;
-};
+export const initIPFS = async () => initIPFSCore();
 
 // Start OrbitDB
 export const initOrbitDB = async (ipfs, chainType, isLoggedIn = false) => {
   if (isLoggedIn) {
     if (chainType.contains('NEAR')) {
-      Identities.addIdentityProvider(NearIdentityProvider);
-      const identity = await Identities.createIdentity({ type: 'NearIdentity' });
+      IdentityProvider.addIdentityProvider(NearIdentityProvider);
+      const identity = await IdentityProvider.createIdentity({ type: 'NearIdentity' });
 
       orbitdb = await OrbitDB.createInstance(ipfs, { identity });
     }
@@ -77,7 +70,6 @@ export const get = async (address) => {
   return db;
 };
 
-const createUUID = () => uuidv4();
 
 export const fetchDB = async (db) => {
   if (db) {

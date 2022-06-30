@@ -11,6 +11,8 @@ const init = async (projectConfig) => {
       throw Error(`Unconfigured chainType '${projectConfig.chainType}'`);
   }
 
+  globalThis.projectConfig = projectConfig
+
   await Auth.initAuth();
 
   const ipfs = await Database.initIPFS();

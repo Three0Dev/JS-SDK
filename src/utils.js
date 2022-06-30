@@ -6,3 +6,7 @@ export function getBlockchainType(chainType) {
       throw Error(`Unconfigured chainType '${chainType}'`);
   }
 }
+
+export function getPID(){
+    return globalThis.projectsplit('.')[0];
+}
