@@ -2,9 +2,10 @@ import IdentityProvider from 'orbit-db-identity-provider';
 import { keyStores } from 'near-api-js';
 import OrbitDB from 'orbit-db';
 import { v4 as uuidv4 } from 'uuid';
-import * as sha256 from 'js-sha256';
-import { NEAR_CONFIG } from './NEAR';
+import { sha256 } from 'js-sha256';
+import { getNearConfig } from './NEAR';
 import { initIPFS } from './IPFS';
+
 const convertToBitArray = (data) => Uint8Array.from(sha256.array(data))
 
 class NearIdentityProvider extends IdentityProvider {

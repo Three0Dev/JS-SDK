@@ -30,7 +30,7 @@ export async function initContract(projectConfig) {
   });
 }
 
-function getNearConfig(env) {
+export function getNearConfig(env) {
   const CONTRACT_NAME = env.contractName;
 
   switch (env) {
