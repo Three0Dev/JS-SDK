@@ -7,6 +7,6 @@ export function getBlockchainType(chainType) {
   }
 }
 
-export function getPID(){
-    return globalThis.projectsplit('.')[0];
+export function getPID() {
+  return globalThis.projectsplit('.')[0];
 }

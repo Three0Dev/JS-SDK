@@ -1,4 +1,4 @@
-import { getPID } from "./utils";
+import { getPID } from '../utils';
 
 export function isLoggedIn() {
   return globalThis.walletConnection.isSignedIn();
@@ -20,7 +20,7 @@ export async function initAuth() {
     }))
   ) {
     try {
-      await globalThis.contract.create_user({ project_id: getgetPID()() });
+      await globalThis.contract.create_user({ project_id: getPID() });
     } catch (e) {
       console.error(e);
       throw e;
