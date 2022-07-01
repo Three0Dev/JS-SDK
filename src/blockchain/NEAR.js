@@ -1,38 +1,13 @@
 import {
   connect, Contract, keyStores, WalletConnection,
 } from 'near-api-js';
-import { getBlockchainType } from './utils';
-
-// Initialize contract & set global variables
-export async function initContract(projectConfig) {
-  const nearConfig = getNearConfig(projectConfig);
-
-  // Initialize connection to the NEAR testnet
-  const near = await connect({
-    deps: { keyStore: new keyStores.BrowserLocalStorageKeyStore() },
-    ...nearConfig,
-  });
-
-  // Initializing Wallet based Account. It can work with NEAR testnet wallet that
-  // is hosted at https://wallet.testnet.near.org
-  globalThis.walletConnection = new WalletConnection(near);
-
-  // Getting the Account ID. If still unauthorized, it's just empty string
-  globalThis.accountId = globalThis.walletConnection.getAccountId();
-
-  // Initializing our contract APIs by contract name and configuration
-  globalThis.contract = new Contract(globalThis.walletConnection.account(), nearConfig.contractName, {
-    // View methods are read only. They don't modify the state, but usually return some value.
-    viewMethods: ['user_exists', 'get_user', 'valid_database'],
-    // Change methods can modify the state. But you don't receive the returned value when called.
-    changeMethods: ['create_user', 'user_action'],
-  });
-}
+import { getBlockchainType } from '../utils';
 
 export function getNearConfig() {
-  const CONTRACT_NAME = globalThis.contractName
+  const CONTRACT_NAME = globalThis.contractName;
+  const chainType = getBlockchainType(globalThis.chainType);
 
-  switch (getBlockchainType(globalThis.chainType)) {
+  switch (chainType) {
     case 'production':
     case 'mainnet':
       return {
@@ -87,7 +62,37 @@ export function getNearConfig() {
       };
     default:
       throw Error(
-        `Unconfigured environment '${env}'. Can be configured in src/config.js.`,
+        `Unconfigured environment '${chainType}'. Can be configured in src/config.js.`,
       );
   }
+}
+
+// Initialize contract & set global variables
+export async function init(projectConfig) {
+  const nearConfig = getNearConfig(projectConfig);
+
+  // Initialize connection to the NEAR testnet
+  const near = await connect({
+    deps: { keyStore: new keyStores.BrowserLocalStorageKeyStore() },
+    ...nearConfig,
+  });
+
+  // Initializing Wallet based Account. It can work with NEAR testnet wallet that
+  // is hosted at https://wallet.testnet.near.org
+  globalThis.walletConnection = new WalletConnection(near);
+
+  // Getting the Account ID. If still unauthorized, it's just empty string
+  globalThis.accountId = globalThis.walletConnection.getAccountId();
+
+  // Initializing our contract APIs by contract name and configuration
+  globalThis.contract = new Contract(
+    globalThis.walletConnection.account(),
+    nearConfig.contractName,
+    {
+    // View methods are read only. They don't modify the state, but usually return some value.
+      viewMethods: ['user_exists', 'get_user', 'valid_database'],
+      // Change methods can modify the state. But you don't receive the returned value when called.
+      changeMethods: ['create_user', 'user_action'],
+    },
+  );
 }
