@@ -12,6 +12,7 @@ import {
   Feed,
   KeyValue,
 } from './wrappers';
+import { isLoggedIn } from '../auth';
 
 const convertToBitArray = (data) => Uint8Array.from(sha256.array(data));
 
@@ -28,7 +29,7 @@ class NearIdentityProvider extends IdentityProvider {
 
   // return a signature of data (signature of the OrbitDB public key)
   async signIdentity(data) {
-    const NEAR_CONFIG = NEAR.getNearConfig(globalThis.projectConfig);
+    const NEAR_CONFIG = NEAR.getNearConfig();
 
     const dataBuffer = convertToBitArray(data);
     const keyStore = new keyStores.BrowserLocalStorageKeyStore();
@@ -38,7 +39,7 @@ class NearIdentityProvider extends IdentityProvider {
 
   // return true if identity.signatures are valid
   static async verifyIdentity(identity) {
-    const NEAR_CONFIG = NEAR.getNearConfig(globalThis.projectConfig);
+    const NEAR_CONFIG = NEAR.getNearConfig();
 
     const keyStore = new keyStores.BrowserLocalStorageKeyStore();
     const keyPair = await keyStore.getKey(NEAR_CONFIG.networkId, globalThis.accountId);
@@ -49,44 +50,40 @@ class NearIdentityProvider extends IdentityProvider {
   }
 }
 
-let orbitdb;
-
 // Start OrbitDB
-export const initOrbitDB = async (chainType, isLoggedIn = false) => {
-  const ipfs = await initIPFS();
+export const initOrbitDB = async () => {
+  if (globalThis.orbitdb) return;
 
-  if (isLoggedIn) {
-    if (chainType.contains('NEAR')) {
+  const ipfs = await initIPFS();
+  const loggedIn = isLoggedIn();
+
+  if (loggedIn) {
+    if (globalThis.projectConfig.chainType.includes('NEAR')) {
       IdentityProvider.addIdentityProvider(NearIdentityProvider);
       const identity = await IdentityProvider.createIdentity({ type: 'NearIdentity' });
-
-      orbitdb = await OrbitDB.createInstance(ipfs, { identity });
+      globalThis.orbitdb = await OrbitDB.createInstance(ipfs, { identity });
     }
+  } else {
+    globalThis.orbitdb = await OrbitDB.createInstance(ipfs);
   }
-
-  if (!orbitdb) {
-    orbitdb = await OrbitDB.createInstance(ipfs);
-  }
-
-  return orbitdb;
 };
 
-export const { getCounter } = Counter;
-export const { getDocStore } = DocStore;
-export const { getEventLog } = EventLog;
-export const { getFeed } = Feed;
-export const { getKeyValue } = KeyValue;
+export function getCounter(address) {
+  return Counter.getCounter(globalThis.orbitdb, address);
+}
 
-export const fetchDB = async (db) => {
-  if (db) {
-    let entries;
-    if (db.type === 'eventlog' || db.type === 'feed') entries = await db.iterator({ limit: 10 }).collect().reverse();
-    else if (db.type === 'counter') entries = [{ payload: { value: db.value } }];
-    else if (db.type === 'keyvalue') entries = Object.keys(db.all).map((e) => ({ payload: { value: { key: e, value: db.get(e) } } }));
-    else if (db.type === 'docstore') entries = db.query((e) => e !== null, { fullOp: true }).reverse();
-    else entries = [{ payload: { value: 'TODO' } }];
+export function getDocStore(address) {
+  return DocStore.getDocStore(globalThis.orbitdb, address);
+}
 
-    return entries;
-  }
-  return null;
-};
+export function getEventLog(address) {
+  return EventLog.getEventLog(globalThis.orbitdb, address);
+}
+
+export function getFeed(address) {
+  return Feed.getFeed(globalThis.orbitdb, address);
+}
+
+export function getKeyValue(address) {
+  return KeyValue.getKeyValue(globalThis.orbitdb, address);
+}

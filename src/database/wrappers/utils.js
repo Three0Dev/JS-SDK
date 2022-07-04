@@ -9,3 +9,11 @@ export const isValidDatabase = async (address) => {
   const isProjectDatabase = await globalThis.contract.valid_database(address);
   return isProjectDatabase;
 };
+
+export function isValidKey(key) {
+  return key && typeof key === 'string';
+}
+
+export function isValidValueObject(value) {
+  return value && value instanceof Object;
+}

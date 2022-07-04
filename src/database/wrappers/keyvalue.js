@@ -22,12 +22,12 @@ class KVDatabase {
 
   async set(key, value) {
     if (!(key && key instanceof String)) throw Error('Key is required');
-    return this.#database.put(key, value);
+    await this.#database.put(key, value);
   }
 
   async delete(key) {
     if (!(key && key instanceof String)) throw Error('Key is required');
-    return this.#database.delete(key);
+    await this.#database.delete(key);
   }
 }
 
@@ -38,5 +38,6 @@ export const getKeyValue = async (orbitdb, address) => {
   if (!isValid) throw Error('Invalid database address');
 
   const database = await orbitdb.keyvalue(address);
+  await database.load();
   return new KVDatabase(database);
 };

@@ -4,8 +4,8 @@ import {
 import { getBlockchainType } from '../utils';
 
 export function getNearConfig() {
-  const CONTRACT_NAME = globalThis.contractName;
-  const chainType = getBlockchainType(globalThis.chainType);
+  const CONTRACT_NAME = globalThis.projectConfig.contractName;
+  const chainType = getBlockchainType();
 
   switch (chainType) {
     case 'production':
@@ -68,8 +68,8 @@ export function getNearConfig() {
 }
 
 // Initialize contract & set global variables
-export async function init(projectConfig) {
-  const nearConfig = getNearConfig(projectConfig);
+export async function init() {
+  const nearConfig = getNearConfig();
 
   // Initialize connection to the NEAR testnet
   const near = await connect({

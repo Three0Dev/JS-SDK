@@ -14,7 +14,7 @@ const init = async (projectConfig) => {
   }
 
   await Auth.initAuth();
-  await Database.initOrbitDB(projectConfig.chainType, Auth.isLoggedIn());
+  await Database.initOrbitDB();
 };
 
 export {

@@ -20,6 +20,7 @@ class CounterDatabase {
     }
 
     await Promise.all(incrementPromises);
+    await this.#database.load();
   }
 }
 
@@ -30,5 +31,6 @@ export const getCounter = async (orbitdb, address) => {
   if (!isValid) throw Error('Invalid database address');
 
   const database = await orbitdb.counter(address);
+  await database.load();
   return new CounterDatabase(database);
 };
