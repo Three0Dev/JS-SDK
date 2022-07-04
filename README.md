@@ -30,10 +30,6 @@ init(config).then(() => {
   root.render(<App />)
 }).catch(console.error)
 ```
-### Angular
-```
-
-```
 ### Vue
 ```
 import { createApp } from 'vue';
@@ -47,6 +43,9 @@ initContract(config)
     app.mount('#app');
 }).catch(console.error)
 ```
+### Angular
+WIP
+
 ### Vanilla
 WIP: Pending Bug Fixes and CDN Compatibility
 
