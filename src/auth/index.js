@@ -1,48 +1,30 @@
-import { getPID } from '../utils';
+import { providers } from 'near-api-js';
+import { getPID, getQueryParams } from '../utils';
+import { getNearConfig } from '../blockchain/NEAR';
+
+export async function initAuth() {
+  const nearConfig = getNearConfig();
+  const provider = new providers.JsonRpcProvider(
+    `https://archival-rpc.${nearConfig.networkId}.near.org`,
+  );
+
+  const queryParams = getQueryParams();
+
+  if (!queryParams.has('transactionHashes')) return;
+
+  const result = await provider.txStatus(queryParams.get('transactionHashes'), globalThis.accountId);
+  console.log(result);
+
+  // TODO: check if the transaction is valid
+
+  await globalThis.contract.user_action({
+    project_id: getPID(),
+    action: 'LOGIN',
+  });
+}
 
 export function isLoggedIn() {
   return globalThis.walletConnection.isSignedIn();
-}
-
-export async function initAuth() {
-  if (!isLoggedIn()) return;
-
-  if (globalThis[CONTRACT_NAME]) {
-    globalThis[CONTRACT_NAME] = false;
-    globalThis.walletConnection.signOut();
-    return;
-  }
-
-  if (
-    !(await globalThis.contract.user_exists({
-      project_id: getPID(),
-      account_id: this.getAccountId(),
-    }))
-  ) {
-    try {
-      await globalThis.contract.create_user({ project_id: getPID() });
-    } catch (e) {
-      console.error(e);
-      throw e;
-    }
-  }
-
-  const user = await globalThis.contract.get_user({
-    project_id: getPID(),
-    account_id: this.getAccountId(),
-  });
-  if (!user.is_online) {
-    globalThis[CONTRACT_NAME] = true;
-    try {
-      await globalThis.contract.user_action({
-        project_id: getPID(),
-        action: 'LOGIN',
-      });
-    } catch (e) {
-      console.error(e);
-      throw e;
-    }
-  }
 }
 
 export function getAccountId() {
@@ -51,7 +33,6 @@ export function getAccountId() {
 
 export async function logout() {
   try {
-    globalThis[CONTRACT_NAME] = false;
     await globalThis.contract.user_action({
       project_id: getPID(),
       action: 'LOGOUT',
@@ -63,21 +44,15 @@ export async function logout() {
   }
 }
 
-export function login(
+export async function login(
   appName = 'My Three0 App',
-  successURL = window.location.href,
-  failureURL = window.location.href,
+  successUrL = window.location.href,
+  failureUrL = window.location.href,
 ) {
-  // Allow the current app to make calls to the specified contract on the
-  // user's behalf.
-  // This works by creating a new access key for the user's account and storing
-  // the private key in localStorage.
-  globalThis[CONTRACT_NAME] = false;
-  // console.log(successURL)
   globalThis.walletConnection.requestSignIn(
-    CONTRACT_NAME,
+    globalThis.projectConfig.contractName,
     appName,
-    successURL,
-    failureURL,
+    successUrL,
+    failureUrL,
   );
 }
