@@ -1,64 +1,115 @@
 # Three0 JS SDK
+This is a JS SDK is intended for browser based applications that need to interact with the Three0 Service Suite. It is not intended yet for Node.js applications. The SDK is currently in alpha stage development and is not yet ready for production use.
+
 ## Initialization
 ```
 npm i --save three0-js-sdk
 ```
 ## Usage
-1. Import Three0
+1. Import Three0 and prepare configuration
 ```
-import { DESI } from 'desi-js-sdk'
+import { init } from 'three0-js-sdk'
+
+const config = {
+  "contractName": "myTestContract",
+  "projectId": "myTestProject",
+  "chainType": "NEAR_TESTNET"
+}
 ```
 2. Initialize SDK
 - - - -
 ### React
 ```
-const configFile = `../path_to_config_file.json`
+import React from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App'
 
+init(config).then(() => {
+  const container = document.querySelector('#root')
+  const root = createRoot(container)
+  root.render(<App />)
+}).catch(console.error)
 ```
 ### Angular
 ```
-const configFile = `../path_to_config_file.json`
-const DESI_CLIENT = new DESI(configFile)
+
 ```
 ### Vue
 ```
-import Vue from "vue"
-import App from "./App.vue"
+import { createApp } from 'vue';
+import App from './App.vue';
 
-import { initContract } from "./utils"
-
-Vue.config.productionTip = false
-
-const configFile = `../path_to_config_file.json`
-
-initContract(configFile)
+initContract(config)
   .then(() => {
-
-    new Vue({
-      render: h => h(App),
-    }).$mount("#app")
-
-  })
+    const app = createApp(App);
+    app.use(store);
+    app.use(router);
+    app.mount('#app');
+}).catch(console.error)
 ```
 ### Vanilla
-```
-const configFile = `../path_to_config_file.json`
-const DESI_CLIENT = new DESI(configFile)
-```
+WIP: Pending Bug Fixes and CDN Compatibility
 
 ## Services
 ### Auth
 ```
-const auth = DESI_CLIENT.AUTH
+import { AUTH } from 'three0-js-sdk'
 ```
-* `auth.login():void`
-    * Logs into dApp using NEAR Wallet
-    * Creates new user on NEAR blockchain if user doesn't exist
-* `auth.logout([refresh]:bool):void`
-    * Logs out of dApp
-    * Refreshes site after logout if `refresh` parameter is true (Default: `false`)
+* `AUTH.login():Promise<void>`
+  * Logs into dApp using NEAR Wallet
+  * Creates new user on NEAR blockchain if user doesn't exist
+* `AUTH.logout():Promise<void>`
+  * Logs out of dApp
+* `AUTH.isLoggedIn():boolean`
+  * Returns `true` if user is logged in
+* `AUTH.getAccountId():string`
+  * Returns user account ID
 ### Database
+```
+import { DB } from 'three0-js-sdk'
+```
+#### **DocStore**: `const docstore = await DB.getDocStore([address])`
+* `docstore.get(key:string):any`
+  * Gets value from docstore
+  * Returns `null` if key doesn't exist
+* `docstore.where(callback: Function):any[]`
+  * Returns array of values that match callback function
+  * Ex: `docstore.where(doc => doc.key === 'value')`
+* `docstore.set(key:string, value:Object):Promise<void>`
+  * Sets value in docstore
+* `docstore.add(value:Object):Promise<string>`
+  * Adds value to docstore
+  * Returns key of added value
+* `docstore.update(key:string, value:Object):Promise<void>`
+  * Updates value in docstore
+* `docstore.delete(key:string):Promise<void>`
+  * Deletes value from docstore
+#### **KeyValue**: `const keyvalue = await DB.getKeyValue([address])`
+* `keyvalue.get(key:string):any`
+  * Gets value from database
+  * Returns `null` if key doesn't exist
+* `keyvalue.getAll():any[]`
+  * Gets all values from database
+* `keyvalue.set(key:string, value:any):Promise<void>`
+  * Sets value in database
+* `keyvalue.delete(key:string):Promise<void>`
+  * Deletes value from database
+#### **Counter**: `const counter = await DB.getCounter([address])`
+* `counter.get():number`
+  * Gets current value of counter
+* `counter.increment(value:int):Promise<void>`
+  * Increments counter by `value`
+  * Value must be >= 1
+#### **Eventlog**
+WIP - Will be released during beta version
+#### **Feed**
+WIP - Will be released during beta version
 
-## License
+## License and Code of Conduct
+This repository is distributed under the terms of both the the Apache License (Version 3.0). See [LICENSE](LICENSE).
+
+See [Code of Conduct](CODE_OF_CONDUCT.md) for more information on contribution and ethical standards.
 
 ## Open Source References
+* [Orbit DB](https://orbitdb.org/)
+* [near-api-js](https://github.com/near/near-api-js)
