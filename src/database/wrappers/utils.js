@@ -6,7 +6,7 @@ export const isValidDatabase = async (address) => {
     return false;
   }
 
-  const isProjectDatabase = await globalThis.contract.valid_database(address);
+  const isProjectDatabase = await globalThis.contract.valid_database({ address });
   return isProjectDatabase;
 };
 

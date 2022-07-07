@@ -1,28 +1,3 @@
-import { providers } from 'near-api-js';
-import { getPID, getQueryParams } from '../utils';
-import { getNearConfig } from '../blockchain/NEAR';
-
-export async function initAuth() {
-  const nearConfig = getNearConfig();
-  const provider = new providers.JsonRpcProvider(
-    `https://archival-rpc.${nearConfig.networkId}.near.org`,
-  );
-
-  const queryParams = getQueryParams();
-
-  if (!queryParams.has('transactionHashes')) return;
-
-  const result = await provider.txStatus(queryParams.get('transactionHashes'), globalThis.accountId);
-  console.log(result);
-
-  // TODO: check if the transaction is valid
-
-  await globalThis.contract.user_action({
-    project_id: getPID(),
-    action: 'LOGIN',
-  });
-}
-
 export function isLoggedIn() {
   return globalThis.walletConnection.isSignedIn();
 }
@@ -34,7 +9,6 @@ export function getAccountId() {
 export async function logout() {
   try {
     await globalThis.contract.user_action({
-      project_id: getPID(),
       action: 'LOGOUT',
     });
     globalThis.walletConnection.signOut();

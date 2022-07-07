@@ -3,12 +3,25 @@
   "version": "0.1.0",
   "description": "js-sdk for Three0 platform",
   "source": [
-    "src/index.js"
+    "src/index.js",
+    "src/auth/index.js",
+    "src/database/index.js"
   ],
-  "main": "dist/main.js",
-  "type": "module",
+  "targets": {
+    "default": {
+      "includeNodeModules": false,
+      "distDir": "dist",
+      "isLibrary": true,
+      "outputFormat": "esmodule"
+    }
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./auth": "./dist/auth/index.js",
+    "./database": "./dist/database/index.js"
+  },
   "scripts": {
-    "build": "parcel build --no-scope-hoist",
+    "build": "parcel build",
     "watch": "parcel watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint 'src/**/*.js' --no-error-on-unmatched-pattern",
@@ -46,10 +59,5 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "engines": {
     "node": ">= 12.0.0"
-  },
-  "targets": {
-    "main": {
-      "includeNodeModules": false
-    }
   }
 }

@@ -1,7 +1,6 @@
 import { NEAR } from './blockchain';
-import * as DB from './database';
-import * as AUTH from './auth';
-
+import initOrbitDB from './database/init';
+import initAuth from './auth/init';
 
 const init = async (projectConfig) => {
   globalThis.projectConfig = projectConfig;
@@ -14,10 +13,8 @@ const init = async (projectConfig) => {
       throw Error(`Unconfigured chainType '${projectConfig.chainType}'`);
   }
 
-  await AUTH.initAuth();
-  await DB.initOrbitDB();
+  await initAuth();
+  await initOrbitDB();
 };
 
-export {init};
-export * from './database';
-export * from './auth';
+export default init;
