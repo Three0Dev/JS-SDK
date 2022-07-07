@@ -20,7 +20,6 @@ class CounterDatabase {
     }
 
     await Promise.all(incrementPromises);
-    await this.#database.load();
   }
 }
 

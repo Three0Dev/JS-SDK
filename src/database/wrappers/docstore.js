@@ -48,12 +48,12 @@ class DocumentDatabase {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const getDocStore = async (orbitdb, address) => {
+export const getDocStore = async (orbitdb, address, indexBy) => {
   if (!orbitdb) throw Error('OrbitDB is not initialized');
   const isValid = await isValidDatabase(address);
   if (!isValid) throw Error('Invalid database address');
 
-  const database = await orbitdb.docs(address);
+  const database = await orbitdb.docs(address, indexBy);
   await database.load();
   return new DocumentDatabase(database);
 };

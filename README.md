@@ -53,22 +53,25 @@ WIP: Pending Bug Fixes and CDN Compatibility
 ## Services
 ### Auth
 ```
-import { AUTH } from 'three0-js-sdk'
+import { login, logout, isloggedIn, getAccountId } from 'three0-js-sdk'
 ```
-* `AUTH.login():Promise<void>`
+* `login():Promise<void>`
   * Logs into dApp using NEAR Wallet
   * Creates new user on NEAR blockchain if user doesn't exist
-* `AUTH.logout():Promise<void>`
+* `logout():Promise<void>`
   * Logs out of dApp
-* `AUTH.isLoggedIn():boolean`
+* `isLoggedIn():boolean`
   * Returns `true` if user is logged in
-* `AUTH.getAccountId():string`
+* `getAccountId():string`
   * Returns user account ID
 ### Database
+
+#### **DocStore**: 
 ```
-import { DB } from 'three0-js-sdk'
+import { getDocStore } from 'three0-js-sdk'
+
+const docstore = await getDocStore([address])
 ```
-#### **DocStore**: `const docstore = await DB.getDocStore([address])`
 * `docstore.get(key:string):any`
   * Gets value from docstore
   * Returns `null` if key doesn't exist
@@ -84,7 +87,12 @@ import { DB } from 'three0-js-sdk'
   * Updates value in docstore
 * `docstore.delete(key:string):Promise<void>`
   * Deletes value from docstore
-#### **KeyValue**: `const keyvalue = await DB.getKeyValue([address])`
+#### **KeyValue**:
+```
+import { getKeyValue } from 'three0-js-sdk'
+
+const keyvalue = await getKeyValue([address])
+```
 * `keyvalue.get(key:string):any`
   * Gets value from database
   * Returns `null` if key doesn't exist
@@ -94,7 +102,12 @@ import { DB } from 'three0-js-sdk'
   * Sets value in database
 * `keyvalue.delete(key:string):Promise<void>`
   * Deletes value from database
-#### **Counter**: `const counter = await DB.getCounter([address])`
+#### **Counter**:
+```
+import { getCounter } from 'three0-js-sdk'
+
+const counter = await getCounter([address])
+```
 * `counter.get():number`
   * Gets current value of counter
 * `counter.increment(value:int):Promise<void>`
