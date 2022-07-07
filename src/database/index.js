@@ -54,17 +54,18 @@ class NearIdentityProvider extends IdentityProvider {
 export const initOrbitDB = async () => {
   if (globalThis.orbitdb) return;
 
-  const ipfs = await initIPFS();
+  const { ipfs, id } = await initIPFS();
   const loggedIn = isLoggedIn();
 
   if (loggedIn) {
+    console.log('Logged in');
     if (globalThis.projectConfig.chainType.includes('NEAR')) {
       IdentityProvider.addIdentityProvider(NearIdentityProvider);
       const identity = await IdentityProvider.createIdentity({ type: 'NearIdentity' });
-      globalThis.orbitdb = await OrbitDB.createInstance(ipfs, { identity });
+      globalThis.orbitdb = await OrbitDB.createInstance(ipfs, { identity, id });
     }
   } else {
-    globalThis.orbitdb = await OrbitDB.createInstance(ipfs);
+    globalThis.orbitdb = await OrbitDB.createInstance(ipfs, { id });
   }
 };
 
@@ -72,8 +73,8 @@ export function getCounter(address) {
   return Counter.getCounter(globalThis.orbitdb, address);
 }
 
-export function getDocStore(address) {
-  return DocStore.getDocStore(globalThis.orbitdb, address);
+export function getDocStore(address, indexBy = { indexBy: '_id' }) {
+  return DocStore.getDocStore(globalThis.orbitdb, address, indexBy);
 }
 
 export function getEventLog(address) {
