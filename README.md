@@ -118,7 +118,7 @@ WIP - Will be released during beta version
 WIP - Will be released during beta version
 
 ## License and Code of Conduct
-This repository is distributed under the terms of both the the Apache License (Version 3.0). See [LICENSE](LICENSE).
+This repository is distributed under the terms of both the the GPL License (Version 3.0). See [LICENSE](LICENSE).
 
 See [Code of Conduct](CODE_OF_CONDUCT.md) for more information on contribution and ethical standards.
 
