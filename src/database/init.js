@@ -1,7 +1,7 @@
 import IdentityProvider from 'orbit-db-identity-provider';
 import OrbitDB from 'orbit-db';
 import { initIPFS } from './ipfs';
-import { NearIdentityProvider } from './identities/NEAR';
+import NearIdentityProvider from './identities/NEAR';
 import { isLoggedIn } from '../auth';
 
 // Start OrbitDB
