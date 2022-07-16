@@ -25,3 +25,7 @@ export function getFeed(address) {
 export function getKeyValue(address) {
   return KeyValue.getKeyValue(globalThis.orbitdb, address);
 }
+
+export function timestamp() {
+  return Date.now();
+}

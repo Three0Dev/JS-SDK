@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
+import Database from './database';
 import { isValidDatabase } from './utils';
 
-class FeedDatabase {
+class FeedDatabase extends Database {
   #database;
 
   constructor(database) {
+    super(database);
     this.#database = database;
   }
 

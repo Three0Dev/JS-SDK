@@ -1,10 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
+import Database from './database';
 import { isValidDatabase, isValidKey, isValidValueObject } from './utils';
 
-class DocumentDatabase {
+class DocumentDatabase extends Database {
   #database;
 
   constructor(database) {
+    super(database);
     this.#database = database;
   }
 

@@ -1,9 +1,11 @@
 import { isValidDatabase } from './utils';
+import Database from './database';
 
-class CounterDatabase {
+class CounterDatabase extends Database {
   #database;
 
   constructor(database) {
+    super(database);
     this.#database = database;
   }
 

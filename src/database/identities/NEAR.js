@@ -31,7 +31,7 @@ export default class NearIdentityProvider extends IdentityProvider {
     const keyPair = await keyStore.getKey(NEAR_CONFIG.networkId, globalThis.accountId);
     return keyPair.verify(
       Buffer.from(identity.publicKey + identity.signatures.id),
-      identity.signatures.publicKey,
+      Buffer.from(Object.values(identity.signatures.publicKey)),
     );
   }
 }

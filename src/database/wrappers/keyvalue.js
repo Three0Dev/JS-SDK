@@ -1,9 +1,11 @@
+import Database from './database';
 import { isValidDatabase } from './utils';
 
-class KVDatabase {
+class KVDatabase extends Database {
   #database;
 
   constructor(database) {
+    super(database);
     this.#database = database;
   }
 
