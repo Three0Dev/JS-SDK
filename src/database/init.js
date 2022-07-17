@@ -15,6 +15,7 @@ const initOrbitDB = async () => {
     if (globalThis.projectConfig.chainType.includes('NEAR')) {
       // IdentityProvider.addIdentityProvider(NearIdentityProvider);
       // const identity = await IdentityProvider.createIdentity({ type: 'NearIdentity' });
+      // const orbitdb = await OrbitDB.createInstance(ipfs, {identity});
       globalThis.orbitdb = await OrbitDB.createInstance(ipfs);
     }
   } else {
