@@ -6,8 +6,6 @@ export default class Database {
   }
 
   onChange(callbackfn) {
-    this.#database.events.on('replicated', () => {
-      callbackfn();
-    });
+    this.#database.events.on('replicated', () => callbackfn());
   }
 }
