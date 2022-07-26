@@ -32,7 +32,7 @@ class EventLogDatabase extends Database {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const getEventLog = async (orbitdb, address) => {
+export const getEventLog = async (address, orbitdb = globalThis.orbitdb) => {
   throw Error('Not implemented');
 
   //   if (!orbitdb) throw Error('OrbitDB is not initialized');

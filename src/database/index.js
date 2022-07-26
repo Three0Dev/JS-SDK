@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   Counter,
   DocStore,
@@ -6,24 +7,63 @@ import {
   KeyValue,
 } from './wrappers';
 
-export function getCounter(address) {
-  return Counter.getCounter(globalThis.orbitdb, address);
+const peerDBServer = 'https://three0server.herokuapp.com';
+
+const cacheMap = new Map();
+
+async function getDB(address, type, options = {}) {
+  let db = null;
+
+  if (cacheMap.has(address)) {
+    db = cacheMap.get(address);
+  } else {
+    switch (type) {
+      case 'counter':
+        db = Counter.getCounter(address);
+        break;
+      case 'docstore':
+        db = DocStore.getDocStore(address, options);
+        break;
+      case 'eventlog':
+        db = EventLog.getEventLog(address);
+        break;
+      case 'feed':
+        db = Feed.getFeed(address);
+        break;
+      case 'keyvalue':
+        db = KeyValue.getKeyValue(address);
+        break;
+      default:
+        throw new Error(`Unknown database type: ${type}`);
+    }
+  }
+
+  await axios.post(peerDBServer, {
+    address,
+    type,
+  });
+
+  return db;
 }
 
-export function getDocStore(address, indexBy = { indexBy: '_id' }) {
-  return DocStore.getDocStore(globalThis.orbitdb, address, indexBy);
+export async function getCounter(address) {
+  return getDB(address, 'counter');
 }
 
-export function getEventLog(address) {
-  return EventLog.getEventLog(globalThis.orbitdb, address);
+export async function getDocStore(address, indexBy = { indexBy: '_id' }) {
+  return getDB(address, 'docstore', indexBy);
 }
 
-export function getFeed(address) {
-  return Feed.getFeed(globalThis.orbitdb, address);
+export async function getEventLog(address) {
+  return getDB(address, 'eventlog');
 }
 
-export function getKeyValue(address) {
-  return KeyValue.getKeyValue(globalThis.orbitdb, address);
+export async function getFeed(address) {
+  return getDB(address, 'feed');
+}
+
+export async function getKeyValue(address) {
+  return getDB(address, 'keyvalue');
 }
 
 export function timestamp() {

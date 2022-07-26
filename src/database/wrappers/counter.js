@@ -26,7 +26,7 @@ class CounterDatabase extends Database {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const getCounter = async (orbitdb, address) => {
+export const getCounter = async (address, orbitdb = globalThis.orbitdb) => {
   if (!orbitdb) throw Error('OrbitDB is not initialized');
   const isValid = await isValidDatabase(address);
   if (!isValid) throw Error('Invalid database address');

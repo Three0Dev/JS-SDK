@@ -34,7 +34,7 @@ class KVDatabase extends Database {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const getKeyValue = async (orbitdb, address) => {
+export const getKeyValue = async (address, orbitdb = globalThis.orbitdb) => {
   if (!orbitdb) throw Error('OrbitDB is not initialized');
   const isValid = await isValidDatabase(address);
   if (!isValid) throw Error('Invalid database address');
