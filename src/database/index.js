@@ -17,30 +17,36 @@ async function getDB(address, type, options = {}) {
   if (cacheMap.has(address)) {
     db = cacheMap.get(address);
   } else {
-    switch (type) {
-      case 'counter':
-        db = Counter.getCounter(address);
-        break;
-      case 'docstore':
-        db = DocStore.getDocStore(address, options);
-        break;
-      case 'eventlog':
-        db = EventLog.getEventLog(address);
-        break;
-      case 'feed':
-        db = Feed.getFeed(address);
-        break;
-      case 'keyvalue':
-        db = KeyValue.getKeyValue(address);
-        break;
-      default:
-        throw new Error(`Unknown database type: ${type}`);
-    }
+    cacheMap.set(address, db);
+    try {
+      switch (type) {
+        case 'counter':
+          db = await Counter.getCounter(address);
+          break;
+        case 'docstore':
+          db = await DocStore.getDocStore(address, options);
+          break;
+        case 'eventlog':
+          db = await EventLog.getEventLog(address);
+          break;
+        case 'feed':
+          db = await Feed.getFeed(address);
+          break;
+        case 'keyvalue':
+          db = await KeyValue.getKeyValue(address);
+          break;
+        default:
+          throw new Error(`Unknown database type: ${type}`);
+      }
 
-    axios.post(peerDBServer, {
-      address,
-      type,
-    });
+      axios.post(peerDBServer, {
+        address,
+        type,
+      });
+    } catch (e) {
+      console.error(e);
+      cacheMap.delete(address);
+    }
   }
 
   return db;
@@ -50,8 +56,8 @@ export async function getCounter(address) {
   return getDB(address, 'counter');
 }
 
-export async function getDocStore(address, indexBy = { indexBy: '_id' }) {
-  return getDB(address, 'docstore', indexBy);
+export async function getDocStore(address, options = { indexBy: '_id' }) {
+  return getDB(address, 'docstore', options);
 }
 
 export async function getEventLog(address) {
