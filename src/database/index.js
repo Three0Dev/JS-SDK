@@ -38,7 +38,7 @@ async function getDB(address, type, options = {}) {
     }
   }
 
-  await axios.post(peerDBServer, {
+  axios.post(peerDBServer, {
     address,
     type,
   });
