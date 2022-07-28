@@ -1,10 +1,12 @@
+import OrbitDB from 'orbit-db';
+import KeyValueStore from 'orbit-db-kvstore';
 import Database from './database';
 import { isValidDatabase } from './utils';
 
 class KVDatabase extends Database {
-  #database;
+  #database: KeyValueStore<any>;
 
-  constructor(database) {
+  constructor(database: KeyValueStore<any>) {
     super(database);
     this.#database = database;
   }
@@ -13,8 +15,7 @@ class KVDatabase extends Database {
     return this.#database;
   }
 
-  get(key) {
-    if (!(key && key instanceof String)) throw Error('Key is required');
+  get(key:string) {
     return this.#database.get(key);
   }
 
@@ -22,19 +23,17 @@ class KVDatabase extends Database {
     return this.#database.all;
   }
 
-  async set(key, value) {
-    if (!(key && key instanceof String)) throw Error('Key is required');
+  async set(key:string, value:any) {
     await this.#database.put(key, value);
   }
 
-  async delete(key) {
-    if (!(key && key instanceof String)) throw Error('Key is required');
-    await this.#database.delete(key);
+  async delete(key:string) {
+    await this.#database.del(key);
   }
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const getKeyValue = async (address, orbitdb = globalThis.orbitdb) => {
+export const getKeyValue = async (address:string, orbitdb:OrbitDB = globalThis.orbitdb) => {
   if (!orbitdb) throw Error('OrbitDB is not initialized');
   const isValid = await isValidDatabase(address);
   if (!isValid) throw Error('Invalid database address');

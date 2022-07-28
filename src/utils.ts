@@ -7,7 +7,7 @@ export function getBlockchainType() {
   }
 }
 
-export function getPID() {
+export function getPID():string {
   return globalThis.projectId;
 }
 

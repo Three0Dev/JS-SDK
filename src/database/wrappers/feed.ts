@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
+import OrbitDB from 'orbit-db';
+import FeedStore from 'orbit-db-feedstore';
 import Database from './database';
 import { isValidDatabase } from './utils';
 
-class EventLogDatabase extends Database {
-  #database;
+class FeedDatabase extends Database {
+  #database: FeedStore<any>;
 
-  constructor(database) {
+  constructor(database: FeedStore<any>) {
     super(database);
     this.#database = database;
   }
@@ -14,9 +16,12 @@ class EventLogDatabase extends Database {
     return this.#database;
   }
 
-  get(key) {
-    if (!(key && key instanceof String)) throw Error('Key is required');
-    return this.#database.get(key);
+  get(key: string) {
+    return this.#database.get(key).payload.value;
+  }
+
+  add(value: any) {
+    return this.#database.add(value);
   }
 
   // TODO Should we implement this?
@@ -25,14 +30,13 @@ class EventLogDatabase extends Database {
   }
 
   // TODO Check if put creates a new entry for pre-exisiting ID
-  async set(key, value) {
-    if (!(key && key instanceof String)) throw Error('Key is required');
-    return this.#database.put(key, value);
+  async set(value: any) {
+    return this.#database.add(value);
   }
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const getEventLog = async (address, orbitdb = globalThis.orbitdb) => {
+export const getFeed = async (address: string, orbitdb:OrbitDB = globalThis.orbitdb) => {
   throw Error('Not implemented');
 
   //   if (!orbitdb) throw Error('OrbitDB is not initialized');
@@ -40,5 +44,5 @@ export const getEventLog = async (address, orbitdb = globalThis.orbitdb) => {
   //   if (!isValid) throw Error('Invalid database address');
 
 //   const database = await orbitdb.log(address);
-//   return new EventLogDatabase(database);
+//   return new FeedDatabase(database);
 };

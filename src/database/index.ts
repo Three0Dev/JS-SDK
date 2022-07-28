@@ -6,13 +6,14 @@ import {
   Feed,
   KeyValue,
 } from './wrappers';
+import Database from './wrappers/database';
 
 const peerDBServer = 'https://three0server.herokuapp.com';
 
 const cacheMap = new Map();
 
-async function getDB(address, type, options = {}) {
-  let db = null;
+async function getDB(address:string, type:string, options = {}) {
+  let db:Database | null = null;
 
   if (cacheMap.has(address)) {
     db = cacheMap.get(address);
@@ -52,23 +53,23 @@ async function getDB(address, type, options = {}) {
   return db;
 }
 
-export async function getCounter(address) {
+export async function getCounter(address:string) {
   return getDB(address, 'counter');
 }
 
-export async function getDocStore(address, options = { indexBy: '_id' }) {
+export async function getDocStore(address:string, options = { indexBy: '_id' }) {
   return getDB(address, 'docstore', options);
 }
 
-export async function getEventLog(address) {
+export async function getEventLog(address:string) {
   return getDB(address, 'eventlog');
 }
 
-export async function getFeed(address) {
+export async function getFeed(address:string) {
   return getDB(address, 'feed');
 }
 
-export async function getKeyValue(address) {
+export async function getKeyValue(address:string) {
   return getDB(address, 'keyvalue');
 }
 

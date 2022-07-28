@@ -1,11 +1,11 @@
-import * as IPFS from 'ipfs-core';
+import { Options, IPFS, create } from 'ipfs-core';
 
-let ipfs;
+let ipfs: IPFS;
 
-const IPFS_CONFIG = {
+const IPFS_CONFIG:Options = {
   start: true,
   EXPERIMENTAL: {
-    pubsub: true,
+    ipnsPubsub: true,
   },
   preload: {
     enabled: false,
@@ -23,7 +23,7 @@ const IPFS_CONFIG = {
 };
 
 const initIPFS = async () => {
-  ipfs = ipfs || await IPFS.create(IPFS_CONFIG);
+  ipfs = ipfs || await create(IPFS_CONFIG);
   return ipfs;
 };
 

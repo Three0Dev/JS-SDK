@@ -75,11 +75,12 @@ export async function init() {
   const near = await connect({
     deps: { keyStore: new keyStores.BrowserLocalStorageKeyStore() },
     ...nearConfig,
+    headers: {}
   });
 
   // Initializing Wallet based Account. It can work with NEAR testnet wallet that
   // is hosted at https://wallet.testnet.near.org
-  globalThis.walletConnection = new WalletConnection(near);
+  globalThis.walletConnection = new WalletConnection(near, null);
 
   // Getting the Account ID. If still unauthorized, it's just empty string
   globalThis.accountId = globalThis.walletConnection.getAccountId();

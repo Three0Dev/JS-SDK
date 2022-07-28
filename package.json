@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Three0Dev/JS-SDK#readme",
   "dependencies": {
+    "@constl/orbit-db-types": "^1.0.3",
     "@swc/helpers": "^0.4.3",
     "@types/orbit-db": "github:orbitdb/orbit-db-types",
     "axios": "^0.27.2",
@@ -30,22 +31,24 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@parcel/transformer-typescript-types": "^2.6.2",
     "eslint": "^8.18.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "parcel": "^2.6.2",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "engines": {
     "node": ">= 12.0.0"
   },
   "source": [
-    "src/index.js",
-    "src/auth/index.js",
-    "src/database/index.js"
+    "src/index.ts",
+    "src/auth/index.ts",
+    "src/database/index.ts"
   ],
   "targets": {
     "module": {
@@ -61,6 +64,7 @@
       "outputFormat": "commonjs"
     }
   },
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/module/index.js",
