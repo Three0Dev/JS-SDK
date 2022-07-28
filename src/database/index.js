@@ -39,7 +39,7 @@ async function getDB(address, type, options = {}) {
           throw new Error(`Unknown database type: ${type}`);
       }
 
-      axios.post(peerDBServer, {
+      await axios.post(peerDBServer, {
         address,
         type,
       });
