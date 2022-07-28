@@ -117,6 +117,10 @@ WIP - Will be released during beta version
 #### **Feed**
 WIP - Will be released during beta version
 
+#### **All Databases**
+* `db.onChange(callback: Function)`
+  * Listens to any changes in database and calls `callback` when changes are made
+
 ## License and Code of Conduct
 This repository is distributed under the terms of both the the GPL License (Version 3.0). See [LICENSE](LICENSE).
 
