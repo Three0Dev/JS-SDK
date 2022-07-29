@@ -16,7 +16,7 @@ const IPFS_CONFIG = {
     Addresses: {
       Swarm: [
         '/dns4/three0-rtc-node.herokuapp.com/tcp/443/wss/p2p-webrtc-star/',
-        '/dns4/p2p-circuit-constellation.herokuapp.com/tcp/443/wss/p2p/QmY8XpuX6VnaUVDz4uA14vpjv3CZYLif3wLPqCkgU2KLSB',
+        '/dns4/three0wsnode.herokuapp.com/tcp/443/wss/p2p/QmdC5icumrvSy6N3jPezA3YXGugbmFrfJePY8miv18Ar9x',
       ],
     },
   },
