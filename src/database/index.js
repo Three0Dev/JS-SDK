@@ -6,7 +6,7 @@ import {
   KeyValue,
 } from './wrappers';
 
-const peerDBServer = 'http://137.184.71.10:8000/';
+const peerDBServer = 'http://157.245.255.12/';
 
 const cacheMap = new Map();
 
