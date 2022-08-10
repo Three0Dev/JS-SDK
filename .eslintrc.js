@@ -6,11 +6,15 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    'prettier'
   ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  plugins: ['prettier'],
   rules: {
+    'prettier/prettier': ['error'],
+		'no-console': 'off',
   },
 };

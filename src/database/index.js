@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   Counter,
   DocStore,
@@ -7,7 +6,7 @@ import {
   KeyValue,
 } from './wrappers';
 
-const peerDBServer = 'https://three0server.herokuapp.com';
+const peerDBServer = 'http://137.184.71.10:8000/';
 
 const cacheMap = new Map();
 
@@ -39,9 +38,13 @@ async function getDB(address, type, options = {}) {
           throw new Error(`Unknown database type: ${type}`);
       }
 
-      await axios.post(peerDBServer, {
-        address,
-        type,
+      await fetch(`${peerDBServer}pin?address=${address}`, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin', // include, *same-origin, omit
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
       });
     } catch (e) {
       console.error(e);
