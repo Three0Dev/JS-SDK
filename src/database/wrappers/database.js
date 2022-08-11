@@ -1,11 +1,11 @@
 export default class Database {
-  #database;
+	#database
 
-  constructor(database) {
-    this.#database = database;
-  }
+	constructor(database) {
+		this.#database = database
+	}
 
-  onChange(callbackfn) {
-    this.#database.events.on('replicated', () => callbackfn());
-  }
+	onChange(callbackfn) {
+		this.#database.events.on('replicated', () => callbackfn())
+	}
 }

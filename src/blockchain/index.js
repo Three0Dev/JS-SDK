@@ -1,6 +1,6 @@
-import * as NEAR from './NEAR';
+import * as NEAR from './NEAR'
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
-  NEAR,
-};
+	// eslint-disable-next-line import/prefer-default-export
+	NEAR,
+}
