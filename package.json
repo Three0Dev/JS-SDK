@@ -23,14 +23,10 @@
     "@swc/helpers": "^0.4.3",
     "@types/orbit-db": "github:orbitdb/orbit-db-types",
     "ipfs-core": "^0.14.3",
-    "libp2p-webrtc-direct": "^0.7.1",
-    "libp2p-webrtc-star": "^0.25.0",
-    "libp2p-websockets": "^0.16.2",
     "near-api-js": "^0.45.1",
     "orbit-db": "^0.28.6",
     "orbit-db-identity-provider": "^0.4.0",
-    "uuid": "^8.3.2",
-    "wrtc": "^0.4.7"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "eslint": "^8.18.0",
