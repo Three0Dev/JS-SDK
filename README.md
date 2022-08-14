@@ -3,12 +3,12 @@ This is a JS SDK is intended for browser based applications that need to interac
 
 ## Initialization
 ```
-npm i --save three0-js-sdk
+npm i --save @three0/js-sdk
 ```
 ## Usage
 1. Import Three0 and prepare configuration
 ```
-import init from 'three0-js-sdk'
+import init from '@three0/js-sdk'
 
 const config = {
   "contractName": "myTestContract",
@@ -52,7 +52,7 @@ WIP: Pending Bug Fixes and CDN Compatibility
 ## Services
 ### Auth
 ```
-import { login, logout, isloggedIn, getAccountId } from 'three0-js-sdk/auth'
+import { login, logout, isloggedIn, getAccountId } from '@three0/js-sdk/auth'
 ```
 * `login():Promise<void>`
   * Logs into dApp using NEAR Wallet
@@ -67,7 +67,7 @@ import { login, logout, isloggedIn, getAccountId } from 'three0-js-sdk/auth'
 
 #### **DocStore**: 
 ```
-import { getDocStore } from 'three0-js-sdk/database'
+import { getDocStore } from '@three0/js-sdk/database'
 
 const docstore = await getDocStore([address])
 ```
@@ -88,7 +88,7 @@ const docstore = await getDocStore([address])
   * Deletes value from docstore
 #### **KeyValue**:
 ```
-import { getKeyValue } from 'three0-js-sdk/database'
+import { getKeyValue } from '@three0/js-sdk/database'
 
 const keyvalue = await getKeyValue([address])
 ```
@@ -103,7 +103,7 @@ const keyvalue = await getKeyValue([address])
   * Deletes value from database
 #### **Counter**:
 ```
-import { getCounter } from 'three0-js-sdk/database'
+import { getCounter } from '@three0/js-sdk/database'
 
 const counter = await getCounter([address])
 ```
