@@ -286,7 +286,7 @@ const $347a60494fd73a84$export$38eb86f225c9e34c = async (address, orbitdb = glob
 
 
 
-const $4d5cc121bd06335c$var$peerDBServer = "http://pinning.three0dev.com/";
+const $4d5cc121bd06335c$var$peerDBServer = "https://pinning.three0dev.com/";
 const $4d5cc121bd06335c$var$cacheMap = new Map();
 async function $4d5cc121bd06335c$var$getDB(address, type, options = {}) {
     let db = $4d5cc121bd06335c$var$cacheMap.get(address);
@@ -312,7 +312,8 @@ async function $4d5cc121bd06335c$var$getDB(address, type, options = {}) {
             default:
                 throw new Error(`Unknown database type: ${type}`);
         }
-        await fetch(`${$4d5cc121bd06335c$var$peerDBServer}pin?address=${address}`, {
+        $4d5cc121bd06335c$var$cacheMap.set(address, db);
+        await fetch(`${$4d5cc121bd06335c$var$peerDBServer}pin/?address=${address}`, {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
@@ -322,7 +323,6 @@ async function $4d5cc121bd06335c$var$getDB(address, type, options = {}) {
         });
     } catch (e) {
         console.error(e);
-        $4d5cc121bd06335c$var$cacheMap.delete(address);
     }
     return db;
 }

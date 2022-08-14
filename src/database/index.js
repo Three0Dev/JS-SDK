@@ -1,6 +1,6 @@
 import { Counter, DocStore, EventLog, Feed, KeyValue } from './wrappers'
 
-const peerDBServer = 'http://pinning.three0dev.com/'
+const peerDBServer = 'https://pinning.three0dev.com/'
 
 const cacheMap = new Map()
 
@@ -30,7 +30,9 @@ async function getDB(address, type, options = {}) {
 				throw new Error(`Unknown database type: ${type}`)
 		}
 
-		await fetch(`${peerDBServer}pin?address=${address}`, {
+		cacheMap.set(address, db)
+
+		await fetch(`${peerDBServer}pin/?address=${address}`, {
 			method: 'POST',
 			mode: 'cors',
 			cache: 'no-cache',
@@ -40,7 +42,6 @@ async function getDB(address, type, options = {}) {
 		})
 	} catch (e) {
 		console.error(e)
-		cacheMap.delete(address)
 	}
 
 	return db
