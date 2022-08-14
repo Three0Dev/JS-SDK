@@ -26,7 +26,7 @@
     "near-api-js": "^0.45.1",
     "orbit-db": "^0.28.6",
     "orbit-db-identity-provider": "^0.4.0",
-    "orbit-db-io": "^1.1.0",
+    "orbit-db-io": "1.0.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
