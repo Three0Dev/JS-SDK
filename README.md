@@ -35,7 +35,7 @@ init(config).then(() => {
 import { createApp } from 'vue';
 import App from './App.vue';
 
-initContract(config)
+init(config)
   .then(() => {
     const app = createApp(App);
     app.use(store);
