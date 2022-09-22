@@ -2,6 +2,9 @@ import { NEAR } from './blockchain';
 import initOrbitDB from './database/init';
 import initAuth from './auth/init';
 
+import { getAccountId, login, logout } from './auth';
+import { timestamp, getCounter, getKeyValue, getDocStore, getFeed, getEventLog } from './database';
+
 const init = async (projectConfig) => {
   globalThis.projectConfig = projectConfig;
 
@@ -18,3 +21,15 @@ const init = async (projectConfig) => {
 };
 
 export default init;
+
+export {
+  getAccountId,
+  login,
+  logout,
+  timestamp,
+  getCounter,
+  getKeyValue,
+  getDocStore,
+  getFeed,
+  getEventLog,
+}
