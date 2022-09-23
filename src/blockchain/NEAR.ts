@@ -80,7 +80,7 @@ export async function init() {
 
   // Initializing Wallet based Account. It can work with NEAR testnet wallet that
   // is hosted at https://wallet.testnet.near.org
-  globalThis.walletConnection = new WalletConnection(near, null);
+  globalThis.walletConnection = new WalletConnection(near);
 
   // Getting the Account ID. If still unauthorized, it's just empty string
   globalThis.accountId = globalThis.walletConnection.getAccountId();

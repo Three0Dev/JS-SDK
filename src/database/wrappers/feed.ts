@@ -17,6 +17,7 @@ class FeedDatabase extends Database {
   }
 
   get(key: string) {
+    if (!(key)) throw Error("Key is required")
     return this.#database.get(key).payload.value;
   }
 
@@ -30,7 +31,8 @@ class FeedDatabase extends Database {
   }
 
   // TODO Check if put creates a new entry for pre-exisiting ID
-  async set(value: any) {
+  async set(key: string, value: any) {
+    if (!(key)) throw Error("Key is required")
     return this.#database.add(value);
   }
 }

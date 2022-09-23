@@ -16,6 +16,7 @@ class EventLogDatabase extends Database {
   }
 
   get(key:string) {
+    if (!(key)) throw Error("Key is required")
     return this.#database.get(key);
   }
 
@@ -26,6 +27,7 @@ class EventLogDatabase extends Database {
 
   // TODO Check if put creates a new entry for pre-exisiting ID
   async set(key:string, value:any) {
+    if (!(key)) throw Error("Key is required")
     return this.#database.set(key, value);
   }
 }

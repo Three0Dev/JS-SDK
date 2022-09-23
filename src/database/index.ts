@@ -8,46 +8,49 @@ import {
 } from './wrappers';
 import Database from './wrappers/database';
 
-const peerDBServer = 'https://three0server.herokuapp.com';
+const peerDBServer = 'https://pinning.three0dev.com/';
 
 const cacheMap = new Map();
 
 async function getDB(address:string, type:string, options = {}) {
+
   let db:Database | null = null;
+  if (db) return db
+  cacheMap.set(address, db)
 
-  if (cacheMap.has(address)) {
-    db = cacheMap.get(address);
-  } else {
-    cacheMap.set(address, db);
-    try {
-      switch (type) {
-        case 'counter':
-          db = await Counter.getCounter(address);
-          break;
-        case 'docstore':
-          db = await DocStore.getDocStore(address, options);
-          break;
-        case 'eventlog':
-          db = await EventLog.getEventLog(address);
-          break;
-        case 'feed':
-          db = await Feed.getFeed(address);
-          break;
-        case 'keyvalue':
-          db = await KeyValue.getKeyValue(address);
-          break;
-        default:
-          throw new Error(`Unknown database type: ${type}`);
-      }
-
-      axios.post(peerDBServer, {
-        address,
-        type,
-      });
-    } catch (e) {
-      console.error(e);
-      cacheMap.delete(address);
+  try {
+    switch (type) {
+      case 'counter':
+        db = await Counter.getCounter(address);
+        break;
+      case 'docstore':
+        db = await DocStore.getDocStore(address, options);
+        break;
+      case 'eventlog':
+        db = await EventLog.getEventLog(address);
+        break;
+      case 'feed':
+        db = await Feed.getFeed(address);
+        break;
+      case 'keyvalue':
+        db = await KeyValue.getKeyValue(address);
+        break;
+      default:
+        throw new Error(`Unknown database type: ${type}`);
     }
+
+    cacheMap.set(address, db)
+
+    await fetch(`${peerDBServer}pin/?address${address}`, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer'
+    });
+  } catch (e) {
+    console.error(e);
   }
 
   return db;

@@ -19,7 +19,9 @@ export default class NearIdentityProvider extends IdentityProvider {
 
     const dataBuffer = Buffer.from(data);
     const keyStore = new keyStores.BrowserLocalStorageKeyStore();
-    const keyPair = await keyStore.getKey(NEAR_CONFIG.networkId, globalThis.accountId);
+    const keyPair = await keyStore.getKey(
+      NEAR_CONFIG.networkId, 
+      globalThis.accountId);
     return keyPair.sign(dataBuffer).signature;
   }
 

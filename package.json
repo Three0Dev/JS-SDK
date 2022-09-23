@@ -12,8 +12,8 @@
     "build": "parcel build --no-cache",
     "watch": "parcel watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint 'src/**/*.js' --no-error-on-unmatched-pattern",
-    "lint:fix": "eslint 'src/**/*.js' --no-error-on-unmatched-pattern --fix"
+    "lint": "eslint 'src/**/*.ts' --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint 'src/**/*.ts' --no-error-on-unmatched-pattern --fix"
   },
   "repository": {
     "type": "git",

@@ -2,7 +2,7 @@ import OrbitDB from 'orbit-db';
 import DocumentStore from 'orbit-db-docstore';
 import { v4 as uuidv4 } from 'uuid';
 import Database from './database';
-import { isValidDatabase } from './utils';
+import { isValidDatabase, isValidKey, isValidValueObject } from './utils';
 
 class DocumentDatabase extends Database {
   #database: DocumentStore<Object>;
@@ -21,20 +21,27 @@ class DocumentDatabase extends Database {
   }
 
   async set(key:string, value:Object) {
+    if (!isValidKey(key)) throw Error("Key is required")
+    if (!isValidValueObject(value)) throw Error("Value is required")
     await this.#database.put({ _id: key, ...value });
   }
 
   async add(value: Object) {
     const id = uuidv4();
+    if (!isValidValueObject(value)) throw Error("Value is required")
     await this.set(id, value);
     return id;
   }
 
   async delete(key:string) {
+    if (!isValidKey(key)) throw Error("Key is required")
     await this.#database.del(key);
   }
 
   async update(key:string, value:Object) {
+    if (!isValidKey(key)) throw Error("Key is required")
+    if (!isValidValueObject(value)) throw Error("Value is required")
+    
     const doc = this.get(key);
     await this.set(key, { ...doc, ...value });
   }

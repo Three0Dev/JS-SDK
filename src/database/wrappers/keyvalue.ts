@@ -16,6 +16,7 @@ class KVDatabase extends Database {
   }
 
   get(key:string) {
+    if (!(key)) throw Error("Key is required")
     return this.#database.get(key);
   }
 
@@ -24,10 +25,12 @@ class KVDatabase extends Database {
   }
 
   async set(key:string, value:any) {
+    if (!(key)) throw Error("Key is required")
     await this.#database.put(key, value);
   }
 
   async delete(key:string) {
+    if (!(key)) throw Error("Key is required")
     await this.#database.del(key);
   }
 }

@@ -11,9 +11,9 @@ export const isValidDatabase = async (address: string) => {
 };
 
 export function isValidKey(key:string) {
-  return !!key;
+  return key && typeof key === "string"
 }
 
 export function isValidValueObject(value:Object) {
-  return !!value;
+  return value && value instanceof Object
 }
