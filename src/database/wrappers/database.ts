@@ -1,11 +1,13 @@
+import Store from 'orbit-db-store'
+
 export default class Database {
-  #database;
+	protected readonly database: Store
 
-  constructor(database) {
-    this.#database = database;
-  }
+	constructor(database: Store) {
+		this.database = database
+	}
 
-  onChange(callbackfn) {
-    this.#database.events.on('replicated', () => callbackfn());
-  }
+	onChange(callbackfn: Function) {
+		this.database.events.on('replicated', () => callbackfn())
+	}
 }

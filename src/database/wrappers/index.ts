@@ -1,13 +1,7 @@
-import * as Counter from './counter';
-import * as DocStore from './docstore';
-import * as EventLog from './eventlog';
-import * as Feed from './feed';
-import * as KeyValue from './keyvalue';
+import getCounter from './counter'
+import getDocStore from './docstore'
+import getEventLog from './eventlog'
+import getFeed from './feed'
+import getKeyValue from './keyvalue'
 
-export {
-  Counter,
-  DocStore,
-  EventLog,
-  Feed,
-  KeyValue,
-};
+export { getCounter, getDocStore, getEventLog, getFeed, getKeyValue }
