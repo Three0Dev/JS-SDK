@@ -1,8 +1,9 @@
-import { Options, IPFS, create } from 'ipfs-core'
+import * as IPFS from 'ipfs'
+import { IPFSOptions } from 'ipfs-core/src/components/network'
 
-let ipfs: IPFS
+let ipfs: IPFS.IPFS
 
-const IPFS_CONFIG: Options = {
+const IPFS_CONFIG: IPFSOptions = {
 	start: true,
 	EXPERIMENTAL: {
 		ipnsPubsub: true,
@@ -20,8 +21,8 @@ const IPFS_CONFIG: Options = {
 	},
 }
 
-const initIPFS = async () => {
-	ipfs = ipfs || (await create(IPFS_CONFIG))
+const initIPFS = async (): Promise<IPFS.IPFS> => {
+	ipfs = ipfs || (await IPFS.create(IPFS_CONFIG))
 	return ipfs
 }
 

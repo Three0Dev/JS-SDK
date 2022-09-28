@@ -1,18 +1,18 @@
 import { NEAR } from './blockchain'
 import initOrbitDB from './database/init'
 import initAuth from './auth/init'
-
 import { getAccountId, login, logout } from './auth'
 import {
 	timestamp,
-	getCounter,
-	getKeyValue,
-	getDocStore,
-	getFeed,
-	getEventLog,
+	Counter,
+	KeyValue,
+	DocStore,
+	Feed,
+	EventLog,
 } from './database'
+import { ProjectConfig } from './types/config'
 
-const init = async (projectConfig) => {
+const init = async (projectConfig: ProjectConfig) => {
 	globalThis.projectConfig = projectConfig
 
 	switch (projectConfig.chainType) {
@@ -34,9 +34,9 @@ export {
 	login,
 	logout,
 	timestamp,
-	getCounter,
-	getKeyValue,
-	getDocStore,
-	getFeed,
-	getEventLog,
+	Counter,
+	KeyValue,
+	DocStore,
+	Feed,
+	EventLog,
 }

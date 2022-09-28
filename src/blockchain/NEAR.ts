@@ -1,6 +1,42 @@
 import { connect, Contract, keyStores, WalletConnection } from 'near-api-js'
 import { getBlockchainType } from '../utils'
 
+export interface Three0Contract {
+	valid_database: ValidDatabaseFunction
+	get_user: GetUserFunction
+	user_action: UserActionFunction
+}
+
+type ValidDatabaseFunction = (
+	database_id: ValidDatabaseParams
+) => Promise<boolean>
+type GetUserFunction = (user_id: GetUserParams) => Promise<User>
+type UserActionFunction = (action: UserActionParams) => Promise<void>
+
+interface User {
+	account_id: string
+	is_online: boolean
+	created_at: bigint
+	last_online: bigint
+}
+
+interface ValidDatabaseParams {
+	address: string
+}
+
+interface GetUserParams {
+	account_id: string
+}
+
+interface UserActionParams {
+	action: UserActionType
+}
+
+export enum UserActionType {
+	LOGIN = 'LOGIN',
+	LOGOUT = 'LOGOUT',
+}
+
 export function getNearConfig() {
 	const CONTRACT_NAME = globalThis.projectConfig.contractName
 	const chainType = getBlockchainType()
@@ -89,9 +125,9 @@ export async function init() {
 		nearConfig.contractName,
 		{
 			// View methods are read only. They don't modify the state, but usually return some value.
-			viewMethods: ['user_exists', 'get_user', 'valid_database'],
+			viewMethods: ['get_user', 'valid_database'],
 			// Change methods can modify the state. But you don't receive the returned value when called.
-			changeMethods: ['create_user', 'user_action'],
+			changeMethods: ['user_action'],
 		}
 	)
 }
