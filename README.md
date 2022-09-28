@@ -35,7 +35,7 @@ init(config).then(() => {
 import { createApp } from 'vue';
 import App from './App.vue';
 
-initContract(config)
+init(config)
   .then(() => {
     const app = createApp(App);
     app.use(store);
@@ -52,7 +52,7 @@ WIP: Pending Bug Fixes and CDN Compatibility
 ## Services
 ### Auth
 ```
-import { login, logout, isloggedIn, getAccountId } from 'three0-js-sdk/auth'
+import { login, logout, isloggedIn, getAccountId } from 'three0-js-sdk'
 ```
 * `login():Promise<void>`
   * Logs into dApp using NEAR Wallet
@@ -67,9 +67,9 @@ import { login, logout, isloggedIn, getAccountId } from 'three0-js-sdk/auth'
 
 #### **DocStore**: 
 ```
-import { getDocStore } from 'three0-js-sdk/database'
+import { DocStore } from 'three0-js-sdk'
 
-const docstore = await getDocStore([address])
+const docstore = await DocStore([address])
 ```
 * `docstore.get(key:string):any`
   * Gets value from docstore
@@ -88,9 +88,9 @@ const docstore = await getDocStore([address])
   * Deletes value from docstore
 #### **KeyValue**:
 ```
-import { getKeyValue } from 'three0-js-sdk/database'
+import { KeyValue } from 'three0-js-sdk/database'
 
-const keyvalue = await getKeyValue([address])
+const keyvalue = await KeyValue([address])
 ```
 * `keyvalue.get(key:string):any`
   * Gets value from database
@@ -103,9 +103,9 @@ const keyvalue = await getKeyValue([address])
   * Deletes value from database
 #### **Counter**:
 ```
-import { getCounter } from 'three0-js-sdk/database'
+import { Counter } from 'three0-js-sdk/database'
 
-const counter = await getCounter([address])
+const counter = await Counter([address])
 ```
 * `counter.get():number`
   * Gets current value of counter
