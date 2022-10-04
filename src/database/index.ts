@@ -4,6 +4,11 @@ import {
 	getEventLog,
 	getFeed,
 	getKeyValue,
+	CounterDatabase,
+	DocumentDatabase,
+	EventLogDatabase,
+	FeedDatabase,
+	KVDatabase,
 } from './wrappers'
 import Database from './wrappers/database'
 
@@ -19,9 +24,9 @@ async function getDB(
 	address: string,
 	type: string,
 	options: DocStoreOptions = {}
-) {
+): Promise<Database> {
 	let db: Database | null = null
-	if (db) return db
+	if (cacheMap.has(address)) return cacheMap.get(address)
 	cacheMap.set(address, db)
 
 	try {
@@ -59,30 +64,36 @@ async function getDB(
 		console.error(e)
 	}
 
+	if (!db) throw new Error('Database not found')
 	return db
 }
 
-export async function Counter(address: string) {
-	return getDB(address, 'counter')
+export async function Counter(address: string): Promise<CounterDatabase> {
+	const db = await getDB(address, 'counter')
+	return db as CounterDatabase
 }
 
 export async function DocStore(
 	address: string,
 	options: DocStoreOptions = { indexBy: '_id' }
-) {
-	return getDB(address, 'docstore', options)
+): Promise<DocumentDatabase> {
+	const db = await getDB(address, 'docstore', options)
+	return db as DocumentDatabase
 }
 
-export async function EventLog(address: string) {
-	return getDB(address, 'eventlog')
+export async function EventLog(address: string): Promise<EventLogDatabase> {
+	const db = await getDB(address, 'eventlog')
+	return db as EventLogDatabase
 }
 
-export async function Feed(address: string) {
-	return getDB(address, 'feed')
+export async function Feed(address: string): Promise<FeedDatabase> {
+	const db = await getDB(address, 'feed')
+	return db as FeedDatabase
 }
 
-export async function KeyValue(address: string) {
-	return getDB(address, 'keyvalue')
+export async function KeyValue(address: string): Promise<KVDatabase> {
+	const db = await getDB(address, 'keyvalue')
+	return db as KVDatabase
 }
 
 export function timestamp() {

@@ -4,7 +4,7 @@ import EventStore from 'orbit-db-eventstore'
 import Database from './database'
 import { isValidDatabase } from './utils'
 
-class EventLogDatabase extends Database {
+export class EventLogDatabase extends Database {
 	instance() {
 		return this.database as EventStore<any>
 	}

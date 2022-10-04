@@ -4,7 +4,7 @@ import Store from 'orbit-db-store'
 import Database from './database'
 import { isValidDatabase } from './utils'
 
-class KVDatabase extends Database {
+export class KVDatabase extends Database {
 	instance() {
 		return this.database
 	}

@@ -4,7 +4,7 @@ import FeedStore from 'orbit-db-feedstore'
 import Database from './database'
 import { isValidDatabase } from './utils'
 
-class FeedDatabase extends Database {
+export class FeedDatabase extends Database {
 	instance() {
 		return this.database as FeedStore<any>
 	}

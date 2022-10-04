@@ -3,7 +3,7 @@ import OrbitDB from 'orbit-db'
 import { isValidDatabase } from './utils'
 import Database from './database'
 
-class CounterDatabase extends Database {
+export class CounterDatabase extends Database {
 	get() {
 		return (this.database as CounterStore).value
 	}
