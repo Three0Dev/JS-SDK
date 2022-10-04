@@ -1,3 +1,4 @@
+import OrbitDB from 'orbit-db'
 import { isValidDatabase } from './utils'
 import Database from './database'
 

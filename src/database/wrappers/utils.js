@@ -1,8 +1,9 @@
-import { isValidAddress } from 'orbit-db'
+// import { isValidAddress } from 'orbit-db'
+import OrbitDB from 'orbit-db'
 
 // eslint-disable-next-line import/prefer-default-export
 export const isValidDatabase = async (address) => {
-	if (!isValidAddress(address)) {
+	if (!OrbitDB.isValidAddress(address)) {
 		return false
 	}
 

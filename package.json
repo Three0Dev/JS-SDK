@@ -4,10 +4,11 @@
   "description": "JS-SDK for Three0 platform",
   "author": "Three0",
   "license": "GPL-3.0",
+  "type": "module",
   "scripts": {
     "build": "parcel build --no-cache",
     "watch": "parcel watch",
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "lint": "eslint 'src/**/*.js' --no-error-on-unmatched-pattern",
     "lint:fix": "eslint 'src/**/*.js' --no-error-on-unmatched-pattern --fix"
   },
