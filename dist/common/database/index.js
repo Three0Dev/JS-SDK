@@ -275,14 +275,14 @@ async function $0641b9505be276f3$var$getDB(address, type, options = {}) {
                 throw new Error(`Unknown database type: ${type}`);
         }
         $0641b9505be276f3$var$cacheMap.set(address, db);
-        await fetch(`${$0641b9505be276f3$var$peerDBServer}pin/?address=${address}`, {
-            method: "POST",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            redirect: "follow",
-            referrerPolicy: "no-referrer"
-        });
+    // await fetch(`${peerDBServer}pin/?address=${address}`, {
+    // 	method: 'POST',
+    // 	mode: 'cors',
+    // 	cache: 'no-cache',
+    // 	credentials: 'same-origin', // include, *same-origin, omit
+    // 	redirect: 'follow',
+    // 	referrerPolicy: 'no-referrer',
+    // })
     } catch (e) {
         console.error(e);
     }
