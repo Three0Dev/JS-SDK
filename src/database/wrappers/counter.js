@@ -1,4 +1,3 @@
-import OrbitDB from 'orbit-db'
 import { isValidDatabase } from './utils'
 import Database from './database'
 
@@ -15,15 +14,12 @@ class CounterDatabase extends Database {
 	}
 
 	async inc(amt = 1) {
-		if (!(amt instanceof Number && amt >= 1))
+		if (amt < 1)
 			throw Error('Valid amount is required')
 
-		const incrementPromises = []
 		for (let i = 0; i < amt; i += 1) {
-			incrementPromises.push(this.#database.inc())
+			await this.#database.inc()
 		}
-
-		await Promise.all(incrementPromises)
 	}
 }
 

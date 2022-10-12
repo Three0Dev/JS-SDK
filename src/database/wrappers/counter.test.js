@@ -1,6 +1,8 @@
 import { getCounter } from './counter'
 import OrbitDB from 'orbit-db'
 import * as IPFS from 'ipfs-core'
+// import { isValidDatabase } from globalThis
+
 
 const IPFS_CONFIG = {
 	start: true,
@@ -18,44 +20,43 @@ const IPFS_CONFIG = {
 	},
 }
 
-
-let ipfs;
-let orbitdb;
-
-const initIPFS = async () => {
-	ipfs = ipfs || (await IPFS.create(IPFS_CONFIG))
-	return ipfs
-}
-
-const initOrbitDB = async () => {
-    orbitdb = await OrbitDB.createInstance(ipfs)
-}
-
+let db = null;
 
 beforeAll(async () => {
-    initIPFS();
-    initOrbitDB();
+	const ipfs = await IPFS.create(IPFS_CONFIG)
+	globalThis.orbitdb = await OrbitDB.createInstance(ipfs)
+
+	const valid_database_mock = jest.fn();
+
+	globalThis.contract = {
+		valid_database: valid_database_mock
+	}
+
+	valid_database_mock.mockReturnValue(true)
+
+	db = await globalThis.orbitdb.counter('counter-database-test')
 });
 
 afterAll(async () => {
-    orbitdb.close();
+    await db.drop()
+
+	await globalThis.orbitdb.disconnect()
 })
 
-test("counter database", async () => {
-    // const ipfs = await initIPFS()
-    const db = await orbitdb.counter('counter-database-test')
-// db created & opened
-// window.alert(db.address)
-    let counterDB = await getCounter(db.address, db)
-    await counterDB.inc(2)
-    expect(counterDB.get().toBe(2))
+test("Increment counter by 5", async () => {
+	globalThis.contract.valid_database.mockReturnValueOnce(true);
+	let counterDB = await getCounter(db.address)
+
+	await counterDB.inc(5)
+	const value = counterDB.get()
+	expect(value).toEqual(5)
 })
 
-// test('the fetch fails with an error', async () => {
-//     expect.assertions(1);
-//     try {
-//       await counterDB.get();
-//     } catch (e) {
-//       expect(e).toBe(2);
-//     }
-//   });
+// https://stackoverflow.com/questions/47144187/can-you-write-async-tests-that-expect-tothrow#:~:text=You%20can%20test%20your%20async,I%20should%20fail')%3B%20%7D)%3B
+test("Increment 0", async () => {
+	globalThis.contract.valid_database.mockReturnValueOnce(true);
+	let counterDB = await getCounter(db.address)
+	await expect(counterDB.inc(0))
+	.rejects
+	.toThrow("Valid amount is required")
+  })
