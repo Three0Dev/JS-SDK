@@ -102,6 +102,7 @@ const keyvalue = await getKeyValue([address])
 * `keyvalue.delete(key:string):Promise<void>`
   * Deletes value from database
 #### **Counter**:
+WARNING: EXPERIMENTAL
 ```
 import { getCounter } from '@three0dev/js-sdk/database'
 
