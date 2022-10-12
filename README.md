@@ -130,3 +130,12 @@ See [Code of Conduct](CODE_OF_CONDUCT.md) for more information on contribution a
 ## Open Source References
 * [Orbit DB](https://orbitdb.org/)
 * [near-api-js](https://github.com/near/near-api-js)
+
+## Popular Issues
+Occasionally an error stating `npm ERR! Error No binary available for arch 'undefined'` will occur. To fix this:
+1. Delete `node_modules` and `package-lock.json`
+2. Run the following command:
+```
+export TARGET_ARCH=arm64
+```
+3. Reinstall dependencies
