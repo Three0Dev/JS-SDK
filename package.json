@@ -20,14 +20,12 @@
   },
   "homepage": "https://github.com/Three0Dev/JS-SDK#readme",
   "dependencies": {
-    "@swc/helpers": "^0.4.3",
-    "@types/orbit-db": "github:orbitdb/orbit-db-types",
+    "@swc/helpers": "^0.4.12",
     "ipfs-core": "^0.14.3",
     "near-api-js": "^0.45.1",
-    "orbit-db": "^0.28.6",
+    "orbit-db": "^0.28.7",
     "orbit-db-identity-provider": "^0.4.0",
-    "orbit-db-io": "1.0.1",
-    "uuid": "^8.3.2"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "eslint": "^8.18.0",
