@@ -1,5 +1,12 @@
-2022/10/12-12:26:59.374 efa8 Recovering log #141
-2022/10/12-12:26:59.375 efa8 Level-0 table #143: started
-2022/10/12-12:26:59.378 efa8 Level-0 table #143: 3385 bytes OK
-2022/10/12-12:26:59.386 efa8 Delete type=0 #141
-2022/10/12-12:26:59.386 efa8 Delete type=3 #139
+2022/10/15-13:13:51.990 dc58 Recovering log #235
+2022/10/15-13:13:51.990 dc58 Level-0 table #237: started
+2022/10/15-13:13:51.993 dc58 Level-0 table #237: 1596 bytes OK
+2022/10/15-13:13:52.000 dc58 Delete type=0 #235
+2022/10/15-13:13:52.000 dc58 Delete type=3 #233
+2022/10/15-13:13:52.000 b1d8 Compacting 4@0 + 0@1 files
+2022/10/15-13:13:52.002 b1d8 Compacted 4@0 + 0@1 files => 0 bytes
+2022/10/15-13:13:52.004 b1d8 compacted to: files[ 0 0 0 0 0 0 0 ]
+2022/10/15-13:13:52.004 b1d8 Delete type=2 #228
+2022/10/15-13:13:52.005 b1d8 Delete type=2 #231
+2022/10/15-13:13:52.005 b1d8 Delete type=2 #234
+2022/10/15-13:13:52.005 b1d8 Delete type=2 #237
