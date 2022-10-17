@@ -32,14 +32,14 @@ async function getDB(address, type, options = {}) {
 
 		cacheMap.set(address, db)
 
-		await fetch(`${peerDBServer}pin/?address=${address}`, {
-			method: 'POST',
-			mode: 'cors',
-			cache: 'no-cache',
-			credentials: 'same-origin', // include, *same-origin, omit
-			redirect: 'follow',
-			referrerPolicy: 'no-referrer',
-		})
+		// await fetch(`${peerDBServer}pin/?address=${address}`, {
+		// 	method: 'POST',
+		// 	mode: 'cors',
+		// 	cache: 'no-cache',
+		// 	credentials: 'same-origin', // include, *same-origin, omit
+		// 	redirect: 'follow',
+		// 	referrerPolicy: 'no-referrer',
+		// })
 	} catch (e) {
 		console.error(e)
 	}

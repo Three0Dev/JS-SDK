@@ -92,10 +92,8 @@ class $c876db4c3087efe7$var$CounterDatabase extends $c876db4c3087efe7$var$_datab
     }
     async inc() {
         let amt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-        if (!(amt instanceof Number && amt >= 1)) throw Error("Valid amount is required");
-        const incrementPromises = [];
-        for(let i = 0; i < amt; i += 1)incrementPromises.push($c876db4c3087efe7$var$_classPrivateFieldGet(this, $c876db4c3087efe7$var$_database).inc());
-        await Promise.all(incrementPromises);
+        if (amt < 1) throw Error("Valid amount is required");
+        for(let i = 0; i < amt; i += 1)await $c876db4c3087efe7$var$_classPrivateFieldGet(this, $c876db4c3087efe7$var$_database).inc();
     }
     constructor(database){
         super(database);
@@ -105,7 +103,8 @@ class $c876db4c3087efe7$var$CounterDatabase extends $c876db4c3087efe7$var$_datab
         });
         $c876db4c3087efe7$var$_classPrivateFieldSet(this, $c876db4c3087efe7$var$_database, database);
     }
-} // eslint-disable-next-line import/prefer-default-export
+}
+// eslint-disable-next-line import/prefer-default-export
 const $c876db4c3087efe7$var$getCounter = async function(address) {
     let orbitdb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : globalThis.orbitdb;
     if (!orbitdb) throw Error("OrbitDB is not initialized");
@@ -302,7 +301,8 @@ class $f7c921eb9985d37a$var$DocumentDatabase extends $f7c921eb9985d37a$var$_data
         });
         $f7c921eb9985d37a$var$_classPrivateFieldSet(this, $f7c921eb9985d37a$var$_database, database);
     }
-} // eslint-disable-next-line import/prefer-default-export
+}
+// eslint-disable-next-line import/prefer-default-export
 const $f7c921eb9985d37a$var$getDocStore = async function(address, indexBy) {
     let orbitdb = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : globalThis.orbitdb;
     if (!orbitdb) throw Error("OrbitDB is not initialized");
@@ -370,9 +370,11 @@ class $bed204bf21a4db3f$var$EventLogDatabase extends $bed204bf21a4db3f$var$_data
         if (!(key && key instanceof String)) throw Error("Key is required");
         return $bed204bf21a4db3f$var$_classPrivateFieldGet(this, $bed204bf21a4db3f$var$_database).get(key);
     }
+    // TODO Should we implement this?
     getAll() {
         return $bed204bf21a4db3f$var$_classPrivateFieldGet(this, $bed204bf21a4db3f$var$_database).all;
     }
+    // TODO Check if put creates a new entry for pre-exisiting ID
     async set(key, value) {
         if (!(key && key instanceof String)) throw Error("Key is required");
         return $bed204bf21a4db3f$var$_classPrivateFieldGet(this, $bed204bf21a4db3f$var$_database).put(key, value);
@@ -385,10 +387,12 @@ class $bed204bf21a4db3f$var$EventLogDatabase extends $bed204bf21a4db3f$var$_data
         });
         $bed204bf21a4db3f$var$_classPrivateFieldSet(this, $bed204bf21a4db3f$var$_database, database);
     }
-} // eslint-disable-next-line import/prefer-default-export
+}
+// eslint-disable-next-line import/prefer-default-export
 const $bed204bf21a4db3f$var$getEventLog = async function(address) {
     let orbitdb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : globalThis.orbitdb;
-    throw Error("Not implemented"); //   if (!orbitdb) throw Error('OrbitDB is not initialized');
+    throw Error("Not implemented");
+//   if (!orbitdb) throw Error('OrbitDB is not initialized');
 //   const isValid = await isValidDatabase(address);
 //   if (!isValid) throw Error('Invalid database address');
 //   const database = await orbitdb.log(address);
@@ -455,9 +459,11 @@ class $1dcc0040a0c74b65$var$FeedDatabase extends $1dcc0040a0c74b65$var$_database
     add(value) {
         return $1dcc0040a0c74b65$var$_classPrivateFieldGet(this, $1dcc0040a0c74b65$var$_database).add(value);
     }
+    // TODO Should we implement this?
     getAll() {
         return $1dcc0040a0c74b65$var$_classPrivateFieldGet(this, $1dcc0040a0c74b65$var$_database).all;
     }
+    // TODO Check if put creates a new entry for pre-exisiting ID
     async set(key, value) {
         if (!(key && key instanceof String)) throw Error("Key is required");
         return $1dcc0040a0c74b65$var$_classPrivateFieldGet(this, $1dcc0040a0c74b65$var$_database).put(key, value);
@@ -470,10 +476,12 @@ class $1dcc0040a0c74b65$var$FeedDatabase extends $1dcc0040a0c74b65$var$_database
         });
         $1dcc0040a0c74b65$var$_classPrivateFieldSet(this, $1dcc0040a0c74b65$var$_database, database);
     }
-} // eslint-disable-next-line import/prefer-default-export
+}
+// eslint-disable-next-line import/prefer-default-export
 const $1dcc0040a0c74b65$var$getFeed = async function(address) {
     let orbitdb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : globalThis.orbitdb;
-    throw Error("Not implemented"); //   if (!orbitdb) throw Error('OrbitDB is not initialized');
+    throw Error("Not implemented");
+//   if (!orbitdb) throw Error('OrbitDB is not initialized');
 //   const isValid = await isValidDatabase(address);
 //   if (!isValid) throw Error('Invalid database address');
 //   const database = await orbitdb.log(address);
@@ -557,7 +565,8 @@ class $347a60494fd73a84$var$KVDatabase extends $347a60494fd73a84$var$_database2.
         });
         $347a60494fd73a84$var$_classPrivateFieldSet(this, $347a60494fd73a84$var$_database, database);
     }
-} // eslint-disable-next-line import/prefer-default-export
+}
+// eslint-disable-next-line import/prefer-default-export
 const $347a60494fd73a84$var$getKeyValue = async function(address) {
     let orbitdb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : globalThis.orbitdb;
     if (!orbitdb) throw Error("OrbitDB is not initialized");
@@ -603,13 +612,13 @@ $b5a5c19f3db4a18c$exports.Feed = $b5a5c19f3db4a18c$var$Feed;
 
 var $b5a5c19f3db4a18c$var$KeyValue = $b5a5c19f3db4a18c$var$_interopRequireWildcard((parcelRequire("4vl2o")));
 $b5a5c19f3db4a18c$exports.KeyValue = $b5a5c19f3db4a18c$var$KeyValue;
-function $b5a5c19f3db4a18c$var$_getRequireWildcardCache(nodeInterop1) {
+function $b5a5c19f3db4a18c$var$_getRequireWildcardCache(nodeInterop) {
     if (typeof WeakMap !== "function") return null;
     var cacheBabelInterop = new WeakMap();
     var cacheNodeInterop = new WeakMap();
     return ($b5a5c19f3db4a18c$var$_getRequireWildcardCache = function(nodeInterop) {
         return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-    })(nodeInterop1);
+    })(nodeInterop);
 }
 function $b5a5c19f3db4a18c$var$_interopRequireWildcard(obj, nodeInterop) {
     if (!nodeInterop && obj && obj.__esModule) return obj;
@@ -659,15 +668,14 @@ async function $4d5cc121bd06335c$var$getDB(address, type) {
                 throw new Error(`Unknown database type: ${type}`);
         }
         $4d5cc121bd06335c$var$cacheMap.set(address, db);
-        await fetch(`${$4d5cc121bd06335c$var$peerDBServer}pin/?address=${address}`, {
-            method: "POST",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            // include, *same-origin, omit
-            redirect: "follow",
-            referrerPolicy: "no-referrer"
-        });
+    // await fetch(`${peerDBServer}pin/?address=${address}`, {
+    // 	method: 'POST',
+    // 	mode: 'cors',
+    // 	cache: 'no-cache',
+    // 	credentials: 'same-origin', // include, *same-origin, omit
+    // 	redirect: 'follow',
+    // 	referrerPolicy: 'no-referrer',
+    // })
     } catch (e) {
         console.error(e);
     }
