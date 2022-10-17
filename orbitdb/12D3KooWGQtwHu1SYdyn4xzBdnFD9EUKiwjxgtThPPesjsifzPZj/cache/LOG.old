@@ -1,5 +1,5 @@
-2022/10/17-14:05:48.604 8210 Recovering log #241
-2022/10/17-14:05:48.604 8210 Level-0 table #243: started
-2022/10/17-14:05:48.606 8210 Level-0 table #243: 1596 bytes OK
-2022/10/17-14:05:48.607 8210 Delete type=0 #241
-2022/10/17-14:05:48.607 8210 Delete type=3 #239
+2022/10/17-14:48:05.688 fdd8 Recovering log #265
+2022/10/17-14:48:05.697 fdd8 Level-0 table #267: started
+2022/10/17-14:48:05.698 fdd8 Level-0 table #267: 1596 bytes OK
+2022/10/17-14:48:05.709 fdd8 Delete type=0 #265
+2022/10/17-14:48:05.709 fdd8 Delete type=3 #263

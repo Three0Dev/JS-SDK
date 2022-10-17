@@ -1,5 +1,6 @@
 // import {isLoggedIn, add} from './index'
 import * as nearApi from 'near-api-js'
+import {isLoggedIn} from './index'
 
 
 const url = require('url');
@@ -57,46 +58,14 @@ beforeEach(() => {
       }
   });
   walletConnection = new nearApi.WalletConnection(nearFake);
+  globalThis.walletConnection = walletConnection
 });
 
-// globalThis.walletConnection= new nearApi.WalletConnection(nearFake)
-
-// const a = globalThis.walletConnection
-// const b = globalThis.walletConnection
-
-// test('tests isLoggedIn', () => {
-//   expect(isLoggedIn()).toBe(true);
+// it('not signed in by default', () => {
+//   expect(walletConnection.isSignedIn()).not.toBeTruthy();
 // });
 
-// test('adds 1 + 2 to equal 3', () => {
-//   expect(add(1,2)).toBe(3);
-// });
-
-// beforeAll(async () => {
-// 	const ipfs = await IPFS.create(IPFS_CONFIG)
-// 	globalThis.orbitdb = await OrbitDB.createInstance(ipfs)
-
-// 	const valid_database_mock = jest.fn();
-
-// 	globalThis.contract = {
-// 		valid_database: valid_database_mock
-// 	}
-
-//   const isSignedInMock = jest.fn()
-
-//   globalThis.walletConnection = {
-//     isSignedIn: isSignedInMock
-//   }
-
-// 	valid_database_mock.mockReturnValue(true)
-// 	db = await globalThis.orbitdb.counter('counter-database-test')
-// });
-
-// test('not signed in by default', () => {
-//   let returnValue = walletConnection.isSignedIn.mockReturnValue(true)
-//   expect(returnValue).toEqual(true)
-// });
 
 it('not signed in by default', () => {
-  expect(walletConnection.isSignedIn()).not.toBeTruthy();
+  expect(isLoggedIn()).not.toBeTruthy();
 });
