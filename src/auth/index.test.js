@@ -6,33 +6,42 @@ const url = require('url');
 const localStorage = require('localstorage-memory');
 // const BN = require('bn.js');
 
+
+let lastRedirectUrl;
+let lastTransaction;
+
 global.window = {
   localStorage
 }
 
-let history
+global.document = {
+  title: "documentTitle"
+}
+
+let history;
 let nearFake;
 let walletConnection;
 let keyStore = new nearApi.keyStores.InMemoryKeyStore();
 
 
-beforeAll(() => {
+
+beforeEach(() => {
   keyStore.clear();
   nearFake = {
-      config: {
-          networkId: 'networkId',
-          contractName: 'contractId',
-          walletUrl: 'http://example.com/wallet',
-      },
-      connection: {
-          networkId: 'networkId',
-          signer: new nearApi.InMemorySigner(keyStore)
-      },
-      account() {
-          return {
-              state() {}
-          };
-      }
+    config: {
+        networkId: 'networkId',
+        contractName: 'contractId',
+        walletUrl: 'http://example.com/wallet',
+    },
+    connection: {
+        networkId: 'networkId',
+        signer: new nearApi.InMemorySigner(keyStore)
+    },
+    account() {
+        return {
+            state() {}
+        };
+    }
   };
   lastRedirectUrl = null;
   history = [];
@@ -50,7 +59,7 @@ beforeAll(() => {
   walletConnection = new nearApi.WalletConnection(nearFake);
 });
 
-globalThis.walletConnection= new nearApi.WalletConnection(nearFake)
+// globalThis.walletConnection= new nearApi.WalletConnection(nearFake)
 
 // const a = globalThis.walletConnection
 // const b = globalThis.walletConnection
@@ -63,27 +72,31 @@ globalThis.walletConnection= new nearApi.WalletConnection(nearFake)
 //   expect(add(1,2)).toBe(3);
 // });
 
-beforeAll(async () => {
-	const ipfs = await IPFS.create(IPFS_CONFIG)
-	globalThis.orbitdb = await OrbitDB.createInstance(ipfs)
+// beforeAll(async () => {
+// 	const ipfs = await IPFS.create(IPFS_CONFIG)
+// 	globalThis.orbitdb = await OrbitDB.createInstance(ipfs)
 
-	const valid_database_mock = jest.fn();
+// 	const valid_database_mock = jest.fn();
 
-	globalThis.contract = {
-		valid_database: valid_database_mock
-	}
+// 	globalThis.contract = {
+// 		valid_database: valid_database_mock
+// 	}
 
-  const isSignedInMock = jest.fn()
+//   const isSignedInMock = jest.fn()
 
-  globalThis.walletConnection = {
-    isSignedIn: isSignedInMock
-  }
+//   globalThis.walletConnection = {
+//     isSignedIn: isSignedInMock
+//   }
 
-	valid_database_mock.mockReturnValue(true)
-	db = await globalThis.orbitdb.counter('counter-database-test')
-});
+// 	valid_database_mock.mockReturnValue(true)
+// 	db = await globalThis.orbitdb.counter('counter-database-test')
+// });
 
-test('not signed in by default', () => {
-  let returnValue = globalThis.walletConnection.isSignedIn.mockReturnValue(true)
-  expect(returnValue).toEqual(true)
+// test('not signed in by default', () => {
+//   let returnValue = walletConnection.isSignedIn.mockReturnValue(true)
+//   expect(returnValue).toEqual(true)
+// });
+
+it('not signed in by default', () => {
+  expect(walletConnection.isSignedIn()).not.toBeTruthy();
 });
