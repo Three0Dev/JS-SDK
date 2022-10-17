@@ -100,12 +100,11 @@ class $e180e32100ae22a5$var$CounterDatabase extends $e180e32100ae22a5$var$_datab
     }
     async inc() {
         let amt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-        if (!(amt instanceof Number && amt >= 1)) throw Error("Valid amount is required");
-        const incrementPromises = [];
-        for(let i = 0; i < amt; i += 1)incrementPromises.push($e180e32100ae22a5$var$_classPrivateFieldGet(this, $e180e32100ae22a5$var$_database).inc());
-        await Promise.all(incrementPromises);
+        if (amt < 1) throw Error("Valid amount is required");
+        for(let i = 0; i < amt; i += 1)await $e180e32100ae22a5$var$_classPrivateFieldGet(this, $e180e32100ae22a5$var$_database).inc();
     }
-} // eslint-disable-next-line import/prefer-default-export
+}
+// eslint-disable-next-line import/prefer-default-export
 const $e180e32100ae22a5$var$getCounter = async function(address) {
     let orbitdb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : globalThis.orbitdb;
     if (!orbitdb) throw Error("OrbitDB is not initialized");
@@ -302,7 +301,8 @@ class $e7afbe79a418d2e3$var$DocumentDatabase extends $e7afbe79a418d2e3$var$_data
             ...value
         });
     }
-} // eslint-disable-next-line import/prefer-default-export
+}
+// eslint-disable-next-line import/prefer-default-export
 const $e7afbe79a418d2e3$var$getDocStore = async function(address, indexBy) {
     let orbitdb = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : globalThis.orbitdb;
     if (!orbitdb) throw Error("OrbitDB is not initialized");
@@ -378,17 +378,21 @@ class $9e340ee3d0a2be66$var$EventLogDatabase extends $9e340ee3d0a2be66$var$_data
         if (!(key && key instanceof String)) throw Error("Key is required");
         return $9e340ee3d0a2be66$var$_classPrivateFieldGet(this, $9e340ee3d0a2be66$var$_database).get(key);
     }
+    // TODO Should we implement this?
     getAll() {
         return $9e340ee3d0a2be66$var$_classPrivateFieldGet(this, $9e340ee3d0a2be66$var$_database).all;
     }
+    // TODO Check if put creates a new entry for pre-exisiting ID
     async set(key, value) {
         if (!(key && key instanceof String)) throw Error("Key is required");
         return $9e340ee3d0a2be66$var$_classPrivateFieldGet(this, $9e340ee3d0a2be66$var$_database).put(key, value);
     }
-} // eslint-disable-next-line import/prefer-default-export
+}
+// eslint-disable-next-line import/prefer-default-export
 const $9e340ee3d0a2be66$var$getEventLog = async function(address) {
     let orbitdb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : globalThis.orbitdb;
-    throw Error("Not implemented"); //   if (!orbitdb) throw Error('OrbitDB is not initialized');
+    throw Error("Not implemented");
+//   if (!orbitdb) throw Error('OrbitDB is not initialized');
 //   const isValid = await isValidDatabase(address);
 //   if (!isValid) throw Error('Invalid database address');
 //   const database = await orbitdb.log(address);
@@ -463,17 +467,21 @@ class $cc70fe50062add5e$var$FeedDatabase extends $cc70fe50062add5e$var$_database
     add(value) {
         return $cc70fe50062add5e$var$_classPrivateFieldGet(this, $cc70fe50062add5e$var$_database).add(value);
     }
+    // TODO Should we implement this?
     getAll() {
         return $cc70fe50062add5e$var$_classPrivateFieldGet(this, $cc70fe50062add5e$var$_database).all;
     }
+    // TODO Check if put creates a new entry for pre-exisiting ID
     async set(key, value) {
         if (!(key && key instanceof String)) throw Error("Key is required");
         return $cc70fe50062add5e$var$_classPrivateFieldGet(this, $cc70fe50062add5e$var$_database).put(key, value);
     }
-} // eslint-disable-next-line import/prefer-default-export
+}
+// eslint-disable-next-line import/prefer-default-export
 const $cc70fe50062add5e$var$getFeed = async function(address) {
     let orbitdb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : globalThis.orbitdb;
-    throw Error("Not implemented"); //   if (!orbitdb) throw Error('OrbitDB is not initialized');
+    throw Error("Not implemented");
+//   if (!orbitdb) throw Error('OrbitDB is not initialized');
 //   const isValid = await isValidDatabase(address);
 //   if (!isValid) throw Error('Invalid database address');
 //   const database = await orbitdb.log(address);
@@ -557,7 +565,8 @@ class $711674e22308e687$var$KVDatabase extends $711674e22308e687$var$_database2.
         if (!(key && key instanceof String)) throw Error("Key is required");
         await $711674e22308e687$var$_classPrivateFieldGet(this, $711674e22308e687$var$_database).delete(key);
     }
-} // eslint-disable-next-line import/prefer-default-export
+}
+// eslint-disable-next-line import/prefer-default-export
 const $711674e22308e687$var$getKeyValue = async function(address) {
     let orbitdb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : globalThis.orbitdb;
     if (!orbitdb) throw Error("OrbitDB is not initialized");
@@ -602,13 +611,13 @@ $4c7111c921e8619a$exports.Feed = $4c7111c921e8619a$var$Feed;
 
 var $4c7111c921e8619a$var$KeyValue = $4c7111c921e8619a$var$_interopRequireWildcard((parcelRequire("9HXIR")));
 $4c7111c921e8619a$exports.KeyValue = $4c7111c921e8619a$var$KeyValue;
-function $4c7111c921e8619a$var$_getRequireWildcardCache(nodeInterop1) {
+function $4c7111c921e8619a$var$_getRequireWildcardCache(nodeInterop) {
     if (typeof WeakMap !== "function") return null;
     var cacheBabelInterop = new WeakMap();
     var cacheNodeInterop = new WeakMap();
     return ($4c7111c921e8619a$var$_getRequireWildcardCache = function(nodeInterop) {
         return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-    })(nodeInterop1);
+    })(nodeInterop);
 }
 function $4c7111c921e8619a$var$_interopRequireWildcard(obj, nodeInterop) {
     if (!nodeInterop && obj && obj.__esModule) return obj;
@@ -658,15 +667,14 @@ async function $0641b9505be276f3$var$getDB(address, type) {
                 throw new Error(`Unknown database type: ${type}`);
         }
         $0641b9505be276f3$var$cacheMap.set(address, db);
-        await fetch(`${$0641b9505be276f3$var$peerDBServer}pin/?address=${address}`, {
-            method: "POST",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            // include, *same-origin, omit
-            redirect: "follow",
-            referrerPolicy: "no-referrer"
-        });
+    // await fetch(`${peerDBServer}pin/?address=${address}`, {
+    // 	method: 'POST',
+    // 	mode: 'cors',
+    // 	cache: 'no-cache',
+    // 	credentials: 'same-origin', // include, *same-origin, omit
+    // 	redirect: 'follow',
+    // 	referrerPolicy: 'no-referrer',
+    // })
     } catch (e) {
         console.error(e);
     }
