@@ -1,5 +1,5 @@
-2022/10/17-14:49:18.746 c1ec Recovering log #268
-2022/10/17-14:49:18.746 c1ec Level-0 table #270: started
-2022/10/17-14:49:18.752 c1ec Level-0 table #270: 1596 bytes OK
-2022/10/17-14:49:18.761 c1ec Delete type=0 #268
-2022/10/17-14:49:18.761 c1ec Delete type=3 #266
+2022/10/17-15:39:51.818 8190 Recovering log #302
+2022/10/17-15:39:51.818 8190 Level-0 table #304: started
+2022/10/17-15:39:51.824 8190 Level-0 table #304: 1596 bytes OK
+2022/10/17-15:39:51.833 8190 Delete type=0 #302
+2022/10/17-15:39:51.833 8190 Delete type=3 #300

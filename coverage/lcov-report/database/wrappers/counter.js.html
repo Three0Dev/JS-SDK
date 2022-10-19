@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.26% </span>
+                <span class="strong">88.23% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/19</span>
+                <span class='fraction'>15/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">62.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>5/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.25% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/16</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -98,87 +98,75 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import OrbitDB from 'orbit-db'
-import { isValidDatabase } from './utils'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { isValidDatabase } from './utils'
 import Database from './database'
 &nbsp;
 class CounterDatabase extends Database {
 	#database
 &nbsp;
-<span class="fstat-no" title="function not covered" >	co</span>nstructor(database) {
-<span class="cstat-no" title="statement not covered" >		super(database)</span>
-<span class="cstat-no" title="statement not covered" >		this.#database = database</span>
+	constructor(database) {
+		super(database)
+		this.#database = database
 	}
 &nbsp;
-<span class="fstat-no" title="function not covered" >	ge</span>t() {
-<span class="cstat-no" title="statement not covered" >		return this.#database.value</span>
+	get() {
+		return this.#database.value
 	}
 &nbsp;
-<span class="fstat-no" title="function not covered" >	as</span>ync inc(amt = <span class="branch-0 cbranch-no" title="branch not covered" >1)</span> {
-<span class="cstat-no" title="statement not covered" >		if (!(amt instanceof Number &amp;&amp; amt &gt;= 1))</span>
-<span class="cstat-no" title="statement not covered" >			throw Error('Valid amount is required')</span>
+	async inc(amt = <span class="branch-0 cbranch-no" title="branch not covered" >1)</span> {
+		if (amt &lt; 1)
+			throw Error('Valid amount is required')
 &nbsp;
-		const incrementPromises = <span class="cstat-no" title="statement not covered" >[]</span>
-<span class="cstat-no" title="statement not covered" >		for (let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; amt; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >			incrementPromises.push(this.#database.inc())</span>
+		for (let i = 0; i &lt; amt; i += 1) {
+			await this.#database.inc()
 		}
-&nbsp;
-<span class="cstat-no" title="statement not covered" >		await Promise.all(incrementPromises)</span>
 	}
 }
 &nbsp;
 // eslint-disable-next-line import/prefer-default-export
-export const getCounter = <span class="fstat-no" title="function not covered" >as</span>ync (address, orbitdb = <span class="branch-0 cbranch-no" title="branch not covered" >globalThis.orbitdb)</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >	if (!orbitdb) <span class="cstat-no" title="statement not covered" >throw Error('OrbitDB is not initialized')</span></span>
-	const isValid = <span class="cstat-no" title="statement not covered" >await isValidDatabase(address)</span>
-<span class="cstat-no" title="statement not covered" >	if (!isValid) <span class="cstat-no" title="statement not covered" >throw Error('Invalid database address')</span></span>
+export const getCounter = async (address, orbitdb = globalThis.orbitdb) =&gt; {
+	<span class="missing-if-branch" title="if path not taken" >I</span>if (!orbitdb) <span class="cstat-no" title="statement not covered" >throw Error('OrbitDB is not initialized')</span>
+	const isValid = await isValidDatabase(address)
+	<span class="missing-if-branch" title="if path not taken" >I</span>if (!isValid) <span class="cstat-no" title="statement not covered" >throw Error('Invalid database address')</span>
 &nbsp;
-	const database = <span class="cstat-no" title="statement not covered" >await orbitdb.counter(address)</span>
-<span class="cstat-no" title="statement not covered" >	await database.load()</span>
-<span class="cstat-no" title="statement not covered" >	return new CounterDatabase(database)</span>
+	const database = await orbitdb.counter(address)
+	await database.load()
+	return new CounterDatabase(database)
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -187,7 +175,7 @@ export const getCounter = <span class="fstat-no" title="function not covered" >a
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-05T19:47:22.135Z
+                at 2022-10-17T20:39:54.293Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
