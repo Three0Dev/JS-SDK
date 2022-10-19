@@ -1,6 +1,6 @@
 // import {isLoggedIn, add} from './index'
 import * as nearApi from 'near-api-js'
-import {getAccountId, isLoggedIn, logout} from './index'
+import {getAccountId, isLoggedIn, login, logout} from './index'
 
 
 const url = require('url');
@@ -59,6 +59,9 @@ beforeEach(() => {
   });
   walletConnection = new nearApi.WalletConnection(nearFake);
   globalThis.walletConnection = walletConnection
+  globalThis.projectConfig = {
+    contractName: 'signInContract'
+  }
 });
 
 // it('not signed in by default', () => {
@@ -81,12 +84,13 @@ it('Empty account ID', () => {
 describe('can request sign in', () => {
   beforeEach(() => keyStore.clear());
   
-  it('V2', () => {
-      return walletConnection.requestSignIn({
-          contractId: 'signInContract',
-          successUrl: 'http://example.com/success', 
-          failureUrl: 'http://example.com/fail'
-      });
+  it('testing login', () => {
+    
+      return login(
+          'Three0',
+          'http://example.com/success', 
+          'http://example.com/fail'
+      );
   });
 
   afterEach(async () => {

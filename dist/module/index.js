@@ -87,7 +87,7 @@ function $282726261955a79a$var$getNearConfig() {
             return {
                 networkId: "local",
                 nodeUrl: "http://localhost:3030",
-                keyPath: `${"C:\\Users\\hersh"}/.near/validator_key.json`,
+                keyPath: `${"C:\\Users\\dhruv"}/.near/validator_key.json`,
                 walletUrl: "http://localhost:4000/wallet",
                 contractName: CONTRACT_NAME
             };
@@ -109,18 +109,23 @@ function $282726261955a79a$var$getNearConfig() {
         default:
             throw Error(`Unconfigured environment '${chainType}'. Can be configured in src/config.js.`);
     }
-} // Initialize contract & set global variables
+}
+// Initialize contract & set global variables
 async function $282726261955a79a$var$init() {
-    const nearConfig = $282726261955a79a$var$getNearConfig(); // Initialize connection to the NEAR testnet
+    const nearConfig = $282726261955a79a$var$getNearConfig();
+    // Initialize connection to the NEAR testnet
     const near = await (0, $6qQe9$connect)({
         deps: {
             keyStore: new $6qQe9$keyStores.BrowserLocalStorageKeyStore()
         },
         ...nearConfig
-    }); // Initializing Wallet based Account. It can work with NEAR testnet wallet that
+    });
+    // Initializing Wallet based Account. It can work with NEAR testnet wallet that
     // is hosted at https://wallet.testnet.near.org
-    globalThis.walletConnection = new $6qQe9$WalletConnection(near); // Getting the Account ID. If still unauthorized, it's just empty string
-    globalThis.accountId = globalThis.walletConnection.getAccountId(); // Initializing our contract APIs by contract name and configuration
+    globalThis.walletConnection = new $6qQe9$WalletConnection(near);
+    // Getting the Account ID. If still unauthorized, it's just empty string
+    globalThis.accountId = globalThis.walletConnection.getAccountId();
+    // Initializing our contract APIs by contract name and configuration
     globalThis.contract = new $6qQe9$Contract(globalThis.walletConnection.account(), nearConfig.contractName, {
         // View methods are read only. They don't modify the state, but usually return some value.
         viewMethods: [
@@ -206,13 +211,13 @@ Object.defineProperty(module.exports, "__esModule", {
 module.exports.default = void 0;
 
 var $81068f41e097c6e7$var$IPFS = $81068f41e097c6e7$var$_interopRequireWildcard($6qQe9$ipfscore);
-function $81068f41e097c6e7$var$_getRequireWildcardCache(nodeInterop1) {
+function $81068f41e097c6e7$var$_getRequireWildcardCache(nodeInterop) {
     if (typeof WeakMap !== "function") return null;
     var cacheBabelInterop = new WeakMap();
     var cacheNodeInterop = new WeakMap();
     return ($81068f41e097c6e7$var$_getRequireWildcardCache = function(nodeInterop) {
         return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-    })(nodeInterop1);
+    })(nodeInterop);
 }
 function $81068f41e097c6e7$var$_interopRequireWildcard(obj, nodeInterop) {
     if (!nodeInterop && obj && obj.__esModule) return obj;
@@ -339,13 +344,13 @@ $63eb5f628a566d9d$exports.NEAR = void 0;
 
 var $63eb5f628a566d9d$var$NEAR = $63eb5f628a566d9d$var$_interopRequireWildcard((parcelRequire("3rJrX")));
 $63eb5f628a566d9d$exports.NEAR = $63eb5f628a566d9d$var$NEAR;
-function $63eb5f628a566d9d$var$_getRequireWildcardCache(nodeInterop1) {
+function $63eb5f628a566d9d$var$_getRequireWildcardCache(nodeInterop) {
     if (typeof WeakMap !== "function") return null;
     var cacheBabelInterop = new WeakMap();
     var cacheNodeInterop = new WeakMap();
     return ($63eb5f628a566d9d$var$_getRequireWildcardCache = function(nodeInterop) {
         return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-    })(nodeInterop1);
+    })(nodeInterop);
 }
 function $63eb5f628a566d9d$var$_interopRequireWildcard(obj, nodeInterop) {
     if (!nodeInterop && obj && obj.__esModule) return obj;

@@ -109,18 +109,23 @@ function $1c678e23f854c528$var$getNearConfig() {
         default:
             throw Error(`Unconfigured environment '${chainType}'. Can be configured in src/config.js.`);
     }
-} // Initialize contract & set global variables
+}
+// Initialize contract & set global variables
 async function $1c678e23f854c528$var$init() {
-    const nearConfig = $1c678e23f854c528$var$getNearConfig(); // Initialize connection to the NEAR testnet
+    const nearConfig = $1c678e23f854c528$var$getNearConfig();
+    // Initialize connection to the NEAR testnet
     const near = await (0, $igjq5$nearapijs.connect)({
         deps: {
             keyStore: new $igjq5$nearapijs.keyStores.BrowserLocalStorageKeyStore()
         },
         ...nearConfig
-    }); // Initializing Wallet based Account. It can work with NEAR testnet wallet that
+    });
+    // Initializing Wallet based Account. It can work with NEAR testnet wallet that
     // is hosted at https://wallet.testnet.near.org
-    globalThis.walletConnection = new $igjq5$nearapijs.WalletConnection(near); // Getting the Account ID. If still unauthorized, it's just empty string
-    globalThis.accountId = globalThis.walletConnection.getAccountId(); // Initializing our contract APIs by contract name and configuration
+    globalThis.walletConnection = new $igjq5$nearapijs.WalletConnection(near);
+    // Getting the Account ID. If still unauthorized, it's just empty string
+    globalThis.accountId = globalThis.walletConnection.getAccountId();
+    // Initializing our contract APIs by contract name and configuration
     globalThis.contract = new $igjq5$nearapijs.Contract(globalThis.walletConnection.account(), nearConfig.contractName, {
         // View methods are read only. They don't modify the state, but usually return some value.
         viewMethods: [
@@ -206,13 +211,13 @@ Object.defineProperty(module.exports, "__esModule", {
 module.exports.default = void 0;
 
 var $d09c24f68af6a1cd$var$IPFS = $d09c24f68af6a1cd$var$_interopRequireWildcard($igjq5$ipfscore);
-function $d09c24f68af6a1cd$var$_getRequireWildcardCache(nodeInterop1) {
+function $d09c24f68af6a1cd$var$_getRequireWildcardCache(nodeInterop) {
     if (typeof WeakMap !== "function") return null;
     var cacheBabelInterop = new WeakMap();
     var cacheNodeInterop = new WeakMap();
     return ($d09c24f68af6a1cd$var$_getRequireWildcardCache = function(nodeInterop) {
         return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-    })(nodeInterop1);
+    })(nodeInterop);
 }
 function $d09c24f68af6a1cd$var$_interopRequireWildcard(obj, nodeInterop) {
     if (!nodeInterop && obj && obj.__esModule) return obj;
@@ -338,13 +343,13 @@ $4bc0d4344d10a7f2$exports.NEAR = void 0;
 
 var $4bc0d4344d10a7f2$var$NEAR = $4bc0d4344d10a7f2$var$_interopRequireWildcard((parcelRequire("2rcby")));
 $4bc0d4344d10a7f2$exports.NEAR = $4bc0d4344d10a7f2$var$NEAR;
-function $4bc0d4344d10a7f2$var$_getRequireWildcardCache(nodeInterop1) {
+function $4bc0d4344d10a7f2$var$_getRequireWildcardCache(nodeInterop) {
     if (typeof WeakMap !== "function") return null;
     var cacheBabelInterop = new WeakMap();
     var cacheNodeInterop = new WeakMap();
     return ($4bc0d4344d10a7f2$var$_getRequireWildcardCache = function(nodeInterop) {
         return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-    })(nodeInterop1);
+    })(nodeInterop);
 }
 function $4bc0d4344d10a7f2$var$_interopRequireWildcard(obj, nodeInterop) {
     if (!nodeInterop && obj && obj.__esModule) return obj;
