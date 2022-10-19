@@ -109,3 +109,8 @@ describe('can request sign in', () => {
       });
   });
 });
+
+it('testing logout', () => {
+  //call logout and mock contract so that it doesnt call an actual contract
+  expect(walletConnection.isLoggedIn()).toBe(false);
+});
