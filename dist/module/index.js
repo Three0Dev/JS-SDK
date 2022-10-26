@@ -193,9 +193,10 @@ async function $0b1c7bd34c4de420$export$2e2bcd8739ae039() {
     if ((0, $078e128063fe7ceb$export$256a5a3564694cfc)()) {
         let isLoggedIn = true;
         try {
-            isLoggedIn = await globalThis.contract.get_user({
+            const userProfile = await globalThis.contract.get_user({
                 account_id: (0, $078e128063fe7ceb$export$c1e0336bde96e2dc)()
             });
+            isLoggedIn = userProfile.is_online;
         } catch (e) {
             isLoggedIn = false;
         }
