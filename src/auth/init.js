@@ -5,9 +5,11 @@ export default async function initAuth() {
 		let isLoggedIn = true
 
 		try {
-			isLoggedIn = await globalThis.contract.get_user({
+			const userProfile = await globalThis.contract.get_user({
 				account_id: getAccountId(),
 			})
+
+			isLoggedIn = userProfile.is_online
 		} catch (e) {
 			isLoggedIn = false
 		}
