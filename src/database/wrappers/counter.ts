@@ -13,10 +13,8 @@ export class CounterDatabase extends Database {
 
 		const incrementPromises: Array<Promise<string>> = []
 		for (let i = 0; i < amt; i += 1) {
-			incrementPromises.push((this.database as CounterStore).inc())
+			await (this.database as CounterStore).inc()
 		}
-
-		await Promise.all(incrementPromises)
 	}
 }
 

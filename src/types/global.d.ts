@@ -11,5 +11,3 @@ declare global {
 	var accountId: string
 	var contract: Contract
 }
-
-export {}

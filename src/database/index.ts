@@ -12,12 +12,18 @@ import {
 } from './wrappers'
 import Database from './wrappers/Database'
 
-const peerDBServer = 'https://pinning.three0dev.com/'
-
 const cacheMap = new Map()
 
 type DocStoreOptions = {
 	indexBy?: string
+}
+
+enum DatabaseType {
+	Counter = 'counter',
+	DocStore = 'docstore',
+	EventLog = 'eventlog',
+	Feed = 'feed',
+	KeyValue = 'keyvalue',
 }
 
 async function getDB(
@@ -31,19 +37,19 @@ async function getDB(
 
 	try {
 		switch (type) {
-			case 'counter':
+			case DatabaseType.Counter:
 				db = await getCounter(address)
 				break
-			case 'docstore':
+			case DatabaseType.DocStore:
 				db = await getDocStore(address, options)
 				break
-			case 'eventlog':
+			case DatabaseType.EventLog:
 				db = await getEventLog(address)
 				break
-			case 'feed':
+			case DatabaseType.Feed:
 				db = await getFeed(address)
 				break
-			case 'keyvalue':
+			case DatabaseType.KeyValue:
 				db = await getKeyValue(address)
 				break
 			default:
@@ -51,15 +57,6 @@ async function getDB(
 		}
 
 		cacheMap.set(address, db)
-
-		await fetch(`${peerDBServer}pin/?address${address}`, {
-			method: 'POST',
-			mode: 'cors',
-			cache: 'no-cache',
-			credentials: 'same-origin',
-			redirect: 'follow',
-			referrerPolicy: 'no-referrer',
-		})
 	} catch (e) {
 		console.error(e)
 	}
@@ -69,7 +66,7 @@ async function getDB(
 }
 
 export async function Counter(address: string): Promise<CounterDatabase> {
-	const db = await getDB(address, 'counter')
+	const db = await getDB(address, DatabaseType.Counter)
 	return db as CounterDatabase
 }
 
@@ -77,22 +74,22 @@ export async function DocStore(
 	address: string,
 	options: DocStoreOptions = { indexBy: '_id' }
 ): Promise<DocumentDatabase> {
-	const db = await getDB(address, 'docstore', options)
+	const db = await getDB(address, DatabaseType.DocStore, options)
 	return db as DocumentDatabase
 }
 
 export async function EventLog(address: string): Promise<EventLogDatabase> {
-	const db = await getDB(address, 'eventlog')
+	const db = await getDB(address, DatabaseType.EventLog)
 	return db as EventLogDatabase
 }
 
 export async function Feed(address: string): Promise<FeedDatabase> {
-	const db = await getDB(address, 'feed')
+	const db = await getDB(address, DatabaseType.Feed)
 	return db as FeedDatabase
 }
 
 export async function KeyValue(address: string): Promise<KVDatabase> {
-	const db = await getDB(address, 'keyvalue')
+	const db = await getDB(address, DatabaseType.KeyValue)
 	return db as KVDatabase
 }
 

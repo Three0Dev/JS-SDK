@@ -25,10 +25,11 @@
   },
   "homepage": "https://github.com/Three0Dev/JS-SDK#readme",
   "dependencies": {
+    "@types/orbit-db": "npm:@constl/orbit-db-types@^1.0.5",
+    "@constl/orbit-db-types": "^1.0.5",
     "@swc/helpers": "^0.4.3",
-    "@types/orbit-db": "github:orbitdb/orbit-db-types",
     "@types/uuid": "^8.3.4",
-    "ipfs": "^0.59.0",
+    "ipfs-core": "^0.14.3",
     "near-api-js": "^0.45.1",
     "orbit-db": "^0.28.6",
     "orbit-db-counterstore": "^1.12.1",

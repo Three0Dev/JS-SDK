@@ -42,7 +42,6 @@ export function getNearConfig() {
 	const chainType = getBlockchainType()
 
 	switch (chainType) {
-		case 'production':
 		case 'mainnet':
 			return {
 				networkId: 'mainnet',
@@ -52,6 +51,7 @@ export function getNearConfig() {
 				helperUrl: 'https://helper.mainnet.near.org',
 				explorerUrl: 'https://explorer.mainnet.near.org',
 			}
+		case 'production':
 		case 'development':
 		case 'testnet':
 			return {
@@ -115,9 +115,6 @@ export async function init() {
 	// Initializing Wallet based Account. It can work with NEAR testnet wallet that
 	// is hosted at https://wallet.testnet.near.org
 	globalThis.walletConnection = new WalletConnection(near, null)
-
-	// Getting the Account ID. If still unauthorized, it's just empty string
-	globalThis.accountId = globalThis.walletConnection.getAccountId()
 
 	// Initializing our contract APIs by contract name and configuration
 	globalThis.contract = new Contract(

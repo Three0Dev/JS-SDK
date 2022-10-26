@@ -1,4 +1,4 @@
-import * as IPFS from 'ipfs'
+import * as IPFS from 'ipfs-core'
 import { IPFSOptions } from 'ipfs-core/src/components/network'
 
 let ipfs: IPFS.IPFS
