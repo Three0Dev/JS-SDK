@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import OrbitDB from 'orbit-db'
 import FeedStore from 'orbit-db-feedstore'
-import Database from './database'
-import { isValidDatabase } from './utils'
+import Database from './Database'
+import { isValidDatabase } from './Utils'
 
 export class FeedDatabase extends Database {
 	instance() {

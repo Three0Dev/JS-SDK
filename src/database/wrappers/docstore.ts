@@ -5,8 +5,8 @@
 import OrbitDB from 'orbit-db'
 import DocumentStore from 'orbit-db-docstore'
 import { v4 as uuidv4 } from 'uuid'
-import Database from './database'
-import { isValidDatabase, isValidKey, isValidValueObject } from './utils'
+import Database from './Database'
+import { isValidDatabase, isValidKey, isValidValueObject } from './Utils'
 
 export class DocumentDatabase extends Database {
 	get(key: string | null) {

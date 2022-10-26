@@ -10,7 +10,7 @@ import {
 	FeedDatabase,
 	KVDatabase,
 } from './wrappers'
-import Database from './wrappers/database'
+import Database from './wrappers/Database'
 
 const peerDBServer = 'https://pinning.three0dev.com/'
 

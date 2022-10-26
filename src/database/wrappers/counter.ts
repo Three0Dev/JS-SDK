@@ -1,7 +1,7 @@
 import CounterStore from 'orbit-db-counterstore'
 import OrbitDB from 'orbit-db'
-import { isValidDatabase } from './utils'
-import Database from './database'
+import { isValidDatabase } from './Utils'
+import Database from './Database'
 
 export class CounterDatabase extends Database {
 	get() {

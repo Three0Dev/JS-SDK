@@ -1,6 +1,6 @@
 import { NEAR } from './blockchain'
-import initOrbitDB from './database/init'
-import initAuth from './auth/init'
+import initOrbitDB from './database/Init'
+import initAuth from './auth/Init'
 import { getAccountId, login, logout } from './auth'
 import {
 	timestamp,

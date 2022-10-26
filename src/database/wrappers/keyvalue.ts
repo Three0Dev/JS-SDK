@@ -1,8 +1,8 @@
 import OrbitDB from 'orbit-db'
 import KeyValueStore from 'orbit-db-kvstore'
 import Store from 'orbit-db-store'
-import Database from './database'
-import { isValidDatabase } from './utils'
+import Database from './Database'
+import { isValidDatabase } from './Utils'
 
 export class KVDatabase extends Database {
 	instance() {

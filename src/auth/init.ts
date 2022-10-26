@@ -1,5 +1,5 @@
 import { Three0Contract, UserActionType } from '../blockchain/NEAR'
-import { isLoggedIn as isLoggedInLocally, getAccountId } from './session'
+import { isLoggedIn as isLoggedInLocally, getAccountId } from './Session'
 
 export default async function initAuth() {
 	if (isLoggedInLocally()) {
