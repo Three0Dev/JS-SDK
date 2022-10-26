@@ -1,0 +1,16 @@
+{
+    "include": ["src/**/*"],
+    "compilerOptions": {
+      "target": "ES6",
+      "strict": true,
+      "moduleResolution": "node",
+      "skipLibCheck": true
+    },
+    "files": [
+      "src/types/global.d.ts"
+    ],
+    "typedocOptions": {
+      "entryPoints": ["src/index.ts", "src/auth/index.ts", "src/database/index.ts"],
+      "out": "docs"
+  }
+}

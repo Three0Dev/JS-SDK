@@ -9,10 +9,7 @@ export function getBlockchainType() {
 	}
 }
 
-export function getPID() {
-	return globalThis.projectId
-}
-
 export function getQueryParams() {
+	// eslint-disable-next-line no-restricted-globals
 	return new URLSearchParams(location.search)
 }

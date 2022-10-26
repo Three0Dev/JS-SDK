@@ -3,12 +3,12 @@ This is a JS SDK is intended for browser based applications that need to interac
 
 ## Initialization
 ```
-npm i --save @three0dev/js-sdk
+npm i --save three0-js-sdk
 ```
 ## Usage
 1. Import Three0 and prepare configuration
 ```
-import init from '@three0dev/js-sdk'
+import init from 'three0-js-sdk'
 
 const config = {
   "contractName": "myTestContract",
@@ -52,7 +52,7 @@ WIP: Pending Bug Fixes and CDN Compatibility
 ## Services
 ### Auth
 ```
-import { login, logout, isloggedIn, getAccountId } from '@three0dev/js-sdk/auth'
+import { login, logout, isloggedIn, getAccountId } from 'three0-js-sdk'
 ```
 * `login():Promise<void>`
   * Logs into dApp using NEAR Wallet
@@ -67,9 +67,9 @@ import { login, logout, isloggedIn, getAccountId } from '@three0dev/js-sdk/auth'
 
 #### **DocStore**: 
 ```
-import { getDocStore } from '@three0dev/js-sdk/database'
+import { DocStore } from 'three0-js-sdk'
 
-const docstore = await getDocStore([address])
+const docstore = await DocStore([address])
 ```
 * `docstore.get(key:string):any`
   * Gets value from docstore
@@ -88,9 +88,9 @@ const docstore = await getDocStore([address])
   * Deletes value from docstore
 #### **KeyValue**:
 ```
-import { getKeyValue } from '@three0dev/js-sdk/database'
+import { KeyValue } from 'three0-js-sdk/database'
 
-const keyvalue = await getKeyValue([address])
+const keyvalue = await KeyValue([address])
 ```
 * `keyvalue.get(key:string):any`
   * Gets value from database
@@ -102,11 +102,10 @@ const keyvalue = await getKeyValue([address])
 * `keyvalue.delete(key:string):Promise<void>`
   * Deletes value from database
 #### **Counter**:
-WARNING: EXPERIMENTAL
 ```
-import { getCounter } from '@three0dev/js-sdk/database'
+import { Counter } from 'three0-js-sdk/database'
 
-const counter = await getCounter([address])
+const counter = await Counter([address])
 ```
 * `counter.get():number`
   * Gets current value of counter
@@ -130,12 +129,3 @@ See [Code of Conduct](CODE_OF_CONDUCT.md) for more information on contribution a
 ## Open Source References
 * [Orbit DB](https://orbitdb.org/)
 * [near-api-js](https://github.com/near/near-api-js)
-
-## Popular Issues
-Occasionally an error stating `npm ERR! Error No binary available for arch 'undefined'` will occur. To fix this:
-1. Delete `node_modules` and `package-lock.json`
-2. Run the following command:
-```
-export TARGET_ARCH=arm64
-```
-3. Reinstall dependencies
