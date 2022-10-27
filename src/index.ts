@@ -12,11 +12,15 @@ import {
 } from './database'
 import { ProjectConfig } from './types/config'
 
+const enum BlockchainNetwork {
+	NEAR_TESTNET = 'NEAR_TESTNET',
+}
+
 const init = async (projectConfig: ProjectConfig) => {
 	globalThis.projectConfig = projectConfig
 
 	switch (projectConfig.chainType) {
-		case 'NEAR_TESTNET':
+		case BlockchainNetwork.NEAR_TESTNET:
 			await NEAR.init()
 			break
 		default:
