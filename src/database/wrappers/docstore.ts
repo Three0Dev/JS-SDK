@@ -9,7 +9,7 @@ import Database from './Database'
 import { isValidDatabase, isValidKey, isValidValueObject } from './Utils'
 
 export class DocumentDatabase extends Database {
-	get(key: string | null) {
+	get(key?: string) {
 		return key
 			? (this.database as DocumentStore<Object>).get(key)[0]
 			: this.where((e) => e !== null)

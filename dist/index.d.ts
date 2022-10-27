@@ -15,7 +15,7 @@ declare class CounterDatabase extends Database {
     inc(amt?: number): Promise<void>;
 }
 declare class DocumentDatabase extends Database {
-    get(key: string | null): Object;
+    get(key?: string): Object;
     where(callbackfn: (value: Object) => boolean): Array<Object>;
     set(key: string, value: Object): Promise<void>;
     add(value: Object): Promise<string>;
