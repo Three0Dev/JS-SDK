@@ -33,7 +33,6 @@ async function getDB(
 ): Promise<Database> {
 	let db: Database | null = null
 	if (cacheMap.has(address)) return cacheMap.get(address)
-	cacheMap.set(address, db)
 
 	try {
 		switch (type) {
