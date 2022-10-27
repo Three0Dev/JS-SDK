@@ -804,7 +804,6 @@ function $654c4db4d93f05ad$var$getDB(address, type, options = {}) {
     return $654c4db4d93f05ad$var$__awaiter(this, void 0, void 0, function*() {
         let db = null;
         if ($654c4db4d93f05ad$var$cacheMap.has(address)) return $654c4db4d93f05ad$var$cacheMap.get(address);
-        $654c4db4d93f05ad$var$cacheMap.set(address, db);
         try {
             switch(type){
                 case $654c4db4d93f05ad$var$DatabaseType.Counter:
@@ -897,10 +896,14 @@ var $5b16728422d4a076$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var $5b16728422d4a076$var$BlockchainNetwork;
+(function(BlockchainNetwork) {
+    BlockchainNetwork["NEAR_TESTNET"] = "NEAR_TESTNET";
+})($5b16728422d4a076$var$BlockchainNetwork || ($5b16728422d4a076$var$BlockchainNetwork = {}));
 const $5b16728422d4a076$export$2cd8252107eb640b = (projectConfig)=>$5b16728422d4a076$var$__awaiter(void 0, void 0, void 0, function*() {
         globalThis.projectConfig = projectConfig;
         switch(projectConfig.chainType){
-            case "NEAR_TESTNET":
+            case $5b16728422d4a076$var$BlockchainNetwork.NEAR_TESTNET:
                 yield (0, $bc09daf3d6fd99a8$exports).init();
                 break;
             default:
