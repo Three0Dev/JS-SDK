@@ -11,11 +11,11 @@ class DocumentDatabase extends Database {
 	}
 
 	get(key = null) {
-		if (key) {
-			if (!(typeof key === 'string')) throw Error('Key is required')
-			return this.#database.get(key)[0]
+		if (key == null) {
+			throw Error("Key is required")
 		}
-		return this.where((e) => e !== null)
+		return this.#database.get(key)[0]
+
 	}
 
 	where(callbackfn) {

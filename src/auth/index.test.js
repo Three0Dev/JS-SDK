@@ -5,11 +5,6 @@ import {getAccountId, isLoggedIn, login, logout} from './index'
 
 const url = require('url');
 const localStorage = require('localstorage-memory');
-// const BN = require('bn.js');
-
-
-let lastRedirectUrl;
-let lastTransaction;
 
 global.window = {
   localStorage
@@ -22,9 +17,8 @@ global.document = {
 let history;
 let nearFake;
 let walletConnection;
+let lastRedirectUrl;
 let keyStore = new nearApi.keyStores.InMemoryKeyStore();
-
-
 
 beforeEach(() => {
   keyStore.clear();
@@ -64,11 +58,6 @@ beforeEach(() => {
   }
 });
 
-// it('not signed in by default', () => {
-//   expect(walletConnection.isSignedIn()).not.toBeTruthy();
-// });
-
-
 it('not signed in by default', () => {
   expect(isLoggedIn()).not.toBeTruthy();
 });
@@ -77,9 +66,6 @@ it('Empty account ID', () => {
   expect(getAccountId()).toBe("");
 });
 
-// it('Logout', () => {
-//   expect(logout()).not.toBeTruthy();
-// });
 
 describe('can request sign in', () => {
   beforeEach(() => keyStore.clear());
@@ -110,7 +96,11 @@ describe('can request sign in', () => {
   });
 });
 
-// it('testing logout', () => {
-//   //call logout and mock contract so that it doesnt call an actual contract
-//   expect(walletConnection.isLoggedIn()).toBe(false);
+// TODO Mock contract function call successfully
+// it("testing logout", () => {
+//   const contractCallMock = jest.fn()
+//   globalThis.contract.userAction = contractCallMock
+
+//   logout()
+//   expect(isLoggedIn()).not.toBeTruthy();
 // });

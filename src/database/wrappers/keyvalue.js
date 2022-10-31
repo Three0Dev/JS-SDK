@@ -14,7 +14,9 @@ class KVDatabase extends Database {
 	}
 
 	get(key) {
-		if (!(key && key instanceof String)) throw Error('Key is required')
+		if (key == null){
+			throw Error("Key is required")
+		}
 		return this.#database.get(key)
 	}
 
@@ -23,13 +25,18 @@ class KVDatabase extends Database {
 	}
 
 	async set(key, value) {
-		if (!(key && key instanceof String)) throw Error('Key is required')
+		if (key == null){
+			throw Error("Key is required")
+		}
+
 		await this.#database.put(key, value)
 	}
 
 	async delete(key) {
-		if (!(key && key instanceof String)) throw Error('Key is required')
-		await this.#database.delete(key)
+		if (key == null){
+			throw Error("Key is required")
+		}
+		await this.#database.del(key)
 	}
 }
 
