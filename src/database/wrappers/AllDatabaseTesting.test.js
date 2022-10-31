@@ -126,6 +126,13 @@ describe('Counter Testing', () => {
         const value = keyvalueDB.get("testKey")
         expect(value).toEqual(undefined)
     })
+
+    test("Instance Function", async () => {
+        globalThis.contract.valid_database.mockReturnValueOnce(true);
+        let keyvalueDB = await getKeyValue(db.address)
+        expect(keyvalueDB.instance()).not.toBeNull()
+     })
+
   });
 
   describe('Docstore Testing', () => {

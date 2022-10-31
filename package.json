@@ -8,7 +8,7 @@
   "scripts": {
     "build": "parcel build --no-cache",
     "watch": "parcel watch",
-    "test": "jest --verbose",
+    "test": "jest --verbose --coverage",
     "lint": "eslint 'src/**/*.js' --no-error-on-unmatched-pattern",
     "lint:fix": "eslint 'src/**/*.js' --no-error-on-unmatched-pattern --fix"
   },
