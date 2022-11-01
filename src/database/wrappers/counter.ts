@@ -11,7 +11,7 @@ export class CounterDatabase extends Database {
 	async inc(amt = 1) {
 		if (amt >= 1) throw Error('Valid amount is required')
 
-		const incrementPromises: Array<Promise<string>> = []
+		// TODO: Add support for multiple increments
 		for (let i = 0; i < amt; i += 1) {
 			await (this.database as CounterStore).inc()
 		}
