@@ -1,3 +1,5 @@
-2022/10/31-00:49:03.786 6dc8 Recovering log #744
-2022/10/31-00:49:03.794 6dc8 Delete type=0 #744
-2022/10/31-00:49:03.794 6dc8 Delete type=3 #742
+2022/10/31-20:05:58.673 d7cc Recovering log #905
+2022/10/31-20:05:58.673 d7cc Level-0 table #907: started
+2022/10/31-20:05:58.676 d7cc Level-0 table #907: 1313 bytes OK
+2022/10/31-20:05:58.683 d7cc Delete type=0 #905
+2022/10/31-20:05:58.683 d7cc Delete type=3 #903

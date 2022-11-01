@@ -1,6 +1,5 @@
-2022/10/31-00:49:05.080 fd20 Recovering log #400
-2022/10/31-00:49:05.080 fd20 Level-0 table #402: started
-2022/10/31-00:49:05.082 fd20 Level-0 table #402: 3918 bytes OK
-2022/10/31-00:49:05.088 fd20 Delete type=0 #400
-2022/10/31-00:49:05.088 fd20 Delete type=3 #398
-2022/10/31-00:49:05.090 e638 Moved #402 to level-1 3918 bytes OK: files[ 3 2 0 0 0 0 0 ]
+2022/10/31-20:05:59.488 11aa4 Recovering log #724
+2022/10/31-20:05:59.488 11aa4 Level-0 table #726: started
+2022/10/31-20:05:59.491 11aa4 Level-0 table #726: 3924 bytes OK
+2022/10/31-20:05:59.497 11aa4 Delete type=0 #724
+2022/10/31-20:05:59.497 11aa4 Delete type=3 #722

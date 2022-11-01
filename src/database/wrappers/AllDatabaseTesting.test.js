@@ -55,31 +55,52 @@ describe('Counter Testing', () => {
         expect(value).toEqual(0)
     })
 
+    test("Increment with no Parameter", async () => {
+        globalThis.contract.valid_database.mockReturnValueOnce(true);
+        let counterDB = await getCounter(db.address)
+        await counterDB.inc()
+        const value = counterDB.get()
+        expect(value).toEqual(1)
+    })
+
     test("Increment -1", async () => {
         globalThis.contract.valid_database.mockReturnValueOnce(true);
         let counterDB = await getCounter(db.address)
-        await expect(counterDB.inc(-1))
-        .rejects
-        .toThrow("Valid amount is required")
+        try{
+            await counterDB.inc(-1)
+        }catch(e){
+            expect(e.message).toEqual("Valid amount is required")
+        }
     })
-
 
     // // https://stackoverflow.com/questions/47144187/can-you-write-async-tests-that-expect-tothrow#:~:text=You%20can%20test%20your%20async,I%20should%20fail')%3B%20%7D)%3B
     test("Increment 0", async () => {
         globalThis.contract.valid_database.mockReturnValueOnce(true);
         let counterDB = await getCounter(db.address)
-        await expect(counterDB.inc(0))
-        .rejects
-        .toThrow("Valid amount is required")
+        try{
+            await counterDB.inc(0)
+        }catch(e){
+            expect(e.message).toEqual("Valid amount is required")
+        }
     })
 
-    test("Increment 2", async () => {
+    test("Invalid Database Address", async () => {
         globalThis.contract.valid_database.mockReturnValueOnce(true);
-        let counterDB = await getCounter(db.address)
-        await counterDB.inc(2)
-        const value = counterDB.get()
-        expect(value).toEqual(2)
-    }) 
+        try{
+            await getCounter("123abc")
+        }catch(e){
+            expect(e.message).toEqual("Invalid database address")
+        }
+    })
+
+    test("Invalid OrbitDB", async () => {
+        globalThis.contract.valid_database.mockReturnValueOnce(true);
+        try{
+            await getCounter("123abc", null)
+        }catch(e){
+            expect(e.message).toEqual("OrbitDB is not initialized")
+        }
+    })
 
   });
 
@@ -104,6 +125,16 @@ describe('Counter Testing', () => {
         expect(returnValue).toEqual(value)
     })
 
+    test("Get Function with Null Key", async () => {
+        globalThis.contract.valid_database.mockReturnValueOnce(true);
+        let keyvalueDB = await getKeyValue(db.address)
+        try{
+            await keyvalueDB.get(null)
+        } catch (e){
+            expect(e.message).toEqual("Key is required")
+        }
+    })
+
     test("Get All Function", async () => {
         globalThis.contract.valid_database.mockReturnValueOnce(true);
         let keyvalueDB = await getKeyValue(db.address)
@@ -118,6 +149,16 @@ describe('Counter Testing', () => {
         keyvalueDB.set("testKey", "testValue")
      })
 
+     test("Set Function with Null Key", async () => {
+        globalThis.contract.valid_database.mockReturnValueOnce(true);
+        let keyvalueDB = await getKeyValue(db.address)
+        try{
+            await keyvalueDB.set(null, "testValue")
+        }catch(e){
+            expect(e.message).toEqual("Key is required")
+        }
+     })
+
     test("Delete Function", async () => {
         globalThis.contract.valid_database.mockReturnValueOnce(true);
         let keyvalueDB = await getKeyValue(db.address)
@@ -127,11 +168,50 @@ describe('Counter Testing', () => {
         expect(value).toEqual(undefined)
     })
 
+    test("Delete Function with Null Key", async () => {
+        globalThis.contract.valid_database.mockReturnValueOnce(true);
+        let keyvalueDB = await getKeyValue(db.address)
+        try{
+            await keyvalueDB.delete(null)
+        }catch(e){
+            expect(e.message).toEqual("Key is required")
+        }
+     })
+
     test("Instance Function", async () => {
         globalThis.contract.valid_database.mockReturnValueOnce(true);
         let keyvalueDB = await getKeyValue(db.address)
         expect(keyvalueDB.instance()).not.toBeNull()
      })
+
+     test("On Change Function", async () => {
+        globalThis.contract.valid_database.mockReturnValueOnce(true);
+        let keyvalueDB = await getKeyValue(db.address)
+        let isChanged = false
+        keyvalueDB.set("testKey", "testValue")
+        keyvalueDB.onChange(
+            isChanged = true
+        )
+        expect(isChanged).toEqual(true)
+     })
+
+     test("Invalid Database Address", async () => {
+        globalThis.contract.valid_database.mockReturnValueOnce(true);
+        try{
+            await getKeyValue("123abc")
+        }catch(e){
+            expect(e.message).toEqual("Invalid database address")
+        }
+    })
+
+    test("Invalid OrbitDB", async () => {
+        globalThis.contract.valid_database.mockReturnValueOnce(true);
+        try{
+            await getKeyValue("123abc", null)
+        }catch(e){
+            expect(e.message).toEqual("OrbitDB is not initialized")
+        }
+    })
 
   });
 
@@ -154,6 +234,16 @@ describe('Counter Testing', () => {
         var expectedDictionary = {}
         expectedDictionary = {"_id": "testKey", "value": "testValue"}
         expect(value).toEqual(expectedDictionary)
+    })
+
+    test("Get Function with Null Key", async () => {
+        globalThis.contract.valid_database.mockReturnValueOnce(true);
+        let docstoreDB = await getDocStore(db.address)
+        try{
+            await docstoreDB.get(null)
+        } catch (e){
+            expect(e.message).toEqual("Key is required")
+        }
     })
 
     test("Set Function", async () => {
