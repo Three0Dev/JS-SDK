@@ -1,12 +1,47 @@
 import { connect, Contract, keyStores, WalletConnection } from 'near-api-js'
 import { getBlockchainType } from '../utils'
 
+export interface Three0Contract {
+	valid_database: ValidDatabaseFunction
+	get_user: GetUserFunction
+	user_action: UserActionFunction
+}
+
+type ValidDatabaseFunction = (
+	database_id: ValidDatabaseParams
+) => Promise<boolean>
+type GetUserFunction = (user_id: GetUserParams) => Promise<User>
+type UserActionFunction = (action: UserActionParams) => Promise<void>
+
+interface User {
+	account_id: string
+	is_online: boolean
+	created_at: bigint
+	last_online: bigint
+}
+
+interface ValidDatabaseParams {
+	address: string
+}
+
+interface GetUserParams {
+	account_id: string
+}
+
+interface UserActionParams {
+	action: UserActionType
+}
+
+export enum UserActionType {
+	LOGIN = 'LOGIN',
+	LOGOUT = 'LOGOUT',
+}
+
 export function getNearConfig() {
 	const CONTRACT_NAME = globalThis.projectConfig.contractName
 	const chainType = getBlockchainType()
 
 	switch (chainType) {
-		case 'production':
 		case 'mainnet':
 			return {
 				networkId: 'mainnet',
@@ -16,6 +51,7 @@ export function getNearConfig() {
 				helperUrl: 'https://helper.mainnet.near.org',
 				explorerUrl: 'https://explorer.mainnet.near.org',
 			}
+		case 'production':
 		case 'development':
 		case 'testnet':
 			return {
@@ -73,14 +109,12 @@ export async function init() {
 	const near = await connect({
 		deps: { keyStore: new keyStores.BrowserLocalStorageKeyStore() },
 		...nearConfig,
+		headers: {},
 	})
 
 	// Initializing Wallet based Account. It can work with NEAR testnet wallet that
 	// is hosted at https://wallet.testnet.near.org
-	globalThis.walletConnection = new WalletConnection(near)
-
-	// Getting the Account ID. If still unauthorized, it's just empty string
-	globalThis.accountId = globalThis.walletConnection.getAccountId()
+	globalThis.walletConnection = new WalletConnection(near, null)
 
 	// Initializing our contract APIs by contract name and configuration
 	globalThis.contract = new Contract(
@@ -88,9 +122,9 @@ export async function init() {
 		nearConfig.contractName,
 		{
 			// View methods are read only. They don't modify the state, but usually return some value.
-			viewMethods: ['user_exists', 'get_user', 'valid_database'],
+			viewMethods: ['get_user', 'valid_database'],
 			// Change methods can modify the state. But you don't receive the returned value when called.
-			changeMethods: ['create_user', 'user_action'],
+			changeMethods: ['user_action'],
 		}
 	)
 }
