@@ -1,5 +1,5 @@
 import * as nearApi from 'near-api-js'
-import {getAccountId, isLoggedIn, login, logout} from './index'
+import {getAccountId, isLoggedIn, login} from './index'
 
 const url = require('url');
 const localStorage = require('localstorage-memory');
