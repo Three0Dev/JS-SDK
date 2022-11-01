@@ -1,7 +1,5 @@
-// import {isLoggedIn, add} from './index'
 import * as nearApi from 'near-api-js'
 import {getAccountId, isLoggedIn, login, logout} from './index'
-
 
 const url = require('url');
 const localStorage = require('localstorage-memory');
@@ -65,7 +63,6 @@ it('not signed in by default', () => {
 it('Empty account ID', () => {
   expect(getAccountId()).toBe("");
 });
-
 
 describe('can request sign in', () => {
   beforeEach(() => keyStore.clear());

@@ -27,18 +27,14 @@ let ipfs = null;
 beforeAll(async () => {
 	ipfs = await IPFS.create(IPFS_CONFIG)
 	globalThis.orbitdb = await OrbitDB.createInstance(ipfs)
-
 	const valid_database_mock = jest.fn();
-
 	globalThis.contract = {
 		valid_database: valid_database_mock
 	}
-
 	valid_database_mock.mockReturnValue(true)
 });
 
 describe('Counter Testing', () => {
-
     beforeAll(async () => {
         db = await globalThis.orbitdb.counter('counter-database-test')
     });
@@ -73,7 +69,6 @@ describe('Counter Testing', () => {
         }
     })
 
-    // // https://stackoverflow.com/questions/47144187/can-you-write-async-tests-that-expect-tothrow#:~:text=You%20can%20test%20your%20async,I%20should%20fail')%3B%20%7D)%3B
     test("Increment 0", async () => {
         globalThis.contract.valid_database.mockReturnValueOnce(true);
         let counterDB = await getCounter(db.address)
@@ -101,11 +96,9 @@ describe('Counter Testing', () => {
             expect(e.message).toEqual("OrbitDB is not initialized")
         }
     })
-
   });
 
   describe('Keyvalue Testing', () => {
-
     beforeAll(async () => {
         db = await globalThis.orbitdb.keyvalue('keyvalue-database-test')
     });
@@ -212,11 +205,9 @@ describe('Counter Testing', () => {
             expect(e.message).toEqual("OrbitDB is not initialized")
         }
     })
-
   });
 
   describe('Docstore Testing', () => {
-
     beforeAll(async () => {
         db = await globalThis.orbitdb.docstore('docstore-database-test')
     });
