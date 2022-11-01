@@ -249,7 +249,7 @@ describe('Counter Testing', () => {
     test("Set Function", async () => {
         globalThis.contract.valid_database.mockReturnValueOnce(true);
         let docstoreDB = await getDocStore(db.address)
-        docstoreDB.set("testKey", "testValue")
+        await docstoreDB.set("testKey", {"value": 'testValue'})
     })
 
     test("Delete Function", async () => {
