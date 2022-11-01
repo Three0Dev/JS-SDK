@@ -11,6 +11,8 @@ import {
 	EventLog,
 } from './database'
 import { ProjectConfig } from './types/config'
+import initStorage from './storage/init'
+import { uploadFile, openFile, getFileList } from './storage'
 
 const init = async (projectConfig: ProjectConfig) => {
 	globalThis.projectConfig = projectConfig
@@ -25,6 +27,7 @@ const init = async (projectConfig: ProjectConfig) => {
 
 	await initAuth()
 	await initOrbitDB()
+	await initStorage()
 }
 
 const Auth = {
@@ -43,8 +46,10 @@ const Database = {
 	EventLog,
 }
 
-export {
-	init,
-	Auth,
-	Database
+const Storage = {
+	uploadFile,
+	openFile,
+	getFileList,
 }
+
+export { init, Auth, Database, Storage }

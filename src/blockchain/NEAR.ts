@@ -5,6 +5,8 @@ export interface Three0Contract {
 	valid_database: ValidDatabaseFunction
 	get_user: GetUserFunction
 	user_action: UserActionFunction
+	has_storage: HasStorageFunction
+	get_storage: GetStorageFunction
 }
 
 type ValidDatabaseFunction = (
@@ -12,6 +14,8 @@ type ValidDatabaseFunction = (
 ) => Promise<boolean>
 type GetUserFunction = (user_id: GetUserParams) => Promise<User>
 type UserActionFunction = (action: UserActionParams) => Promise<void>
+type HasStorageFunction = () => Promise<boolean>
+type GetStorageFunction = () => Promise<string>
 
 interface User {
 	account_id: string
@@ -35,6 +39,42 @@ interface UserActionParams {
 export enum UserActionType {
 	LOGIN = 'LOGIN',
 	LOGOUT = 'LOGOUT',
+}
+
+export interface StorageContract {
+	list_files: ListFilesFunction
+	get_file: GetFileFunction
+	nft_mint: NftMintFunction
+}
+
+type ListFilesFunction = (params: ListFilesParams) => Promise<string[]>
+type GetFileFunction = (params: GetFileParams) => Promise<FileMetadata>
+type NftMintFunction = (
+	params: NftMintParams,
+	attached_gas: string,
+	attached_deposit: string
+) => Promise<void>
+
+interface ListFilesParams {
+	path: string
+}
+interface GetFileParams {
+	file_path: string
+}
+interface NftMintParams {
+	token_id: string
+	metadata: FileMetadata
+	path: string
+	receiver_id: string
+}
+
+export interface FileMetadata {
+	title: string
+	description: string
+	media: string
+	media_hash: string
+	file_type: string
+	issued_at: number
 }
 
 export function getNearConfig() {
@@ -122,7 +162,7 @@ export async function init() {
 		nearConfig.contractName,
 		{
 			// View methods are read only. They don't modify the state, but usually return some value.
-			viewMethods: ['get_user', 'valid_database'],
+			viewMethods: ['get_user', 'valid_database', 'has_storage', 'get_storage'],
 			// Change methods can modify the state. But you don't receive the returned value when called.
 			changeMethods: ['user_action'],
 		}

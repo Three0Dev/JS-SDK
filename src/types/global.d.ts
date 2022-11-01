@@ -10,4 +10,5 @@ declare global {
 	var walletConnection: WalletConnection
 	var accountId: string
 	var contract: Contract
+	var storageContract: Contract
 }
