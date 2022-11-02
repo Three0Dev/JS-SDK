@@ -14,8 +14,8 @@ export default async function initAuth() {
 		})
 		isLoggedIn = user.is_online
 	} catch (e) {
-		console.error(e)
 		isLoggedIn = false
+		throw e
 	}
 
 	if (!isLoggedIn) {

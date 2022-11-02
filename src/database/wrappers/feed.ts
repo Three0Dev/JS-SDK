@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import OrbitDB from 'orbit-db'
 import FeedStore from 'orbit-db-feedstore'
 import Database from './Database'
 import { isValidDatabase } from './Utils'
@@ -28,10 +26,7 @@ export class FeedDatabase extends Database {
 	}
 }
 
-const getFeed = async (
-	address: string,
-	orbitdb: OrbitDB = globalThis.orbitdb
-) => {
+const getFeed = async (address: string) => {
 	throw Error('Not implemented')
 
 	if (!orbitdb) throw Error('OrbitDB is not initialized')
