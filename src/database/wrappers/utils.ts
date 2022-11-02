@@ -6,18 +6,19 @@ export const isValidDatabase = async (address: string) => {
 		return false
 	}
 
-	const isProjectDatabase = await (
-		globalThis.contract as unknown as Three0Contract
-	).valid_database({
-		address,
-	})
-	return isProjectDatabase
+	try {
+		const isProjectDatabase = await (
+			globalThis.contract as unknown as Three0Contract
+		).valid_database({
+			address,
+		})
+
+		return isProjectDatabase
+	} catch (e) {
+		return false
+	}
 }
 
 export function isValidKey(key: string) {
 	return !!key
-}
-
-export function isValidValueObject(value: Object) {
-	return !!value
 }

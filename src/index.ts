@@ -11,10 +11,7 @@ import {
 	EventLog,
 } from './database'
 import { ProjectConfig } from './types/config'
-
-const enum BlockchainNetwork {
-	NEAR_TESTNET = 'NEAR_TESTNET',
-}
+import { BlockchainNetwork } from './utils'
 
 const init = async (projectConfig: ProjectConfig) => {
 	globalThis.projectConfig = projectConfig
@@ -47,8 +44,4 @@ const Database = {
 	EventLog,
 }
 
-export {
-	init,
-	Auth,
-	Database
-}
+export { init, Auth, Database }

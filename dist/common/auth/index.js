@@ -1,18 +1,22 @@
-function $parcel$export(e, n, v, s) {
-  Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
+"use strict";
+Object.defineProperty(module.exports, "__esModule", {
+    value: true
+});
+module.exports.add = $fb5487c0bb6a0f3b$var$add;
+module.exports.getAccountId = $fb5487c0bb6a0f3b$var$getAccountId;
+module.exports.isLoggedIn = $fb5487c0bb6a0f3b$var$isLoggedIn;
+module.exports.login = $fb5487c0bb6a0f3b$var$login;
+module.exports.logout = $fb5487c0bb6a0f3b$var$logout;
+function $fb5487c0bb6a0f3b$var$add(a, b) {
+    return a + b;
 }
-
-$parcel$export(module.exports, "isLoggedIn", () => $fb5487c0bb6a0f3b$export$256a5a3564694cfc);
-$parcel$export(module.exports, "getAccountId", () => $fb5487c0bb6a0f3b$export$c1e0336bde96e2dc);
-$parcel$export(module.exports, "logout", () => $fb5487c0bb6a0f3b$export$a0973bcfe11b05c9);
-$parcel$export(module.exports, "login", () => $fb5487c0bb6a0f3b$export$596d806903d1f59e);
-function $fb5487c0bb6a0f3b$export$256a5a3564694cfc() {
+function $fb5487c0bb6a0f3b$var$isLoggedIn() {
     return globalThis.walletConnection.isSignedIn();
 }
-function $fb5487c0bb6a0f3b$export$c1e0336bde96e2dc() {
+function $fb5487c0bb6a0f3b$var$getAccountId() {
     return globalThis.walletConnection.getAccountId();
 }
-async function $fb5487c0bb6a0f3b$export$a0973bcfe11b05c9() {
+async function $fb5487c0bb6a0f3b$var$logout() {
     try {
         await globalThis.contract.user_action({
             action: "LOGOUT"
@@ -23,7 +27,10 @@ async function $fb5487c0bb6a0f3b$export$a0973bcfe11b05c9() {
         throw e;
     }
 }
-async function $fb5487c0bb6a0f3b$export$596d806903d1f59e(appName = "My Three0 App", successUrL = window.location.href, failureUrL = window.location.href) {
+async function $fb5487c0bb6a0f3b$var$login() {
+    let appName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "My Three0 App";
+    let successUrL = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window.location.href;
+    let failureUrL = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : window.location.href;
     globalThis.walletConnection.requestSignIn(globalThis.projectConfig.contractName, appName, successUrL, failureUrL);
 }
 
