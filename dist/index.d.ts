@@ -2,7 +2,7 @@ import Store from "orbit-db-store";
 import EventStore from "orbit-db-eventstore";
 import FeedStore from "orbit-db-feedstore";
 declare function logout(): Promise<void>;
-declare function login(appName?: string, successUrL?: string, failureUrL?: string): Promise<void>;
+declare function login(successUrl?: string, failureUrl?: string): Promise<void>;
 declare function isLoggedIn(): boolean;
 declare function getAccountId(): string;
 declare class _Database1 {
@@ -15,7 +15,7 @@ declare class CounterDatabase extends Database {
     inc(amt?: number): Promise<void>;
 }
 declare class DocumentDatabase extends Database {
-    get(key: string | null): Object;
+    get(key?: string): Object;
     where(callbackfn: (value: Object) => boolean): Array<Object>;
     set(key: string, value: Object): Promise<void>;
     add(value: Object): Promise<string>;
@@ -36,7 +36,6 @@ declare class FeedDatabase extends Database {
     set(value: any): Promise<string>;
 }
 declare class KVDatabase extends Database {
-    instance(): Store;
     get(key: string): any;
     getAll(): {
         [key: string]: any;
@@ -58,6 +57,9 @@ interface ProjectConfig {
     contractName: string;
     projectId: string;
 }
+declare function uploadFile(file: File, path?: string, description?: string): Promise<void>;
+declare function openFile(path: string): Promise<import("blockchain/NEAR").FileMetadata>;
+declare function getFileList(path: string): Promise<string[]>;
 export const init: (projectConfig: ProjectConfig) => Promise<void>;
 export const Auth: {
     getAccountId: typeof getAccountId;
@@ -72,6 +74,11 @@ export const Database: {
     DocStore: typeof DocStore;
     Feed: typeof Feed;
     EventLog: typeof EventLog;
+};
+export const Storage: {
+    uploadFile: typeof uploadFile;
+    openFile: typeof openFile;
+    getFileList: typeof getFileList;
 };
 
 //# sourceMappingURL=index.d.ts.map

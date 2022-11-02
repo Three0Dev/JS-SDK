@@ -1,39 +1,43 @@
-var $dSCMW$nearapijs = require("near-api-js");
-var $dSCMW$orbitdb = require("orbit-db");
-var $dSCMW$ipfscore = require("ipfs-core");
-var $dSCMW$uuid = require("uuid");
+import {connect as $170xe$connect, keyStores as $170xe$keyStores, WalletConnection as $170xe$WalletConnection, Contract as $170xe$Contract} from "near-api-js";
+import $170xe$orbitdb from "orbit-db";
+import {create as $170xe$create} from "ipfs-core";
+import {v4 as $170xe$v4} from "uuid";
+import {generate as $170xe$generate} from "short-uuid";
 
 function $parcel$export(e, n, v, s) {
   Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
 }
-function $parcel$interopDefault(a) {
-  return a && a.__esModule ? a.default : a;
-}
+var $5b16728422d4a076$exports = {};
 
-$parcel$export(module.exports, "init", function () { return $020eab0e4dd81a46$export$2cd8252107eb640b; }, function (v) { return $020eab0e4dd81a46$export$2cd8252107eb640b = v; });
-$parcel$export(module.exports, "Auth", function () { return $020eab0e4dd81a46$export$334c29725a78c21d; }, function (v) { return $020eab0e4dd81a46$export$334c29725a78c21d = v; });
-$parcel$export(module.exports, "Database", function () { return $020eab0e4dd81a46$export$6feb5ea51a7b0b47; }, function (v) { return $020eab0e4dd81a46$export$6feb5ea51a7b0b47 = v; });
-var $d3ed99f02d86c501$exports = {};
+$parcel$export($5b16728422d4a076$exports, "init", function () { return $5b16728422d4a076$export$2cd8252107eb640b; }, function (v) { return $5b16728422d4a076$export$2cd8252107eb640b = v; });
+$parcel$export($5b16728422d4a076$exports, "Auth", function () { return $5b16728422d4a076$export$334c29725a78c21d; }, function (v) { return $5b16728422d4a076$export$334c29725a78c21d = v; });
+$parcel$export($5b16728422d4a076$exports, "Database", function () { return $5b16728422d4a076$export$6feb5ea51a7b0b47; }, function (v) { return $5b16728422d4a076$export$6feb5ea51a7b0b47 = v; });
+$parcel$export($5b16728422d4a076$exports, "Storage", function () { return $5b16728422d4a076$export$bf2a15d34f3c441c; }, function (v) { return $5b16728422d4a076$export$bf2a15d34f3c441c = v; });
+var $bc09daf3d6fd99a8$exports = {};
 
-$parcel$export($d3ed99f02d86c501$exports, "UserActionType", function () { return $d3ed99f02d86c501$export$4d85d82e4ea34f7c; }, function (v) { return $d3ed99f02d86c501$export$4d85d82e4ea34f7c = v; });
-$parcel$export($d3ed99f02d86c501$exports, "getNearConfig", function () { return $d3ed99f02d86c501$export$31eac9c8bd069ff7; }, function (v) { return $d3ed99f02d86c501$export$31eac9c8bd069ff7 = v; });
-$parcel$export($d3ed99f02d86c501$exports, "init", function () { return $d3ed99f02d86c501$export$2cd8252107eb640b; }, function (v) { return $d3ed99f02d86c501$export$2cd8252107eb640b = v; });
+$parcel$export($bc09daf3d6fd99a8$exports, "UserActionType", function () { return $bc09daf3d6fd99a8$export$4d85d82e4ea34f7c; }, function (v) { return $bc09daf3d6fd99a8$export$4d85d82e4ea34f7c = v; });
+$parcel$export($bc09daf3d6fd99a8$exports, "getNearConfig", function () { return $bc09daf3d6fd99a8$export$31eac9c8bd069ff7; }, function (v) { return $bc09daf3d6fd99a8$export$31eac9c8bd069ff7 = v; });
+$parcel$export($bc09daf3d6fd99a8$exports, "init", function () { return $bc09daf3d6fd99a8$export$2cd8252107eb640b; }, function (v) { return $bc09daf3d6fd99a8$export$2cd8252107eb640b = v; });
 
-function $44dda2c9f6001bf5$export$e72398d75d0174d8() {
+var $8f6052a2b1cc37fc$export$11617b6a00cf0054;
+(function(BlockchainNetwork) {
+    BlockchainNetwork["NEAR_TESTNET"] = "NEAR_TESTNET";
+})($8f6052a2b1cc37fc$export$11617b6a00cf0054 || ($8f6052a2b1cc37fc$export$11617b6a00cf0054 = {}));
+function $8f6052a2b1cc37fc$export$e72398d75d0174d8() {
     switch(globalThis.projectConfig.chainType){
-        case "NEAR_TESTNET":
+        case $8f6052a2b1cc37fc$export$11617b6a00cf0054.NEAR_TESTNET:
             return "testnet";
         default:
             throw Error(`Unconfigured chainType '${globalThis.projectConfig.chainType}'`);
     }
 }
-function $44dda2c9f6001bf5$export$e2de15bbd9edf9c6() {
+function $8f6052a2b1cc37fc$export$e2de15bbd9edf9c6() {
     // eslint-disable-next-line no-restricted-globals
     return new URLSearchParams(location.search);
 }
 
 
-var $d3ed99f02d86c501$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $bc09daf3d6fd99a8$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -60,14 +64,14 @@ var $d3ed99f02d86c501$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var $d3ed99f02d86c501$export$4d85d82e4ea34f7c;
+var $bc09daf3d6fd99a8$export$4d85d82e4ea34f7c;
 (function(UserActionType) {
     UserActionType["LOGIN"] = "LOGIN";
     UserActionType["LOGOUT"] = "LOGOUT";
-})($d3ed99f02d86c501$export$4d85d82e4ea34f7c || ($d3ed99f02d86c501$export$4d85d82e4ea34f7c = {}));
-function $d3ed99f02d86c501$export$31eac9c8bd069ff7() {
+})($bc09daf3d6fd99a8$export$4d85d82e4ea34f7c || ($bc09daf3d6fd99a8$export$4d85d82e4ea34f7c = {}));
+function $bc09daf3d6fd99a8$export$31eac9c8bd069ff7() {
     const CONTRACT_NAME = globalThis.projectConfig.contractName;
-    const chainType = (0, $44dda2c9f6001bf5$export$e72398d75d0174d8)();
+    const chainType = (0, $8f6052a2b1cc37fc$export$e72398d75d0174d8)();
     switch(chainType){
         case "mainnet":
             return {
@@ -102,7 +106,7 @@ function $d3ed99f02d86c501$export$31eac9c8bd069ff7() {
             return {
                 networkId: "local",
                 nodeUrl: "http://localhost:3030",
-                keyPath: `${"/Users/sreegrandhe"}/.near/validator_key.json`,
+                keyPath: `${"/Users/uneeb"}/.near/validator_key.json`,
                 walletUrl: "http://localhost:4000/wallet",
                 contractName: CONTRACT_NAME
             };
@@ -125,26 +129,26 @@ function $d3ed99f02d86c501$export$31eac9c8bd069ff7() {
             throw Error(`Unconfigured environment '${chainType}'. Can be configured in src/config.js.`);
     }
 }
-function $d3ed99f02d86c501$export$2cd8252107eb640b() {
-    return $d3ed99f02d86c501$var$__awaiter(this, void 0, void 0, function*() {
-        const nearConfig = $d3ed99f02d86c501$export$31eac9c8bd069ff7();
+function $bc09daf3d6fd99a8$export$2cd8252107eb640b() {
+    return $bc09daf3d6fd99a8$var$__awaiter(this, void 0, void 0, function*() {
+        const nearConfig = $bc09daf3d6fd99a8$export$31eac9c8bd069ff7();
         // Initialize connection to the NEAR testnet
-        const near = yield (0, $dSCMW$nearapijs.connect)(Object.assign(Object.assign({
-            deps: {
-                keyStore: new (0, $dSCMW$nearapijs.keyStores).BrowserLocalStorageKeyStore()
-            }
+        const near = yield (0, $170xe$connect)(Object.assign(Object.assign({
+            keyStore: new (0, $170xe$keyStores).BrowserLocalStorageKeyStore()
         }, nearConfig), {
             headers: {}
         }));
         // Initializing Wallet based Account. It can work with NEAR testnet wallet that
         // is hosted at https://wallet.testnet.near.org
-        globalThis.walletConnection = new (0, $dSCMW$nearapijs.WalletConnection)(near, null);
+        globalThis.walletConnection = new (0, $170xe$WalletConnection)(near, null);
         // Initializing our contract APIs by contract name and configuration
-        globalThis.contract = new (0, $dSCMW$nearapijs.Contract)(globalThis.walletConnection.account(), nearConfig.contractName, {
+        globalThis.contract = new (0, $170xe$Contract)(globalThis.walletConnection.account(), nearConfig.contractName, {
             // View methods are read only. They don't modify the state, but usually return some value.
             viewMethods: [
                 "get_user",
-                "valid_database"
+                "valid_database",
+                "has_storage",
+                "get_storage"
             ],
             // Change methods can modify the state. But you don't receive the returned value when called.
             changeMethods: [
@@ -157,15 +161,15 @@ function $d3ed99f02d86c501$export$2cd8252107eb640b() {
 
 
 
-var $c4225dfc37430fda$exports = {};
+var $31f2ee8310cb2ee4$exports = {};
 
-$parcel$export($c4225dfc37430fda$exports, "default", function () { return $c4225dfc37430fda$export$2e2bcd8739ae039; }, function (v) { return $c4225dfc37430fda$export$2e2bcd8739ae039 = v; });
+$parcel$export($31f2ee8310cb2ee4$exports, "default", function () { return $31f2ee8310cb2ee4$export$2e2bcd8739ae039; }, function (v) { return $31f2ee8310cb2ee4$export$2e2bcd8739ae039 = v; });
 
-var $46137cfcfeb0552d$exports = {};
+var $f1f4ca456620baa2$exports = {};
 
-$parcel$export($46137cfcfeb0552d$exports, "default", function () { return $46137cfcfeb0552d$export$2e2bcd8739ae039; }, function (v) { return $46137cfcfeb0552d$export$2e2bcd8739ae039 = v; });
+$parcel$export($f1f4ca456620baa2$exports, "default", function () { return $f1f4ca456620baa2$export$2e2bcd8739ae039; }, function (v) { return $f1f4ca456620baa2$export$2e2bcd8739ae039 = v; });
 
-var $46137cfcfeb0552d$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $f1f4ca456620baa2$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -192,8 +196,8 @@ var $46137cfcfeb0552d$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-let $46137cfcfeb0552d$var$ipfs;
-const $46137cfcfeb0552d$var$IPFS_CONFIG = {
+let $f1f4ca456620baa2$var$ipfs;
+const $f1f4ca456620baa2$var$IPFS_CONFIG = {
     start: true,
     EXPERIMENTAL: {
         ipnsPubsub: true
@@ -209,19 +213,19 @@ const $46137cfcfeb0552d$var$IPFS_CONFIG = {
         }
     }
 };
-const $46137cfcfeb0552d$var$initIPFS = ()=>$46137cfcfeb0552d$var$__awaiter(void 0, void 0, void 0, function*() {
-        $46137cfcfeb0552d$var$ipfs = $46137cfcfeb0552d$var$ipfs || (yield $dSCMW$ipfscore.create($46137cfcfeb0552d$var$IPFS_CONFIG));
-        return $46137cfcfeb0552d$var$ipfs;
+const $f1f4ca456620baa2$var$initIPFS = ()=>$f1f4ca456620baa2$var$__awaiter(void 0, void 0, void 0, function*() {
+        $f1f4ca456620baa2$var$ipfs = $f1f4ca456620baa2$var$ipfs || (yield $170xe$create($f1f4ca456620baa2$var$IPFS_CONFIG));
+        return $f1f4ca456620baa2$var$ipfs;
     });
-var $46137cfcfeb0552d$export$2e2bcd8739ae039 = $46137cfcfeb0552d$var$initIPFS;
+var $f1f4ca456620baa2$export$2e2bcd8739ae039 = $f1f4ca456620baa2$var$initIPFS;
 
 
-var $36a1a38c5f443c85$exports = {};
+var $29671cfde807e590$exports = {};
 
-$parcel$export($36a1a38c5f443c85$exports, "logout", function () { return $36a1a38c5f443c85$export$a0973bcfe11b05c9; }, function (v) { return $36a1a38c5f443c85$export$a0973bcfe11b05c9 = v; });
-$parcel$export($36a1a38c5f443c85$exports, "login", function () { return $36a1a38c5f443c85$export$596d806903d1f59e; }, function (v) { return $36a1a38c5f443c85$export$596d806903d1f59e = v; });
+$parcel$export($29671cfde807e590$exports, "logout", function () { return $29671cfde807e590$export$a0973bcfe11b05c9; }, function (v) { return $29671cfde807e590$export$a0973bcfe11b05c9 = v; });
+$parcel$export($29671cfde807e590$exports, "login", function () { return $29671cfde807e590$export$596d806903d1f59e; }, function (v) { return $29671cfde807e590$export$596d806903d1f59e = v; });
 
-var $36a1a38c5f443c85$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $29671cfde807e590$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -248,37 +252,36 @@ var $36a1a38c5f443c85$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-function $36a1a38c5f443c85$export$a0973bcfe11b05c9() {
-    return $36a1a38c5f443c85$var$__awaiter(this, void 0, void 0, function*() {
-        try {
-            yield globalThis.contract.user_action({
-                action: (0, $d3ed99f02d86c501$exports.UserActionType).LOGOUT
-            });
-            globalThis.walletConnection.signOut();
-        } catch (e) {
-            console.error(e);
-            throw e;
-        }
+function $29671cfde807e590$export$a0973bcfe11b05c9() {
+    return $29671cfde807e590$var$__awaiter(this, void 0, void 0, function*() {
+        yield globalThis.contract.user_action({
+            action: (0, $bc09daf3d6fd99a8$exports.UserActionType).LOGOUT
+        });
+        globalThis.walletConnection.signOut();
     });
 }
-function $36a1a38c5f443c85$export$596d806903d1f59e(appName = "My Three0 App", successUrL = window.location.href, failureUrL = window.location.href) {
-    return $36a1a38c5f443c85$var$__awaiter(this, void 0, void 0, function*() {
-        globalThis.walletConnection.requestSignIn(globalThis.projectConfig.contractName, appName, successUrL, failureUrL);
+function $29671cfde807e590$export$596d806903d1f59e(successUrl, failureUrl) {
+    return $29671cfde807e590$var$__awaiter(this, void 0, void 0, function*() {
+        globalThis.walletConnection.requestSignIn({
+            contractId: globalThis.projectConfig.contractName,
+            successUrl: successUrl,
+            failureUrl: failureUrl
+        });
     });
 }
 
 
-function $268f5174a8123bd7$export$256a5a3564694cfc() {
+function $701110f03c3de876$export$256a5a3564694cfc() {
     return globalThis.walletConnection.isSignedIn();
 }
-function $268f5174a8123bd7$export$c1e0336bde96e2dc() {
+function $701110f03c3de876$export$c1e0336bde96e2dc() {
     return globalThis.walletConnection.getAccountId();
 }
 
 
 
 
-var $c4225dfc37430fda$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $31f2ee8310cb2ee4$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -306,26 +309,26 @@ var $c4225dfc37430fda$var$__awaiter = undefined && undefined.__awaiter || functi
     });
 };
 // Start OrbitDB
-const $c4225dfc37430fda$var$initOrbitDB = ()=>$c4225dfc37430fda$var$__awaiter(void 0, void 0, void 0, function*() {
+const $31f2ee8310cb2ee4$var$initOrbitDB = ()=>$31f2ee8310cb2ee4$var$__awaiter(void 0, void 0, void 0, function*() {
         if (globalThis.orbitdb) return;
-        const ipfs = yield (0, $46137cfcfeb0552d$exports.default)();
-        const loggedIn = (0, $268f5174a8123bd7$export$256a5a3564694cfc)();
+        const ipfs = yield (0, $f1f4ca456620baa2$exports.default)();
+        const loggedIn = (0, $701110f03c3de876$export$256a5a3564694cfc)();
         if (loggedIn) {
             if (globalThis.projectConfig.chainType.includes("NEAR")) // IdentityProvider.addIdentityProvider(NearIdentityProvider);
             // const identity = await IdentityProvider.createIdentity({ type: 'NearIdentity' });
             // const orbitdb = await OrbitDB.createInstance(ipfs, {identity});
-            globalThis.orbitdb = yield (0, ($parcel$interopDefault($dSCMW$orbitdb))).createInstance(ipfs);
-        } else globalThis.orbitdb = yield (0, ($parcel$interopDefault($dSCMW$orbitdb))).createInstance(ipfs);
+            globalThis.orbitdb = yield (0, $170xe$orbitdb).createInstance(ipfs);
+        } else globalThis.orbitdb = yield (0, $170xe$orbitdb).createInstance(ipfs);
     });
-var $c4225dfc37430fda$export$2e2bcd8739ae039 = $c4225dfc37430fda$var$initOrbitDB;
+var $31f2ee8310cb2ee4$export$2e2bcd8739ae039 = $31f2ee8310cb2ee4$var$initOrbitDB;
 
 
-var $6cad23d4edb5a464$exports = {};
+var $129e7bb7b84cbd88$exports = {};
 
-$parcel$export($6cad23d4edb5a464$exports, "default", function () { return $6cad23d4edb5a464$export$2e2bcd8739ae039; }, function (v) { return $6cad23d4edb5a464$export$2e2bcd8739ae039 = v; });
+$parcel$export($129e7bb7b84cbd88$exports, "default", function () { return $129e7bb7b84cbd88$export$2e2bcd8739ae039; }, function (v) { return $129e7bb7b84cbd88$export$2e2bcd8739ae039 = v; });
 
 
-var $6cad23d4edb5a464$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $129e7bb7b84cbd88$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -352,88 +355,40 @@ var $6cad23d4edb5a464$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-function $6cad23d4edb5a464$export$2e2bcd8739ae039() {
-    return $6cad23d4edb5a464$var$__awaiter(this, void 0, void 0, function*() {
-        if (!(0, $268f5174a8123bd7$export$256a5a3564694cfc)()) return;
+function $129e7bb7b84cbd88$export$2e2bcd8739ae039() {
+    return $129e7bb7b84cbd88$var$__awaiter(this, void 0, void 0, function*() {
+        if (!(0, $701110f03c3de876$export$256a5a3564694cfc)()) return;
         let isLoggedIn = true;
         try {
             const user = yield globalThis.contract.get_user({
-                account_id: (0, $268f5174a8123bd7$export$c1e0336bde96e2dc)()
+                account_id: (0, $701110f03c3de876$export$c1e0336bde96e2dc)()
             });
             isLoggedIn = user.is_online;
         } catch (e) {
-            console.error(e);
             isLoggedIn = false;
+            throw e;
         }
         if (!isLoggedIn) yield globalThis.contract.user_action({
-            action: (0, $d3ed99f02d86c501$exports.UserActionType).LOGIN
+            action: (0, $bc09daf3d6fd99a8$exports.UserActionType).LOGIN
         });
     });
 }
 
 
 
-var $c519e5c2d701af31$exports = {};
+var $654c4db4d93f05ad$exports = {};
 
-$parcel$export($c519e5c2d701af31$exports, "Counter", function () { return $c519e5c2d701af31$export$1b74141c5fe63a28; }, function (v) { return $c519e5c2d701af31$export$1b74141c5fe63a28 = v; });
-$parcel$export($c519e5c2d701af31$exports, "DocStore", function () { return $c519e5c2d701af31$export$ae6e3da9bde8af08; }, function (v) { return $c519e5c2d701af31$export$ae6e3da9bde8af08 = v; });
-$parcel$export($c519e5c2d701af31$exports, "EventLog", function () { return $c519e5c2d701af31$export$f8203d08df5cd081; }, function (v) { return $c519e5c2d701af31$export$f8203d08df5cd081 = v; });
-$parcel$export($c519e5c2d701af31$exports, "Feed", function () { return $c519e5c2d701af31$export$833919a382305440; }, function (v) { return $c519e5c2d701af31$export$833919a382305440 = v; });
-$parcel$export($c519e5c2d701af31$exports, "KeyValue", function () { return $c519e5c2d701af31$export$12b3cc2522c3bba5; }, function (v) { return $c519e5c2d701af31$export$12b3cc2522c3bba5 = v; });
-$parcel$export($c519e5c2d701af31$exports, "timestamp", function () { return $c519e5c2d701af31$export$fc00ee57782020aa; }, function (v) { return $c519e5c2d701af31$export$fc00ee57782020aa = v; });
-var $088689cdba66f326$exports = {};
+$parcel$export($654c4db4d93f05ad$exports, "Counter", function () { return $654c4db4d93f05ad$export$1b74141c5fe63a28; }, function (v) { return $654c4db4d93f05ad$export$1b74141c5fe63a28 = v; });
+$parcel$export($654c4db4d93f05ad$exports, "DocStore", function () { return $654c4db4d93f05ad$export$ae6e3da9bde8af08; }, function (v) { return $654c4db4d93f05ad$export$ae6e3da9bde8af08 = v; });
+$parcel$export($654c4db4d93f05ad$exports, "EventLog", function () { return $654c4db4d93f05ad$export$f8203d08df5cd081; }, function (v) { return $654c4db4d93f05ad$export$f8203d08df5cd081 = v; });
+$parcel$export($654c4db4d93f05ad$exports, "Feed", function () { return $654c4db4d93f05ad$export$833919a382305440; }, function (v) { return $654c4db4d93f05ad$export$833919a382305440 = v; });
+$parcel$export($654c4db4d93f05ad$exports, "KeyValue", function () { return $654c4db4d93f05ad$export$12b3cc2522c3bba5; }, function (v) { return $654c4db4d93f05ad$export$12b3cc2522c3bba5 = v; });
+$parcel$export($654c4db4d93f05ad$exports, "timestamp", function () { return $654c4db4d93f05ad$export$fc00ee57782020aa; }, function (v) { return $654c4db4d93f05ad$export$fc00ee57782020aa = v; });
+var $8ef4373c29a8ef17$exports = {};
 
-$parcel$export($088689cdba66f326$exports, "CounterDatabase", function () { return $088689cdba66f326$export$b62cdc4dda4dc10d; }, function (v) { return $088689cdba66f326$export$b62cdc4dda4dc10d = v; });
-$parcel$export($088689cdba66f326$exports, "default", function () { return $088689cdba66f326$export$2e2bcd8739ae039; }, function (v) { return $088689cdba66f326$export$2e2bcd8739ae039 = v; });
-var $1133891dffb598a6$exports = {};
-
-$parcel$export($1133891dffb598a6$exports, "isValidDatabase", function () { return $1133891dffb598a6$export$d8658f5af792a7a4; }, function (v) { return $1133891dffb598a6$export$d8658f5af792a7a4 = v; });
-$parcel$export($1133891dffb598a6$exports, "isValidKey", function () { return $1133891dffb598a6$export$47865c7da002be09; }, function (v) { return $1133891dffb598a6$export$47865c7da002be09 = v; });
-$parcel$export($1133891dffb598a6$exports, "isValidValueObject", function () { return $1133891dffb598a6$export$fc456c96b38a4d8; }, function (v) { return $1133891dffb598a6$export$fc456c96b38a4d8 = v; });
-
-var $1133891dffb598a6$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
-    function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve) {
-            resolve(value);
-        });
-    }
-    return new (P || (P = Promise))(function(resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-const $1133891dffb598a6$export$d8658f5af792a7a4 = (address)=>$1133891dffb598a6$var$__awaiter(void 0, void 0, void 0, function*() {
-        if (!(0, ($parcel$interopDefault($dSCMW$orbitdb))).isValidAddress(address)) return false;
-        const isProjectDatabase = yield globalThis.contract.valid_database({
-            address: address
-        });
-        return isProjectDatabase;
-    });
-function $1133891dffb598a6$export$47865c7da002be09(key) {
-    return !!key;
-}
-function $1133891dffb598a6$export$fc456c96b38a4d8(value) {
-    return !!value;
-}
-
-
-class $1c05c1fe683ce4de$export$2e2bcd8739ae039 {
+$parcel$export($8ef4373c29a8ef17$exports, "CounterDatabase", function () { return $8ef4373c29a8ef17$export$b62cdc4dda4dc10d; }, function (v) { return $8ef4373c29a8ef17$export$b62cdc4dda4dc10d = v; });
+$parcel$export($8ef4373c29a8ef17$exports, "default", function () { return $8ef4373c29a8ef17$export$2e2bcd8739ae039; }, function (v) { return $8ef4373c29a8ef17$export$2e2bcd8739ae039 = v; });
+class $d1b5d3ae4b75a4c6$export$2e2bcd8739ae039 {
     onChange(callbackfn) {
         this.database.events.on("replicated", ()=>callbackfn());
     }
@@ -443,7 +398,7 @@ class $1c05c1fe683ce4de$export$2e2bcd8739ae039 {
 }
 
 
-var $088689cdba66f326$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $8ef4373c29a8ef17$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -470,39 +425,37 @@ var $088689cdba66f326$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $088689cdba66f326$export$b62cdc4dda4dc10d extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
+class $8ef4373c29a8ef17$export$b62cdc4dda4dc10d extends (0, $d1b5d3ae4b75a4c6$export$2e2bcd8739ae039) {
     get() {
         return this.database.value;
     }
     inc(amt = 1) {
-        return $088689cdba66f326$var$__awaiter(this, void 0, void 0, function*() {
-            if (amt >= 1) throw Error("Valid amount is required");
-            const incrementPromises = [];
-            for(let i = 0; i < amt; i += 1)yield this.database.inc();
+        return $8ef4373c29a8ef17$var$__awaiter(this, void 0, void 0, function*() {
+            if (amt < 1) throw Error("Valid amount is required");
+            yield this.database.inc(amt);
         });
     }
 }
-const $088689cdba66f326$var$getCounter = (address, orbitdb = globalThis.orbitdb)=>$088689cdba66f326$var$__awaiter(void 0, void 0, void 0, function*() {
-        if (!orbitdb) throw Error("OrbitDB is not initialized");
-        const isValid = yield (0, $1133891dffb598a6$exports.isValidDatabase)(address);
-        if (!isValid) throw Error("Invalid database address");
-        const database = yield orbitdb.counter(address);
+const $8ef4373c29a8ef17$var$getCounter = (address)=>$8ef4373c29a8ef17$var$__awaiter(void 0, void 0, void 0, function*() {
+        const database = yield globalThis.orbitdb.counter(address);
         yield database.load();
-        return new $088689cdba66f326$export$b62cdc4dda4dc10d(database);
+        return new $8ef4373c29a8ef17$export$b62cdc4dda4dc10d(database);
     });
-var $088689cdba66f326$export$2e2bcd8739ae039 = $088689cdba66f326$var$getCounter;
+var $8ef4373c29a8ef17$export$2e2bcd8739ae039 = $8ef4373c29a8ef17$var$getCounter;
 
 
-var $ecfd62e1e5921b75$exports = {};
+var $739a37eae7f01d37$exports = {};
 
-$parcel$export($ecfd62e1e5921b75$exports, "DocumentDatabase", function () { return $ecfd62e1e5921b75$export$cc7289d1409c61ee; }, function (v) { return $ecfd62e1e5921b75$export$cc7289d1409c61ee = v; });
-$parcel$export($ecfd62e1e5921b75$exports, "default", function () { return $ecfd62e1e5921b75$export$2e2bcd8739ae039; }, function (v) { return $ecfd62e1e5921b75$export$2e2bcd8739ae039 = v; });
+$parcel$export($739a37eae7f01d37$exports, "DocumentDatabase", function () { return $739a37eae7f01d37$export$cc7289d1409c61ee; }, function (v) { return $739a37eae7f01d37$export$cc7289d1409c61ee = v; });
+$parcel$export($739a37eae7f01d37$exports, "default", function () { return $739a37eae7f01d37$export$2e2bcd8739ae039; }, function (v) { return $739a37eae7f01d37$export$2e2bcd8739ae039 = v; });
 
 
+var $400fea999f1b0043$exports = {};
 
-/**
- * @module Docstore
- */ var $ecfd62e1e5921b75$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+$parcel$export($400fea999f1b0043$exports, "isValidDatabase", function () { return $400fea999f1b0043$export$d8658f5af792a7a4; }, function (v) { return $400fea999f1b0043$export$d8658f5af792a7a4 = v; });
+$parcel$export($400fea999f1b0043$exports, "isValidKey", function () { return $400fea999f1b0043$export$47865c7da002be09; }, function (v) { return $400fea999f1b0043$export$47865c7da002be09 = v; });
+
+var $400fea999f1b0043$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -529,63 +482,99 @@ $parcel$export($ecfd62e1e5921b75$exports, "default", function () { return $ecfd6
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $ecfd62e1e5921b75$export$cc7289d1409c61ee extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
+const $400fea999f1b0043$export$d8658f5af792a7a4 = (address)=>$400fea999f1b0043$var$__awaiter(void 0, void 0, void 0, function*() {
+        if (!(0, $170xe$orbitdb).isValidAddress(address)) return false;
+        try {
+            const isProjectDatabase = yield globalThis.contract.valid_database({
+                address: address
+            });
+            return isProjectDatabase;
+        } catch (e) {
+            return false;
+        }
+    });
+function $400fea999f1b0043$export$47865c7da002be09(key) {
+    return !!key;
+}
+
+
+var $739a37eae7f01d37$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
+        });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+class $739a37eae7f01d37$export$cc7289d1409c61ee extends (0, $d1b5d3ae4b75a4c6$export$2e2bcd8739ae039) {
     get(key) {
-        return key ? this.database.get(key)[0] : this.where((e)=>e !== null);
+        return key ? this.database.get(key)[0] : this.database.get("");
     }
     where(callbackfn) {
         return this.database.query(callbackfn);
     }
     set(key, value) {
-        return $ecfd62e1e5921b75$var$__awaiter(this, void 0, void 0, function*() {
-            if (!(0, $1133891dffb598a6$exports.isValidKey)(key)) throw Error("Key is required");
-            if (!(0, $1133891dffb598a6$exports.isValidValueObject)(value)) throw Error("Value is required");
+        return $739a37eae7f01d37$var$__awaiter(this, void 0, void 0, function*() {
+            if (!(0, $400fea999f1b0043$exports.isValidKey)(key)) throw Error("Key is required");
             yield this.database.put(Object.assign({
                 _id: key
             }, value));
         });
     }
     add(value) {
-        return $ecfd62e1e5921b75$var$__awaiter(this, void 0, void 0, function*() {
-            const id = (0, $dSCMW$uuid.v4)();
-            if (!(0, $1133891dffb598a6$exports.isValidValueObject)(value)) throw Error("Value is required");
+        return $739a37eae7f01d37$var$__awaiter(this, void 0, void 0, function*() {
+            const id = (0, $170xe$v4)();
             yield this.set(id, value);
             return id;
         });
     }
     delete(key) {
-        return $ecfd62e1e5921b75$var$__awaiter(this, void 0, void 0, function*() {
-            if (!(0, $1133891dffb598a6$exports.isValidKey)(key)) throw Error("Key is required");
+        return $739a37eae7f01d37$var$__awaiter(this, void 0, void 0, function*() {
+            if (!(0, $400fea999f1b0043$exports.isValidKey)(key)) throw Error("Key is required");
             yield this.database.del(key);
         });
     }
     update(key, value) {
-        return $ecfd62e1e5921b75$var$__awaiter(this, void 0, void 0, function*() {
-            if (!(0, $1133891dffb598a6$exports.isValidKey)(key)) throw Error("Key is required");
-            if (!(0, $1133891dffb598a6$exports.isValidValueObject)(value)) throw Error("Value is required");
+        return $739a37eae7f01d37$var$__awaiter(this, void 0, void 0, function*() {
+            if (!(0, $400fea999f1b0043$exports.isValidKey)(key)) throw Error("Key is required");
             const doc = this.get(key);
             yield this.set(key, Object.assign(Object.assign({}, doc), value));
         });
     }
 }
-const $ecfd62e1e5921b75$var$getDocStore = (address, indexBy, orbitdb = globalThis.orbitdb)=>$ecfd62e1e5921b75$var$__awaiter(void 0, void 0, void 0, function*() {
-        if (!orbitdb) throw Error("OrbitDB is not initialized");
-        const isValid = yield (0, $1133891dffb598a6$exports.isValidDatabase)(address);
-        if (!isValid) throw Error("Invalid database address");
-        const database = yield orbitdb.docs(address, indexBy);
+const $739a37eae7f01d37$var$getDocStore = (address, indexBy)=>$739a37eae7f01d37$var$__awaiter(void 0, void 0, void 0, function*() {
+        const database = yield globalThis.orbitdb.docs(address, indexBy);
         yield database.load();
-        return new $ecfd62e1e5921b75$export$cc7289d1409c61ee(database);
+        return new $739a37eae7f01d37$export$cc7289d1409c61ee(database);
     });
-var $ecfd62e1e5921b75$export$2e2bcd8739ae039 = $ecfd62e1e5921b75$var$getDocStore;
+var $739a37eae7f01d37$export$2e2bcd8739ae039 = $739a37eae7f01d37$var$getDocStore;
 
 
-var $610eccb30f15c968$exports = {};
+var $7f01ca951b4d6c7e$exports = {};
 
-$parcel$export($610eccb30f15c968$exports, "EventLogDatabase", function () { return $610eccb30f15c968$export$a4a6104bef1ea4da; }, function (v) { return $610eccb30f15c968$export$a4a6104bef1ea4da = v; });
-$parcel$export($610eccb30f15c968$exports, "default", function () { return $610eccb30f15c968$export$2e2bcd8739ae039; }, function (v) { return $610eccb30f15c968$export$2e2bcd8739ae039 = v; });
+$parcel$export($7f01ca951b4d6c7e$exports, "EventLogDatabase", function () { return $7f01ca951b4d6c7e$export$a4a6104bef1ea4da; }, function (v) { return $7f01ca951b4d6c7e$export$a4a6104bef1ea4da = v; });
+$parcel$export($7f01ca951b4d6c7e$exports, "default", function () { return $7f01ca951b4d6c7e$export$2e2bcd8739ae039; }, function (v) { return $7f01ca951b4d6c7e$export$2e2bcd8739ae039 = v; });
 
-
-var $610eccb30f15c968$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $7f01ca951b4d6c7e$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -612,7 +601,7 @@ var $610eccb30f15c968$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $610eccb30f15c968$export$a4a6104bef1ea4da extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
+class $7f01ca951b4d6c7e$export$a4a6104bef1ea4da extends (0, $d1b5d3ae4b75a4c6$export$2e2bcd8739ae039) {
     instance() {
         return this.database;
     }
@@ -625,24 +614,24 @@ class $610eccb30f15c968$export$a4a6104bef1ea4da extends (0, $1c05c1fe683ce4de$ex
         return this.database.all;
     }
     set(value) {
-        return $610eccb30f15c968$var$__awaiter(this, void 0, void 0, function*() {
+        return $7f01ca951b4d6c7e$var$__awaiter(this, void 0, void 0, function*() {
             return this.database.add(value);
         });
     }
 }
-const $610eccb30f15c968$var$getEventLog = (address, orbitdb = globalThis.orbitdb)=>$610eccb30f15c968$var$__awaiter(void 0, void 0, void 0, function*() {
+const $7f01ca951b4d6c7e$var$getEventLog = (address)=>$7f01ca951b4d6c7e$var$__awaiter(void 0, void 0, void 0, function*() {
         throw Error("Not implemented");
     });
-var $610eccb30f15c968$export$2e2bcd8739ae039 = $610eccb30f15c968$var$getEventLog;
+var $7f01ca951b4d6c7e$export$2e2bcd8739ae039 = $7f01ca951b4d6c7e$var$getEventLog;
 
 
-var $9f42f73f36b591e2$exports = {};
+var $75daf015ee5b198c$exports = {};
 
-$parcel$export($9f42f73f36b591e2$exports, "FeedDatabase", function () { return $9f42f73f36b591e2$export$c4331506dfaaa28a; }, function (v) { return $9f42f73f36b591e2$export$c4331506dfaaa28a = v; });
-$parcel$export($9f42f73f36b591e2$exports, "default", function () { return $9f42f73f36b591e2$export$2e2bcd8739ae039; }, function (v) { return $9f42f73f36b591e2$export$2e2bcd8739ae039 = v; });
+$parcel$export($75daf015ee5b198c$exports, "FeedDatabase", function () { return $75daf015ee5b198c$export$c4331506dfaaa28a; }, function (v) { return $75daf015ee5b198c$export$c4331506dfaaa28a = v; });
+$parcel$export($75daf015ee5b198c$exports, "default", function () { return $75daf015ee5b198c$export$2e2bcd8739ae039; }, function (v) { return $75daf015ee5b198c$export$2e2bcd8739ae039 = v; });
 
 
-var $9f42f73f36b591e2$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $75daf015ee5b198c$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -669,7 +658,7 @@ var $9f42f73f36b591e2$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $9f42f73f36b591e2$export$c4331506dfaaa28a extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
+class $75daf015ee5b198c$export$c4331506dfaaa28a extends (0, $d1b5d3ae4b75a4c6$export$2e2bcd8739ae039) {
     instance() {
         return this.database;
     }
@@ -685,24 +674,23 @@ class $9f42f73f36b591e2$export$c4331506dfaaa28a extends (0, $1c05c1fe683ce4de$ex
         return this.database.all;
     }
     set(value) {
-        return $9f42f73f36b591e2$var$__awaiter(this, void 0, void 0, function*() {
+        return $75daf015ee5b198c$var$__awaiter(this, void 0, void 0, function*() {
             return this.database.add(value);
         });
     }
 }
-const $9f42f73f36b591e2$var$getFeed = (address, orbitdb = globalThis.orbitdb)=>$9f42f73f36b591e2$var$__awaiter(void 0, void 0, void 0, function*() {
+const $75daf015ee5b198c$var$getFeed = (address)=>$75daf015ee5b198c$var$__awaiter(void 0, void 0, void 0, function*() {
         throw Error("Not implemented");
     });
-var $9f42f73f36b591e2$export$2e2bcd8739ae039 = $9f42f73f36b591e2$var$getFeed;
+var $75daf015ee5b198c$export$2e2bcd8739ae039 = $75daf015ee5b198c$var$getFeed;
 
 
-var $fd768f09317d5eed$exports = {};
+var $5933033ace426ad7$exports = {};
 
-$parcel$export($fd768f09317d5eed$exports, "KVDatabase", function () { return $fd768f09317d5eed$export$f0160e6bce89ab9; }, function (v) { return $fd768f09317d5eed$export$f0160e6bce89ab9 = v; });
-$parcel$export($fd768f09317d5eed$exports, "default", function () { return $fd768f09317d5eed$export$2e2bcd8739ae039; }, function (v) { return $fd768f09317d5eed$export$2e2bcd8739ae039 = v; });
+$parcel$export($5933033ace426ad7$exports, "KVDatabase", function () { return $5933033ace426ad7$export$f0160e6bce89ab9; }, function (v) { return $5933033ace426ad7$export$f0160e6bce89ab9 = v; });
+$parcel$export($5933033ace426ad7$exports, "default", function () { return $5933033ace426ad7$export$2e2bcd8739ae039; }, function (v) { return $5933033ace426ad7$export$2e2bcd8739ae039 = v; });
 
-
-var $fd768f09317d5eed$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $5933033ace426ad7$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -729,10 +717,7 @@ var $fd768f09317d5eed$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $fd768f09317d5eed$export$f0160e6bce89ab9 extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
-    instance() {
-        return this.database;
-    }
+class $5933033ace426ad7$export$f0160e6bce89ab9 extends (0, $d1b5d3ae4b75a4c6$export$2e2bcd8739ae039) {
     get(key) {
         if (!key) throw Error("Key is required");
         return this.database.get(key);
@@ -741,32 +726,30 @@ class $fd768f09317d5eed$export$f0160e6bce89ab9 extends (0, $1c05c1fe683ce4de$exp
         return this.database.all;
     }
     set(key, value) {
-        return $fd768f09317d5eed$var$__awaiter(this, void 0, void 0, function*() {
+        return $5933033ace426ad7$var$__awaiter(this, void 0, void 0, function*() {
             if (!key) throw Error("Key is required");
             yield this.database.put(key, value);
         });
     }
     delete(key) {
-        return $fd768f09317d5eed$var$__awaiter(this, void 0, void 0, function*() {
+        return $5933033ace426ad7$var$__awaiter(this, void 0, void 0, function*() {
             if (!key) throw Error("Key is required");
             yield this.database.del(key);
         });
     }
 }
-const $fd768f09317d5eed$var$getKeyValue = (address, orbitdb = globalThis.orbitdb)=>$fd768f09317d5eed$var$__awaiter(void 0, void 0, void 0, function*() {
-        if (!orbitdb) throw Error("OrbitDB is not initialized");
-        const isValid = yield (0, $1133891dffb598a6$exports.isValidDatabase)(address);
-        if (!isValid) throw Error("Invalid database address");
+const $5933033ace426ad7$var$getKeyValue = (address)=>$5933033ace426ad7$var$__awaiter(void 0, void 0, void 0, function*() {
         const database = yield orbitdb.keyvalue(address);
         yield database.load();
-        return new $fd768f09317d5eed$export$f0160e6bce89ab9(database);
+        return new $5933033ace426ad7$export$f0160e6bce89ab9(database);
     });
-var $fd768f09317d5eed$export$2e2bcd8739ae039 = $fd768f09317d5eed$var$getKeyValue;
+var $5933033ace426ad7$export$2e2bcd8739ae039 = $5933033ace426ad7$var$getKeyValue;
 
 
 
 
-var $c519e5c2d701af31$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+
+var $654c4db4d93f05ad$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -793,86 +776,88 @@ var $c519e5c2d701af31$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const $c519e5c2d701af31$var$cacheMap = new Map();
-var $c519e5c2d701af31$var$DatabaseType;
+const $654c4db4d93f05ad$var$cacheMap = new Map();
+var $654c4db4d93f05ad$var$DatabaseType;
 (function(DatabaseType) {
-    DatabaseType["Counter"] = "counter";
-    DatabaseType["DocStore"] = "docstore";
-    DatabaseType["EventLog"] = "eventlog";
-    DatabaseType["Feed"] = "feed";
-    DatabaseType["KeyValue"] = "keyvalue";
-})($c519e5c2d701af31$var$DatabaseType || ($c519e5c2d701af31$var$DatabaseType = {}));
-function $c519e5c2d701af31$var$getDB(address, type, options = {}) {
-    return $c519e5c2d701af31$var$__awaiter(this, void 0, void 0, function*() {
+    DatabaseType["CounterDB"] = "counter";
+    DatabaseType["DocStoreDB"] = "docstore";
+    DatabaseType["EventLogDB"] = "eventlog";
+    DatabaseType["FeedDB"] = "feed";
+    DatabaseType["KeyValueDB"] = "keyvalue";
+})($654c4db4d93f05ad$var$DatabaseType || ($654c4db4d93f05ad$var$DatabaseType = {}));
+function $654c4db4d93f05ad$var$getDB(address, type, options = {}) {
+    return $654c4db4d93f05ad$var$__awaiter(this, void 0, void 0, function*() {
         let db = null;
-        if ($c519e5c2d701af31$var$cacheMap.has(address)) return $c519e5c2d701af31$var$cacheMap.get(address);
-        $c519e5c2d701af31$var$cacheMap.set(address, db);
-        try {
-            switch(type){
-                case $c519e5c2d701af31$var$DatabaseType.Counter:
-                    db = yield (0, $088689cdba66f326$exports.default)(address);
-                    break;
-                case $c519e5c2d701af31$var$DatabaseType.DocStore:
-                    db = yield (0, $ecfd62e1e5921b75$exports.default)(address, options);
-                    break;
-                case $c519e5c2d701af31$var$DatabaseType.EventLog:
-                    db = yield (0, $610eccb30f15c968$exports.default)(address);
-                    break;
-                case $c519e5c2d701af31$var$DatabaseType.Feed:
-                    db = yield (0, $9f42f73f36b591e2$exports.default)(address);
-                    break;
-                case $c519e5c2d701af31$var$DatabaseType.KeyValue:
-                    db = yield (0, $fd768f09317d5eed$exports.default)(address);
-                    break;
-                default:
-                    throw new Error(`Unknown database type: ${type}`);
-            }
-            $c519e5c2d701af31$var$cacheMap.set(address, db);
-        } catch (e) {
-            console.error(e);
+        if (!globalThis.orbitdb) throw Error("OrbitDB is not initialized");
+        const isValid = yield (0, $400fea999f1b0043$exports.isValidDatabase)(address);
+        if (!isValid) throw Error("Invalid database address");
+        if ($654c4db4d93f05ad$var$cacheMap.has(address)) return $654c4db4d93f05ad$var$cacheMap.get(address);
+        switch(type){
+            case $654c4db4d93f05ad$var$DatabaseType.CounterDB:
+                db = yield (0, $8ef4373c29a8ef17$exports.default)(address);
+                break;
+            case $654c4db4d93f05ad$var$DatabaseType.DocStoreDB:
+                db = yield (0, $739a37eae7f01d37$exports.default)(address, options);
+                break;
+            case $654c4db4d93f05ad$var$DatabaseType.EventLogDB:
+                db = yield (0, $7f01ca951b4d6c7e$exports.default)(address);
+                break;
+            case $654c4db4d93f05ad$var$DatabaseType.FeedDB:
+                db = yield (0, $75daf015ee5b198c$exports.default)(address);
+                break;
+            case $654c4db4d93f05ad$var$DatabaseType.KeyValueDB:
+                db = yield (0, $5933033ace426ad7$exports.default)(address);
+                break;
+            default:
+                throw new Error(`Unknown database type: ${type}`);
         }
+        $654c4db4d93f05ad$var$cacheMap.set(address, db);
         if (!db) throw new Error("Database not found");
         return db;
     });
 }
-function $c519e5c2d701af31$export$1b74141c5fe63a28(address) {
-    return $c519e5c2d701af31$var$__awaiter(this, void 0, void 0, function*() {
-        const db = yield $c519e5c2d701af31$var$getDB(address, $c519e5c2d701af31$var$DatabaseType.Counter);
+function $654c4db4d93f05ad$export$1b74141c5fe63a28(address) {
+    return $654c4db4d93f05ad$var$__awaiter(this, void 0, void 0, function*() {
+        const db = yield $654c4db4d93f05ad$var$getDB(address, $654c4db4d93f05ad$var$DatabaseType.CounterDB);
         return db;
     });
 }
-function $c519e5c2d701af31$export$ae6e3da9bde8af08(address, options = {
+function $654c4db4d93f05ad$export$ae6e3da9bde8af08(address, options = {
     indexBy: "_id"
 }) {
-    return $c519e5c2d701af31$var$__awaiter(this, void 0, void 0, function*() {
-        const db = yield $c519e5c2d701af31$var$getDB(address, $c519e5c2d701af31$var$DatabaseType.DocStore, options);
+    return $654c4db4d93f05ad$var$__awaiter(this, void 0, void 0, function*() {
+        const db = yield $654c4db4d93f05ad$var$getDB(address, $654c4db4d93f05ad$var$DatabaseType.DocStoreDB, options);
         return db;
     });
 }
-function $c519e5c2d701af31$export$f8203d08df5cd081(address) {
-    return $c519e5c2d701af31$var$__awaiter(this, void 0, void 0, function*() {
-        const db = yield $c519e5c2d701af31$var$getDB(address, $c519e5c2d701af31$var$DatabaseType.EventLog);
+function $654c4db4d93f05ad$export$f8203d08df5cd081(address) {
+    return $654c4db4d93f05ad$var$__awaiter(this, void 0, void 0, function*() {
+        const db = yield $654c4db4d93f05ad$var$getDB(address, $654c4db4d93f05ad$var$DatabaseType.EventLogDB);
         return db;
     });
 }
-function $c519e5c2d701af31$export$833919a382305440(address) {
-    return $c519e5c2d701af31$var$__awaiter(this, void 0, void 0, function*() {
-        const db = yield $c519e5c2d701af31$var$getDB(address, $c519e5c2d701af31$var$DatabaseType.Feed);
+function $654c4db4d93f05ad$export$833919a382305440(address) {
+    return $654c4db4d93f05ad$var$__awaiter(this, void 0, void 0, function*() {
+        const db = yield $654c4db4d93f05ad$var$getDB(address, $654c4db4d93f05ad$var$DatabaseType.FeedDB);
         return db;
     });
 }
-function $c519e5c2d701af31$export$12b3cc2522c3bba5(address) {
-    return $c519e5c2d701af31$var$__awaiter(this, void 0, void 0, function*() {
-        const db = yield $c519e5c2d701af31$var$getDB(address, $c519e5c2d701af31$var$DatabaseType.KeyValue);
+function $654c4db4d93f05ad$export$12b3cc2522c3bba5(address) {
+    return $654c4db4d93f05ad$var$__awaiter(this, void 0, void 0, function*() {
+        const db = yield $654c4db4d93f05ad$var$getDB(address, $654c4db4d93f05ad$var$DatabaseType.KeyValueDB);
         return db;
     });
 }
-function $c519e5c2d701af31$export$fc00ee57782020aa() {
+function $654c4db4d93f05ad$export$fc00ee57782020aa() {
     return Date.now();
 }
 
 
-var $020eab0e4dd81a46$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $30fd9ccd8434e85f$exports = {};
+
+$parcel$export($30fd9ccd8434e85f$exports, "default", function () { return $30fd9ccd8434e85f$export$2e2bcd8739ae039; }, function (v) { return $30fd9ccd8434e85f$export$2e2bcd8739ae039 = v; });
+
+var $30fd9ccd8434e85f$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -899,32 +884,166 @@ var $020eab0e4dd81a46$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const $020eab0e4dd81a46$export$2cd8252107eb640b = (projectConfig)=>$020eab0e4dd81a46$var$__awaiter(void 0, void 0, void 0, function*() {
+function $30fd9ccd8434e85f$export$2e2bcd8739ae039() {
+    return $30fd9ccd8434e85f$var$__awaiter(this, void 0, void 0, function*() {
+        const hasStorage = yield globalThis.contract.has_storage();
+        if (!hasStorage) return;
+        globalThis.storageContract = new (0, $170xe$Contract)(globalThis.walletConnection.account(), (yield globalThis.contract.get_storage()), {
+            // View methods are read only. They don't modify the state, but usually return some value.
+            viewMethods: [
+                "list_files",
+                "get_file"
+            ],
+            // Change methods can modify the state. But you don't receive the returned value when called.
+            changeMethods: [
+                "nft_mint"
+            ]
+        });
+    });
+}
+
+
+var $c1ec8daeb266bd8b$exports = {};
+
+$parcel$export($c1ec8daeb266bd8b$exports, "uploadFile", function () { return $c1ec8daeb266bd8b$export$a5575dbeeffdad98; }, function (v) { return $c1ec8daeb266bd8b$export$a5575dbeeffdad98 = v; });
+$parcel$export($c1ec8daeb266bd8b$exports, "openFile", function () { return $c1ec8daeb266bd8b$export$c47c8b06a9966d9f; }, function (v) { return $c1ec8daeb266bd8b$export$c47c8b06a9966d9f = v; });
+$parcel$export($c1ec8daeb266bd8b$exports, "getFileList", function () { return $c1ec8daeb266bd8b$export$23006a4c24fbadd0; }, function (v) { return $c1ec8daeb266bd8b$export$23006a4c24fbadd0 = v; });
+
+
+var $c1ec8daeb266bd8b$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
+        });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+function $c1ec8daeb266bd8b$export$a5575dbeeffdad98(file, path = "", description = "") {
+    return $c1ec8daeb266bd8b$var$__awaiter(this, void 0, void 0, function*() {
+        let filepath = path;
+        if (path === "") filepath = file.name;
+        else filepath = `${path}/${file.name}`;
+        // Upload to IPFS
+        // Put IPFS URL into NFT and mint
+        const ipfs = yield (0, $f1f4ca456620baa2$exports.default)();
+        const uploadedFile = yield ipfs.add(file);
+        const fileMetadata = {
+            title: file.name,
+            description: description,
+            media: `http://ipfs.io/ipfs/${uploadedFile.path}`,
+            media_hash: btoa(uploadedFile.path),
+            file_type: file.type,
+            issued_at: Date.now()
+        };
+        yield globalThis.storageContract.nft_mint({
+            token_id: $170xe$generate().toLowerCase(),
+            metadata: fileMetadata,
+            path: filepath,
+            receiver_id: globalThis.walletConnection.account().accountId
+        }, "300000000000000", "100000000000000000000000" // attached deposit in yoctoNEAR (optional)
+        );
+    });
+}
+function $c1ec8daeb266bd8b$export$c47c8b06a9966d9f(path) {
+    return $c1ec8daeb266bd8b$var$__awaiter(this, void 0, void 0, function*() {
+        const tokenMetaData = yield globalThis.storageContract.get_file({
+            file_path: path
+        });
+        return tokenMetaData;
+    });
+}
+function $c1ec8daeb266bd8b$export$23006a4c24fbadd0(path) {
+    return $c1ec8daeb266bd8b$var$__awaiter(this, void 0, void 0, function*() {
+        // add slash to end of path if not present
+        const folder = path.slice(-1) === "/" ? path : `${path}/`;
+        const list = yield globalThis.storageContract.list_files({
+            path: folder
+        });
+        return list;
+    });
+}
+
+
+
+var $5b16728422d4a076$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
+        });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const $5b16728422d4a076$export$2cd8252107eb640b = (projectConfig)=>$5b16728422d4a076$var$__awaiter(void 0, void 0, void 0, function*() {
         globalThis.projectConfig = projectConfig;
         switch(projectConfig.chainType){
-            case "NEAR_TESTNET":
-                yield (0, $d3ed99f02d86c501$exports).init();
+            case (0, $8f6052a2b1cc37fc$export$11617b6a00cf0054).NEAR_TESTNET:
+                yield (0, $bc09daf3d6fd99a8$exports).init();
                 break;
             default:
                 throw Error(`Unconfigured chainType '${projectConfig.chainType}'`);
         }
-        yield (0, $6cad23d4edb5a464$exports.default)();
-        yield (0, $c4225dfc37430fda$exports.default)();
+        yield (0, $129e7bb7b84cbd88$exports.default)();
+        yield (0, $31f2ee8310cb2ee4$exports.default)();
+        yield (0, $30fd9ccd8434e85f$exports.default)();
     });
-const $020eab0e4dd81a46$export$334c29725a78c21d = {
-    getAccountId: $268f5174a8123bd7$export$c1e0336bde96e2dc,
-    login: $36a1a38c5f443c85$exports.login,
-    logout: $36a1a38c5f443c85$exports.logout,
-    isLoggedIn: $268f5174a8123bd7$export$256a5a3564694cfc
+const $5b16728422d4a076$export$334c29725a78c21d = {
+    getAccountId: $701110f03c3de876$export$c1e0336bde96e2dc,
+    login: $29671cfde807e590$exports.login,
+    logout: $29671cfde807e590$exports.logout,
+    isLoggedIn: $701110f03c3de876$export$256a5a3564694cfc
 };
-const $020eab0e4dd81a46$export$6feb5ea51a7b0b47 = {
-    timestamp: $c519e5c2d701af31$exports.timestamp,
-    Counter: $c519e5c2d701af31$exports.Counter,
-    KeyValue: $c519e5c2d701af31$exports.KeyValue,
-    DocStore: $c519e5c2d701af31$exports.DocStore,
-    Feed: $c519e5c2d701af31$exports.Feed,
-    EventLog: $c519e5c2d701af31$exports.EventLog
+const $5b16728422d4a076$export$6feb5ea51a7b0b47 = {
+    timestamp: $654c4db4d93f05ad$exports.timestamp,
+    Counter: $654c4db4d93f05ad$exports.Counter,
+    KeyValue: $654c4db4d93f05ad$exports.KeyValue,
+    DocStore: $654c4db4d93f05ad$exports.DocStore,
+    Feed: $654c4db4d93f05ad$exports.Feed,
+    EventLog: $654c4db4d93f05ad$exports.EventLog
+};
+const $5b16728422d4a076$export$bf2a15d34f3c441c = {
+    uploadFile: $c1ec8daeb266bd8b$exports.uploadFile,
+    openFile: $c1ec8daeb266bd8b$exports.openFile,
+    getFileList: $c1ec8daeb266bd8b$exports.getFileList
 };
 
 
+export {$5b16728422d4a076$export$2cd8252107eb640b as init, $5b16728422d4a076$export$334c29725a78c21d as Auth, $5b16728422d4a076$export$6feb5ea51a7b0b47 as Database, $5b16728422d4a076$export$bf2a15d34f3c441c as Storage, $5b16728422d4a076$exports as default};
 //# sourceMappingURL=index.js.map

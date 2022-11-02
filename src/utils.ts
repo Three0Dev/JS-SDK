@@ -1,6 +1,10 @@
+export const enum BlockchainNetwork {
+	NEAR_TESTNET = 'NEAR_TESTNET',
+}
+
 export function getBlockchainType() {
 	switch (globalThis.projectConfig.chainType) {
-		case 'NEAR_TESTNET':
+		case BlockchainNetwork.NEAR_TESTNET:
 			return 'testnet'
 		default:
 			throw Error(

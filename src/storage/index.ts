@@ -34,7 +34,7 @@ export async function uploadFile(
 			token_id: short.generate().toLowerCase(),
 			metadata: fileMetadata,
 			path: filepath,
-			receiver_id: window.walletConnection.account().accountId,
+			receiver_id: globalThis.walletConnection.account().accountId,
 		},
 		'300000000000000', // attached GAS (optional)
 		'100000000000000000000000' // attached deposit in yoctoNEAR (optional)

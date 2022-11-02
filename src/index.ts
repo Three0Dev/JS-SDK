@@ -13,12 +13,13 @@ import {
 import { ProjectConfig } from './types/config'
 import initStorage from './storage/init'
 import { uploadFile, openFile, getFileList } from './storage'
+import { BlockchainNetwork } from './utils'
 
 const init = async (projectConfig: ProjectConfig) => {
 	globalThis.projectConfig = projectConfig
 
 	switch (projectConfig.chainType) {
-		case 'NEAR_TESTNET':
+		case BlockchainNetwork.NEAR_TESTNET:
 			await NEAR.init()
 			break
 		default:

@@ -1,8 +1,5 @@
-/* eslint-disable no-unused-vars */
-import OrbitDB from 'orbit-db'
 import EventStore from 'orbit-db-eventstore'
 import Database from './Database'
-import { isValidDatabase } from './Utils'
 
 export class EventLogDatabase extends Database {
 	instance() {
@@ -24,15 +21,8 @@ export class EventLogDatabase extends Database {
 	}
 }
 
-const getEventLog = async (
-	address: string,
-	orbitdb: OrbitDB = globalThis.orbitdb
-) => {
+const getEventLog = async (address: string) => {
 	throw Error('Not implemented')
-
-	if (!orbitdb) throw Error('OrbitDB is not initialized')
-	const isValid = await isValidDatabase(address)
-	if (!isValid) throw Error('Invalid database address')
 
 	const database = await orbitdb.log(address)
 	return new EventLogDatabase(database)

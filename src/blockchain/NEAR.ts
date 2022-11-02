@@ -147,7 +147,7 @@ export async function init() {
 
 	// Initialize connection to the NEAR testnet
 	const near = await connect({
-		deps: { keyStore: new keyStores.BrowserLocalStorageKeyStore() },
+		keyStore: new keyStores.BrowserLocalStorageKeyStore(),
 		...nearConfig,
 		headers: {},
 	})
