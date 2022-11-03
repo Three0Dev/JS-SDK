@@ -31,7 +31,7 @@
     "@types/orbit-db": "npm:@constl/orbit-db-types@^1.0.5",
     "@types/uuid": "^8.3.4",
     "ipfs-core": "^0.14.3",
-    "near-api-js": "^1.1.0",
+    "near-api-js": "^0.44.2",
     "orbit-db": "^0.28.6",
     "orbit-db-counterstore": "^1.12.1",
     "orbit-db-docstore": "^1.12.0",
