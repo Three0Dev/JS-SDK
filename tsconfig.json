@@ -1,5 +1,5 @@
 {
-    "include": ["src/**/*", "jest.config.ts"],
+    "include": ["src/**/*", "jest.config.ts", "test/**.*"],
     "compilerOptions": {
       "target": "ES6",
       "strict": true,
