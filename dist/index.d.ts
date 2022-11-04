@@ -2,7 +2,7 @@ import Store from "orbit-db-store";
 import EventStore from "orbit-db-eventstore";
 import FeedStore from "orbit-db-feedstore";
 declare function logout(): Promise<void>;
-declare function login(appName?: string, successUrL?: string, failureUrL?: string): Promise<void>;
+declare function login(successUrl?: string, failureUrl?: string): Promise<void>;
 declare function isLoggedIn(): boolean;
 declare function getAccountId(): string;
 declare class _Database1 {
@@ -36,7 +36,6 @@ declare class FeedDatabase extends Database {
     set(value: any): Promise<string>;
 }
 declare class KVDatabase extends Database {
-    instance(): Store;
     get(key: string): any;
     getAll(): {
         [key: string]: any;
