@@ -3,7 +3,7 @@ import OrbitDB from 'orbit-db'
 import * as IPFS from 'ipfs-core'
 import { IPFSOptions } from 'ipfs-core/src/components/network'
 import Store from 'orbit-db-store'
-import { Counter, DocStore, KeyValue, timestamp } from '.'
+import { Counter, DocStore, KeyValue, timestamp } from '../src/database'
 
 const IPFS_CONFIG: IPFSOptions = {
 	start: true,

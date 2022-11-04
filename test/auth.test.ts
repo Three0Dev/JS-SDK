@@ -1,5 +1,5 @@
 import { WalletConnection, InMemorySigner, keyStores, Near } from 'near-api-js'
-import { getAccountId, isLoggedIn, login, logout } from './index'
+import { getAccountId, isLoggedIn, login, logout } from '../src/auth/index'
 
 const localStorage = require('localstorage-memory')
 const URL = require('url')
