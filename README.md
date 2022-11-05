@@ -97,7 +97,7 @@ const docstore = await Database.DocStore([address])
   * Returns key of added value
 * `docstore.update(key:string, value:Object):Promise<void>`
   * Updates value in docstore
-* `docstore.delete(key:string):Promise<void>`
+* `docstore.del(key:string):Promise<void>`
   * Deletes value from docstore
 #### **KeyValue**:
 ```
