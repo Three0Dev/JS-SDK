@@ -1,6 +1,8 @@
 var $dSCMW$nearapijs = require("near-api-js");
+var $dSCMW$orbitdbidentityprovider = require("orbit-db-identity-provider");
 var $dSCMW$orbitdb = require("orbit-db");
 var $dSCMW$ipfscore = require("ipfs-core");
+var $dSCMW$buffer = require("buffer");
 var $dSCMW$uuid = require("uuid");
 
 function $parcel$export(e, n, v, s) {
@@ -163,6 +165,7 @@ var $c4225dfc37430fda$exports = {};
 
 $parcel$export($c4225dfc37430fda$exports, "default", function () { return $c4225dfc37430fda$export$2e2bcd8739ae039; }, function (v) { return $c4225dfc37430fda$export$2e2bcd8739ae039 = v; });
 
+
 var $46137cfcfeb0552d$exports = {};
 
 $parcel$export($46137cfcfeb0552d$exports, "default", function () { return $46137cfcfeb0552d$export$2e2bcd8739ae039; }, function (v) { return $46137cfcfeb0552d$export$2e2bcd8739ae039 = v; });
@@ -216,6 +219,84 @@ const $46137cfcfeb0552d$var$initIPFS = ()=>$46137cfcfeb0552d$var$__awaiter(void 
         return $46137cfcfeb0552d$var$ipfs;
     });
 var $46137cfcfeb0552d$export$2e2bcd8739ae039 = $46137cfcfeb0552d$var$initIPFS;
+
+
+var $291fcf7686cc2f2a$exports = {};
+
+$parcel$export($291fcf7686cc2f2a$exports, "default", function () { return $291fcf7686cc2f2a$export$2e2bcd8739ae039; }, function (v) { return $291fcf7686cc2f2a$export$2e2bcd8739ae039 = v; });
+
+
+
+
+var $291fcf7686cc2f2a$require$Buffer = $dSCMW$buffer.Buffer;
+var $291fcf7686cc2f2a$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
+        });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+class $291fcf7686cc2f2a$export$2e2bcd8739ae039 extends (0, $dSCMW$orbitdbidentityprovider.IdentityProvider) {
+    // return type
+    static get type() {
+        return "NearIdentity";
+    }
+    // return identifier of external id (eg. a public key)
+    // eslint-disable-next-line class-methods-use-this
+    getId() {
+        return $291fcf7686cc2f2a$var$__awaiter(this, void 0, void 0, function*() {
+            return globalThis.accountId;
+        });
+    }
+    // return a signature of data (signature of the OrbitDB public key)
+    // eslint-disable-next-line class-methods-use-this
+    signIdentity(// eslint-disable-next-line no-undef
+    data) {
+        return $291fcf7686cc2f2a$var$__awaiter(this, void 0, void 0, function*() {
+            console.log(data);
+            const dataBuffer = $291fcf7686cc2f2a$require$Buffer.from(data);
+            console.log(dataBuffer);
+            const keyStore = new (0, $dSCMW$nearapijs.keyStores).BrowserLocalStorageKeyStore();
+            const id = yield this.getId();
+            const keyPair = yield keyStore.getKey((0, $44dda2c9f6001bf5$export$e72398d75d0174d8)(), id);
+            const { signature: signature  } = keyPair.sign(dataBuffer);
+            console.log(signature);
+            return signature;
+        });
+    }
+    // return true if identity.signatures are valid
+    static verifyIdentity(identity) {
+        return $291fcf7686cc2f2a$var$__awaiter(this, void 0, void 0, function*() {
+            const keyStore = new (0, $dSCMW$nearapijs.keyStores).BrowserLocalStorageKeyStore();
+            const keyPair = yield keyStore.getKey((0, $44dda2c9f6001bf5$export$e72398d75d0174d8)(), identity.id);
+            console.log(identity);
+            const message = $291fcf7686cc2f2a$require$Buffer.from(identity.publicKey + identity.signatures.id);
+            const verify = keyPair.verify(message, $291fcf7686cc2f2a$require$Buffer.from(Object.values(identity.signatures.publicKey)));
+            console.log(verify);
+            return verify;
+        });
+    }
+}
 
 
 var $36a1a38c5f443c85$exports = {};
@@ -311,12 +392,24 @@ const $c4225dfc37430fda$var$initOrbitDB = ()=>$c4225dfc37430fda$var$__awaiter(vo
         if (globalThis.orbitdb) return;
         const ipfs = yield (0, $46137cfcfeb0552d$exports.default)();
         const loggedIn = (0, $268f5174a8123bd7$export$256a5a3564694cfc)();
+        console.log("test");
         if (loggedIn) {
-            if (globalThis.projectConfig.chainType.includes("NEAR")) // IdentityProvider.addIdentityProvider(NearIdentityProvider);
-            // const identity = await IdentityProvider.createIdentity({ type: 'NearIdentity' });
-            // const orbitdb = await OrbitDB.createInstance(ipfs, {identity});
+            console.log("bye");
+            if (globalThis.projectConfig.chainType.includes("NEAR")) {
+                console.log("hi");
+                (0, ($parcel$interopDefault($dSCMW$orbitdbidentityprovider))).addIdentityProvider((0, $291fcf7686cc2f2a$exports.default));
+                const identity = yield (0, ($parcel$interopDefault($dSCMW$orbitdbidentityprovider))).createIdentity({
+                    type: "NearIdentity"
+                });
+                globalThis.orbitdb = yield (0, ($parcel$interopDefault($dSCMW$orbitdb))).createInstance(ipfs, {
+                    identity: identity
+                });
+            // globalThis.orbitdb = await OrbitDB.createInstance(ipfs)
+            }
+        } else {
+            console.log("tie");
             globalThis.orbitdb = yield (0, ($parcel$interopDefault($dSCMW$orbitdb))).createInstance(ipfs);
-        } else globalThis.orbitdb = yield (0, ($parcel$interopDefault($dSCMW$orbitdb))).createInstance(ipfs);
+        }
     });
 var $c4225dfc37430fda$export$2e2bcd8739ae039 = $c4225dfc37430fda$var$initOrbitDB;
 
@@ -364,7 +457,6 @@ function $6cad23d4edb5a464$export$2e2bcd8739ae039() {
             isLoggedIn = user.is_online;
         } catch (e) {
             isLoggedIn = false;
-            throw e;
         }
         if (!isLoggedIn) yield globalThis.contract.user_action({
             action: (0, $d3ed99f02d86c501$exports.UserActionType).LOGIN
