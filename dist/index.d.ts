@@ -58,8 +58,8 @@ interface ProjectConfig {
     projectId: string;
 }
 declare function uploadFile(file: File, path?: string, description?: string): Promise<void>;
-declare function openFile(path: string): Promise<import("blockchain/NEAR").FileMetadata>;
-declare function getFileList(path: string): Promise<string[]>;
+declare function openFile(path: string): Promise<any>;
+declare function getFileList(path: string): Promise<any>;
 export const init: (projectConfig: ProjectConfig) => Promise<void>;
 export const Auth: {
     getAccountId: typeof getAccountId;
