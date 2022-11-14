@@ -108,7 +108,7 @@ function $d3ed99f02d86c501$export$31eac9c8bd069ff7() {
             return {
                 networkId: "local",
                 nodeUrl: "http://localhost:3030",
-                keyPath: `${"/Users/sreegrandhe"}/.near/validator_key.json`,
+                keyPath: `${"/Users/uneeb"}/.near/validator_key.json`,
                 walletUrl: "http://localhost:4000/wallet",
                 contractName: CONTRACT_NAME
             };

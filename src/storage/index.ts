@@ -1,6 +1,5 @@
 import * as short from 'short-uuid'
 import initIPFS from '../database/ipfs'
-import { StorageContract } from '../blockchain/NEAR'
 
 export async function uploadFile(
 	file: File,
@@ -29,7 +28,7 @@ export async function uploadFile(
 		issued_at: Date.now(),
 	}
 
-	await (globalThis.storageContract as unknown as StorageContract).nft_mint(
+	await globalThis.storageContract.nft_mint(
 		{
 			token_id: short.generate().toLowerCase(),
 			metadata: fileMetadata,
@@ -42,17 +41,15 @@ export async function uploadFile(
 }
 
 export async function openFile(path: string) {
-	const tokenMetaData = await (
-		globalThis.storageContract as unknown as StorageContract
-	).get_file({ file_path: path })
+	const tokenMetaData = await globalThis.storageContract.get_file({
+		file_path: path,
+	})
 	return tokenMetaData
 }
 
 export async function getFileList(path: string) {
 	// add slash to end of path if not present
 	const folder = path.slice(-1) === '/' ? path : `${path}/`
-	const list = await (
-		globalThis.storageContract as unknown as StorageContract
-	).list_files({ path: folder })
+	const list = await globalThis.storageContract.list_files({ path: folder })
 	return list
 }

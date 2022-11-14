@@ -1,7 +1,7 @@
-import { Three0Contract, UserActionType } from '../blockchain/NEAR'
+import { UserActionType } from '../blockchain/NEAR'
 
 export async function logout() {
-	await (globalThis.contract as unknown as Three0Contract).user_action({
+	await globalThis.contract.user_action({
 		action: UserActionType.LOGOUT,
 	})
 	globalThis.walletConnection.signOut()
