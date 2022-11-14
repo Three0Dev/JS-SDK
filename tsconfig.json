@@ -12,6 +12,7 @@
     ],
     "typedocOptions": {
       "entryPoints": ["src/index.ts", "src/auth/index.ts", "src/database/index.ts", "src/storage/index.ts"],
+      "exclude": ["**/*+(.test|.e2e).ts"],
       "out": "docs"
   }
 }
