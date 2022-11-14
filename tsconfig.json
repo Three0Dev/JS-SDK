@@ -11,7 +11,7 @@
       "src/types/global.d.ts"
     ],
     "typedocOptions": {
-      "entryPoints": ["src/index.ts", "src/auth/index.ts", "src/database/index.ts", "src/storage/index.ts", "src/database/wrappers/index.ts"],
-      "out": "docs"
+      "entryPoints": ["src/index.ts"],
+      "out": "docs",
   }
 }
