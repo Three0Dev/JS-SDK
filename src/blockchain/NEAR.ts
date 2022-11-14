@@ -5,7 +5,6 @@ export interface Three0Contract {
 	valid_database: ValidDatabaseFunction
 	get_user: GetUserFunction
 	user_action: UserActionFunction
-	has_storage: HasStorageFunction
 	get_storage: GetStorageFunction
 }
 
@@ -14,7 +13,6 @@ type ValidDatabaseFunction = (
 ) => Promise<boolean>
 type GetUserFunction = (user_id: GetUserParams) => Promise<User>
 type UserActionFunction = (action: UserActionParams) => Promise<void>
-type HasStorageFunction = () => Promise<boolean>
 type GetStorageFunction = () => Promise<string>
 
 interface User {
@@ -162,7 +160,7 @@ export async function init() {
 		nearConfig.contractName,
 		{
 			// View methods are read only. They don't modify the state, but usually return some value.
-			viewMethods: ['get_user', 'valid_database', 'has_storage', 'get_storage'],
+			viewMethods: ['get_user', 'valid_database', 'get_storage'],
 			// Change methods can modify the state. But you don't receive the returned value when called.
 			changeMethods: ['user_action'],
 		}

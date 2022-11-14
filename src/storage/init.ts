@@ -1,10 +1,15 @@
 import { Contract } from 'near-api-js'
 
 export default async function initStorage() {
-	const hasStorage = await globalThis.contract.has_storage()
-	if (!hasStorage) {
-		return
+	let hasStorage = false
+	try {
+		hasStorage = await globalThis.contract.get_storage()
+	} catch (e) {
+		console.log('Error starting storage:', e)
 	}
+
+	if (!hasStorage) return
+
 	globalThis.storageContract = new Contract(
 		globalThis.walletConnection.account(),
 		await globalThis.contract.get_storage(),
