@@ -1,7 +1,7 @@
 import { connect, Contract, keyStores, WalletConnection } from 'near-api-js'
 import { getBlockchainType } from '../utils'
 
-export interface Three0Contract {
+export interface Three0Contract extends Contract {
 	valid_database: ValidDatabaseFunction
 	get_user: GetUserFunction
 	user_action: UserActionFunction
@@ -164,5 +164,5 @@ export async function init() {
 			// Change methods can modify the state. But you don't receive the returned value when called.
 			changeMethods: ['user_action'],
 		}
-	)
+	) as Three0Contract
 }

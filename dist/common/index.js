@@ -390,10 +390,18 @@ var $088689cdba66f326$exports = {};
 $parcel$export($088689cdba66f326$exports, "CounterDatabase", function () { return $088689cdba66f326$export$b62cdc4dda4dc10d; }, function (v) { return $088689cdba66f326$export$b62cdc4dda4dc10d = v; });
 $parcel$export($088689cdba66f326$exports, "default", function () { return $088689cdba66f326$export$2e2bcd8739ae039; }, function (v) { return $088689cdba66f326$export$2e2bcd8739ae039 = v; });
 class $1c05c1fe683ce4de$export$2e2bcd8739ae039 {
-    onChange(callbackfn) {
+    /**
+     * This function updates information across all systems once database is updated
+     *
+     * @param callbackfn Function
+     */ onChange(callbackfn) {
         this.database.events.on("replicated", ()=>callbackfn());
     }
-    constructor(database){
+    /**
+     * This function constructs a new database
+     *
+     * @param database Database object
+     */ constructor(database){
         this.database = database;
     }
 }
@@ -427,17 +435,30 @@ var $088689cdba66f326$var$__awaiter = undefined && undefined.__awaiter || functi
     });
 };
 class $088689cdba66f326$export$b62cdc4dda4dc10d extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
-    get() {
+    /**
+     * Ths function gets the counter store database
+     *
+     * @returns the counter store database
+     */ get() {
         return this.database.value;
     }
-    inc(amt = 1) {
+    /**
+     * This function increments the counter value
+     *
+     * @param amt The value to increment database by
+     */ inc(amt = 1) {
         return $088689cdba66f326$var$__awaiter(this, void 0, void 0, function*() {
             if (amt < 1) throw Error("Valid amount is required");
             yield this.database.inc(amt);
         });
     }
 }
-const $088689cdba66f326$var$getCounter = (address)=>$088689cdba66f326$var$__awaiter(void 0, void 0, void 0, function*() {
+/**
+ * This function creates a new counter database
+ *
+ * @param address database address
+ * @returns a new counter database
+ */ const $088689cdba66f326$var$getCounter = (address)=>$088689cdba66f326$var$__awaiter(void 0, void 0, void 0, function*() {
         const database = yield globalThis.orbitdb.counter(address);
         yield database.load();
         return new $088689cdba66f326$export$b62cdc4dda4dc10d(database);
@@ -527,13 +548,28 @@ var $ecfd62e1e5921b75$var$__awaiter = undefined && undefined.__awaiter || functi
     });
 };
 class $ecfd62e1e5921b75$export$cc7289d1409c61ee extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
-    get(key) {
+    /**
+     * This function returns a document database
+     *
+     * @param key database key
+     * @returns a document database
+     */ get(key) {
         return key ? this.database.get(key)[0] : this.database.get("");
     }
-    where(callbackfn) {
+    /**
+     * This function queries for a particular document entry
+     *
+     * @param callbackfn
+     * @returns Boolean value to see if query is found
+     */ where(callbackfn) {
         return this.database.query(callbackfn);
     }
-    set(key, value) {
+    /**
+     * This function creates a new entry in the document database
+     *
+     * @param key Document database key
+     * @param value Document database value
+     */ set(key, value) {
         return $ecfd62e1e5921b75$var$__awaiter(this, void 0, void 0, function*() {
             if (!(0, $1133891dffb598a6$exports.isValidKey)(key)) throw Error("Key is required");
             yield this.database.put(Object.assign({
@@ -541,20 +577,34 @@ class $ecfd62e1e5921b75$export$cc7289d1409c61ee extends (0, $1c05c1fe683ce4de$ex
             }, value));
         });
     }
-    add(value) {
+    /**
+     * This function adds an Object
+     *
+     * @param value
+     * @returns
+     */ add(value) {
         return $ecfd62e1e5921b75$var$__awaiter(this, void 0, void 0, function*() {
             const id = (0, $dSCMW$uuid.v4)();
             yield this.set(id, value);
             return id;
         });
     }
-    delete(key) {
+    /**
+     * This function deletes an entry from the document database
+     *
+     * @param key Document database key
+     */ delete(key) {
         return $ecfd62e1e5921b75$var$__awaiter(this, void 0, void 0, function*() {
             if (!(0, $1133891dffb598a6$exports.isValidKey)(key)) throw Error("Key is required");
             yield this.database.del(key);
         });
     }
-    update(key, value) {
+    /**
+     * This function updates an entry in the document database
+     *
+     * @param key Document database key
+     * @param value Document databae value
+     */ update(key, value) {
         return $ecfd62e1e5921b75$var$__awaiter(this, void 0, void 0, function*() {
             if (!(0, $1133891dffb598a6$exports.isValidKey)(key)) throw Error("Key is required");
             const doc = this.get(key);
@@ -562,7 +612,13 @@ class $ecfd62e1e5921b75$export$cc7289d1409c61ee extends (0, $1c05c1fe683ce4de$ex
         });
     }
 }
-const $ecfd62e1e5921b75$var$getDocStore = (address, indexBy)=>$ecfd62e1e5921b75$var$__awaiter(void 0, void 0, void 0, function*() {
+/**
+ * This function creates a new document database
+ *
+ * @param address Database address
+ * @param indexBy Database indexBy parameter
+ * @returns New document database
+ */ const $ecfd62e1e5921b75$var$getDocStore = (address, indexBy)=>$ecfd62e1e5921b75$var$__awaiter(void 0, void 0, void 0, function*() {
         const database = yield globalThis.orbitdb.docs(address, indexBy);
         yield database.load();
         return new $ecfd62e1e5921b75$export$cc7289d1409c61ee(database);
@@ -603,24 +659,46 @@ var $610eccb30f15c968$var$__awaiter = undefined && undefined.__awaiter || functi
     });
 };
 class $610eccb30f15c968$export$a4a6104bef1ea4da extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
-    instance() {
+    /**
+     * This function returns instance of event log database
+     *
+     * @returns Instance of event log database
+     */ instance() {
         return this.database;
     }
-    get(key) {
+    /**
+     * This function gets an entry from the event log database
+     *
+     * @param key Event log database key
+     * @returns Entry from the event log database
+     */ get(key) {
         if (!key) throw Error("Key is required");
         return this.database.get(key);
     }
-    // TODO Should we implement this?
-    getAll() {
+    /**
+     * This function gets all the entries from the event log database
+     *
+     * @returns All entries from the event log database
+     */ getAll() {
         return this.database.all;
     }
-    set(value) {
+    /**
+     * This function creates a new entry in the event log database
+     *
+     * @param value Event log database value
+     * @returns
+     */ set(value) {
         return $610eccb30f15c968$var$__awaiter(this, void 0, void 0, function*() {
             return this.database.add(value);
         });
     }
 }
-const $610eccb30f15c968$var$getEventLog = (address)=>$610eccb30f15c968$var$__awaiter(void 0, void 0, void 0, function*() {
+/**
+ * This function creates a new event log database
+ *
+ * @param address Database address
+ * @returns New event log database
+ */ const $610eccb30f15c968$var$getEventLog = (address)=>$610eccb30f15c968$var$__awaiter(void 0, void 0, void 0, function*() {
         throw Error("Not implemented");
     });
 var $610eccb30f15c968$export$2e2bcd8739ae039 = $610eccb30f15c968$var$getEventLog;
@@ -660,27 +738,54 @@ var $9f42f73f36b591e2$var$__awaiter = undefined && undefined.__awaiter || functi
     });
 };
 class $9f42f73f36b591e2$export$c4331506dfaaa28a extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
-    instance() {
+    /**
+     * This function returns the instance of a feed database
+     *
+     * @returns Instance of feed database
+     */ instance() {
         return this.database;
     }
-    get(key) {
+    /**
+     * This function gets the entry of an entry in the feed database
+     *
+     * @param key Feed database key
+     * @returns Feed database entry
+     */ get(key) {
         if (!key) throw Error("Key is required");
         return this.database.get(key).payload.value;
     }
-    add(value) {
+    /**
+     * This function adds a new entry in the feed database
+     *
+     * @param value Feed database value
+     * @returns
+     */ add(value) {
         return this.database.add(value);
     }
-    // TODO Should we implement this?
-    getAll() {
+    /**
+     * This function retrieves all the entries in the feed database
+     *
+     * @returns All entries in the feed database
+     */ getAll() {
         return this.database.all;
     }
-    set(value) {
+    /**
+     * This function creates a new entry in the feed database
+     *
+     * @param value Feed database value
+     * @returns
+     */ set(value) {
         return $9f42f73f36b591e2$var$__awaiter(this, void 0, void 0, function*() {
             return this.database.add(value);
         });
     }
 }
-const $9f42f73f36b591e2$var$getFeed = (address)=>$9f42f73f36b591e2$var$__awaiter(void 0, void 0, void 0, function*() {
+/**
+ * This function creates a new feedback database
+ *
+ * @param address Database address
+ * @returns New feedback database
+ */ const $9f42f73f36b591e2$var$getFeed = (address)=>$9f42f73f36b591e2$var$__awaiter(void 0, void 0, void 0, function*() {
         throw Error("Not implemented");
     });
 var $9f42f73f36b591e2$export$2e2bcd8739ae039 = $9f42f73f36b591e2$var$getFeed;
@@ -719,27 +824,50 @@ var $fd768f09317d5eed$var$__awaiter = undefined && undefined.__awaiter || functi
     });
 };
 class $fd768f09317d5eed$export$f0160e6bce89ab9 extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
-    get(key) {
+    /**
+     * This function returns the key value database
+     *
+     * @param key database address
+     * @returns key value database
+     */ get(key) {
         if (!key) throw Error("Key is required");
         return this.database.get(key);
     }
-    getAll() {
+    /**
+     * This function returns all entries within the key value database
+     *
+     * @returns all entries within the key value database
+     */ getAll() {
         return this.database.all;
     }
-    set(key, value) {
+    /**
+     * This function creates a new entry in the key value database
+     *
+     * @param key of the new database entry
+     * @param value of the new database entry
+     */ set(key, value) {
         return $fd768f09317d5eed$var$__awaiter(this, void 0, void 0, function*() {
             if (!key) throw Error("Key is required");
             yield this.database.put(key, value);
         });
     }
-    delete(key) {
+    /**
+     * This function deletes an entry within the key value database
+     *
+     * @param key of the database entry
+     */ delete(key) {
         return $fd768f09317d5eed$var$__awaiter(this, void 0, void 0, function*() {
             if (!key) throw Error("Key is required");
             yield this.database.del(key);
         });
     }
 }
-const $fd768f09317d5eed$var$getKeyValue = (address)=>$fd768f09317d5eed$var$__awaiter(void 0, void 0, void 0, function*() {
+/**
+ * This function creates a new key value database
+ *
+ * @param address database address
+ * @returns a new key value database
+ */ const $fd768f09317d5eed$var$getKeyValue = (address)=>$fd768f09317d5eed$var$__awaiter(void 0, void 0, void 0, function*() {
         const database = yield orbitdb.keyvalue(address);
         yield database.load();
         return new $fd768f09317d5eed$export$f0160e6bce89ab9(database);
@@ -786,7 +914,14 @@ var $c519e5c2d701af31$var$DatabaseType;
     DatabaseType["FeedDB"] = "feed";
     DatabaseType["KeyValueDB"] = "keyvalue";
 })($c519e5c2d701af31$var$DatabaseType || ($c519e5c2d701af31$var$DatabaseType = {}));
-function $c519e5c2d701af31$var$getDB(address, type, options = {}) {
+/**
+ * This function creates a specified database type and returns it
+ *
+ * @param address Database address
+ * @param type Database type
+ * @param options Database additional parameters
+ * @returns New database object
+ */ function $c519e5c2d701af31$var$getDB(address, type, options = {}) {
     return $c519e5c2d701af31$var$__awaiter(this, void 0, void 0, function*() {
         let db = null;
         if (!globalThis.orbitdb) throw Error("OrbitDB is not initialized");
