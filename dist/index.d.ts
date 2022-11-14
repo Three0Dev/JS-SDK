@@ -1,10 +1,10 @@
 import Store from "orbit-db-store";
 import EventStore from "orbit-db-eventstore";
 import FeedStore from "orbit-db-feedstore";
-declare function logout(): Promise<void>;
-declare function login(successUrl?: string, failureUrl?: string): Promise<void>;
 declare function isLoggedIn(): boolean;
 declare function getAccountId(): string;
+declare function logout(): Promise<void>;
+declare function login(successUrl?: string, failureUrl?: string): Promise<void>;
 declare class _Database1 {
     protected readonly database: Store;
     constructor(database: Store);
@@ -52,14 +52,18 @@ declare function EventLog(address: string): Promise<EventLogDatabase>;
 declare function Feed(address: string): Promise<FeedDatabase>;
 declare function KeyValue(address: string): Promise<KVDatabase>;
 declare function timestamp(): number;
+declare function uploadFile(file: File, path?: string, description?: string): Promise<void>;
+declare function openFile(path: string): Promise<any>;
+declare function getFileList(path: string): Promise<any>;
+declare function isUserRegistered(): Promise<boolean>;
+declare function registerUser(): Promise<void>;
+declare function getBalance(): Promise<any>;
+declare function transferTokens(receiver: string, amount: number): Promise<void>;
 interface ProjectConfig {
     chainType: string;
     contractName: string;
     projectId: string;
 }
-declare function uploadFile(file: File, path?: string, description?: string): Promise<void>;
-declare function openFile(path: string): Promise<any>;
-declare function getFileList(path: string): Promise<any>;
 export const init: (projectConfig: ProjectConfig) => Promise<void>;
 export const Auth: {
     getAccountId: typeof getAccountId;
@@ -79,6 +83,12 @@ export const Storage: {
     uploadFile: typeof uploadFile;
     openFile: typeof openFile;
     getFileList: typeof getFileList;
+};
+export const Token: {
+    isUserRegistered: typeof isUserRegistered;
+    registerUser: typeof registerUser;
+    getBalance: typeof getBalance;
+    transferTokens: typeof transferTokens;
 };
 
 //# sourceMappingURL=index.d.ts.map
