@@ -11,5 +11,6 @@ declare global {
 	var orbitdb: OrbitDB
 	var walletConnection: WalletConnection
 	var accountId: string
-	var contract: any
+	var contract: Three0Contract
+	var storageContract: StorageContract
 }

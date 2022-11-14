@@ -1,9 +1,8 @@
 var $dSCMW$nearapijs = require("near-api-js");
-var $dSCMW$orbitdbidentityprovider = require("orbit-db-identity-provider");
 var $dSCMW$orbitdb = require("orbit-db");
 var $dSCMW$ipfscore = require("ipfs-core");
-var $dSCMW$buffer = require("buffer");
 var $dSCMW$uuid = require("uuid");
+var $dSCMW$shortuuid = require("short-uuid");
 
 function $parcel$export(e, n, v, s) {
   Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
@@ -15,6 +14,7 @@ function $parcel$interopDefault(a) {
 $parcel$export(module.exports, "init", function () { return $020eab0e4dd81a46$export$2cd8252107eb640b; }, function (v) { return $020eab0e4dd81a46$export$2cd8252107eb640b = v; });
 $parcel$export(module.exports, "Auth", function () { return $020eab0e4dd81a46$export$334c29725a78c21d; }, function (v) { return $020eab0e4dd81a46$export$334c29725a78c21d = v; });
 $parcel$export(module.exports, "Database", function () { return $020eab0e4dd81a46$export$6feb5ea51a7b0b47; }, function (v) { return $020eab0e4dd81a46$export$6feb5ea51a7b0b47 = v; });
+$parcel$export(module.exports, "Storage", function () { return $020eab0e4dd81a46$export$bf2a15d34f3c441c; }, function (v) { return $020eab0e4dd81a46$export$bf2a15d34f3c441c = v; });
 var $d3ed99f02d86c501$exports = {};
 
 $parcel$export($d3ed99f02d86c501$exports, "UserActionType", function () { return $d3ed99f02d86c501$export$4d85d82e4ea34f7c; }, function (v) { return $d3ed99f02d86c501$export$4d85d82e4ea34f7c = v; });
@@ -148,7 +148,8 @@ function $d3ed99f02d86c501$export$2cd8252107eb640b() {
             // View methods are read only. They don't modify the state, but usually return some value.
             viewMethods: [
                 "get_user",
-                "valid_database"
+                "valid_database",
+                "get_storage"
             ],
             // Change methods can modify the state. But you don't receive the returned value when called.
             changeMethods: [
@@ -164,7 +165,6 @@ function $d3ed99f02d86c501$export$2cd8252107eb640b() {
 var $c4225dfc37430fda$exports = {};
 
 $parcel$export($c4225dfc37430fda$exports, "default", function () { return $c4225dfc37430fda$export$2e2bcd8739ae039; }, function (v) { return $c4225dfc37430fda$export$2e2bcd8739ae039 = v; });
-
 
 var $46137cfcfeb0552d$exports = {};
 
@@ -219,84 +219,6 @@ const $46137cfcfeb0552d$var$initIPFS = ()=>$46137cfcfeb0552d$var$__awaiter(void 
         return $46137cfcfeb0552d$var$ipfs;
     });
 var $46137cfcfeb0552d$export$2e2bcd8739ae039 = $46137cfcfeb0552d$var$initIPFS;
-
-
-var $291fcf7686cc2f2a$exports = {};
-
-$parcel$export($291fcf7686cc2f2a$exports, "default", function () { return $291fcf7686cc2f2a$export$2e2bcd8739ae039; }, function (v) { return $291fcf7686cc2f2a$export$2e2bcd8739ae039 = v; });
-
-
-
-
-var $291fcf7686cc2f2a$require$Buffer = $dSCMW$buffer.Buffer;
-var $291fcf7686cc2f2a$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
-    function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve) {
-            resolve(value);
-        });
-    }
-    return new (P || (P = Promise))(function(resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-class $291fcf7686cc2f2a$export$2e2bcd8739ae039 extends (0, $dSCMW$orbitdbidentityprovider.IdentityProvider) {
-    // return type
-    static get type() {
-        return "NearIdentity";
-    }
-    // return identifier of external id (eg. a public key)
-    // eslint-disable-next-line class-methods-use-this
-    getId() {
-        return $291fcf7686cc2f2a$var$__awaiter(this, void 0, void 0, function*() {
-            return globalThis.accountId;
-        });
-    }
-    // return a signature of data (signature of the OrbitDB public key)
-    // eslint-disable-next-line class-methods-use-this
-    signIdentity(// eslint-disable-next-line no-undef
-    data) {
-        return $291fcf7686cc2f2a$var$__awaiter(this, void 0, void 0, function*() {
-            console.log(data);
-            const dataBuffer = $291fcf7686cc2f2a$require$Buffer.from(data);
-            console.log(dataBuffer);
-            const keyStore = new (0, $dSCMW$nearapijs.keyStores).BrowserLocalStorageKeyStore();
-            const id = yield this.getId();
-            const keyPair = yield keyStore.getKey((0, $44dda2c9f6001bf5$export$e72398d75d0174d8)(), id);
-            const { signature: signature  } = keyPair.sign(dataBuffer);
-            console.log(signature);
-            return signature;
-        });
-    }
-    // return true if identity.signatures are valid
-    static verifyIdentity(identity) {
-        return $291fcf7686cc2f2a$var$__awaiter(this, void 0, void 0, function*() {
-            const keyStore = new (0, $dSCMW$nearapijs.keyStores).BrowserLocalStorageKeyStore();
-            const keyPair = yield keyStore.getKey((0, $44dda2c9f6001bf5$export$e72398d75d0174d8)(), identity.id);
-            console.log(identity);
-            const message = $291fcf7686cc2f2a$require$Buffer.from(identity.publicKey + identity.signatures.id);
-            const verify = keyPair.verify(message, $291fcf7686cc2f2a$require$Buffer.from(Object.values(identity.signatures.publicKey)));
-            console.log(verify);
-            return verify;
-        });
-    }
-}
 
 
 var $36a1a38c5f443c85$exports = {};
@@ -392,24 +314,12 @@ const $c4225dfc37430fda$var$initOrbitDB = ()=>$c4225dfc37430fda$var$__awaiter(vo
         if (globalThis.orbitdb) return;
         const ipfs = yield (0, $46137cfcfeb0552d$exports.default)();
         const loggedIn = (0, $268f5174a8123bd7$export$256a5a3564694cfc)();
-        console.log("test");
         if (loggedIn) {
-            console.log("bye");
-            if (globalThis.projectConfig.chainType.includes("NEAR")) {
-                console.log("hi");
-                (0, ($parcel$interopDefault($dSCMW$orbitdbidentityprovider))).addIdentityProvider((0, $291fcf7686cc2f2a$exports.default));
-                const identity = yield (0, ($parcel$interopDefault($dSCMW$orbitdbidentityprovider))).createIdentity({
-                    type: "NearIdentity"
-                });
-                globalThis.orbitdb = yield (0, ($parcel$interopDefault($dSCMW$orbitdb))).createInstance(ipfs, {
-                    identity: identity
-                });
-            // globalThis.orbitdb = await OrbitDB.createInstance(ipfs)
-            }
-        } else {
-            console.log("tie");
+            if (globalThis.projectConfig.chainType.includes("NEAR")) // IdentityProvider.addIdentityProvider(NearIdentityProvider);
+            // const identity = await IdentityProvider.createIdentity({ type: 'NearIdentity' });
+            // const orbitdb = await OrbitDB.createInstance(ipfs, {identity});
             globalThis.orbitdb = yield (0, ($parcel$interopDefault($dSCMW$orbitdb))).createInstance(ipfs);
-        }
+        } else globalThis.orbitdb = yield (0, ($parcel$interopDefault($dSCMW$orbitdb))).createInstance(ipfs);
     });
 var $c4225dfc37430fda$export$2e2bcd8739ae039 = $c4225dfc37430fda$var$initOrbitDB;
 
@@ -457,6 +367,7 @@ function $6cad23d4edb5a464$export$2e2bcd8739ae039() {
             isLoggedIn = user.is_online;
         } catch (e) {
             isLoggedIn = false;
+            throw e;
         }
         if (!isLoggedIn) yield globalThis.contract.user_action({
             action: (0, $d3ed99f02d86c501$exports.UserActionType).LOGIN
@@ -943,6 +854,141 @@ function $c519e5c2d701af31$export$fc00ee57782020aa() {
 }
 
 
+var $e8d2b956588f388c$exports = {};
+
+$parcel$export($e8d2b956588f388c$exports, "default", function () { return $e8d2b956588f388c$export$2e2bcd8739ae039; }, function (v) { return $e8d2b956588f388c$export$2e2bcd8739ae039 = v; });
+
+var $e8d2b956588f388c$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
+        });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+function $e8d2b956588f388c$export$2e2bcd8739ae039() {
+    return $e8d2b956588f388c$var$__awaiter(this, void 0, void 0, function*() {
+        let hasStorage = false;
+        try {
+            hasStorage = yield globalThis.contract.get_storage();
+        } catch (e) {
+            console.log("Error starting storage:", e);
+        }
+        if (!hasStorage) return;
+        globalThis.storageContract = new (0, $dSCMW$nearapijs.Contract)(globalThis.walletConnection.account(), (yield globalThis.contract.get_storage()), {
+            // View methods are read only. They don't modify the state, but usually return some value.
+            viewMethods: [
+                "list_files",
+                "get_file"
+            ],
+            // Change methods can modify the state. But you don't receive the returned value when called.
+            changeMethods: [
+                "nft_mint"
+            ]
+        });
+    });
+}
+
+
+var $ed3b8ded4dcf360c$exports = {};
+
+$parcel$export($ed3b8ded4dcf360c$exports, "uploadFile", function () { return $ed3b8ded4dcf360c$export$a5575dbeeffdad98; }, function (v) { return $ed3b8ded4dcf360c$export$a5575dbeeffdad98 = v; });
+$parcel$export($ed3b8ded4dcf360c$exports, "openFile", function () { return $ed3b8ded4dcf360c$export$c47c8b06a9966d9f; }, function (v) { return $ed3b8ded4dcf360c$export$c47c8b06a9966d9f = v; });
+$parcel$export($ed3b8ded4dcf360c$exports, "getFileList", function () { return $ed3b8ded4dcf360c$export$23006a4c24fbadd0; }, function (v) { return $ed3b8ded4dcf360c$export$23006a4c24fbadd0 = v; });
+
+
+var $ed3b8ded4dcf360c$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
+        });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+function $ed3b8ded4dcf360c$export$a5575dbeeffdad98(file, path = "", description = "") {
+    return $ed3b8ded4dcf360c$var$__awaiter(this, void 0, void 0, function*() {
+        let filepath = path;
+        if (path === "") filepath = file.name;
+        else filepath = `${path}/${file.name}`;
+        // Upload to IPFS
+        // Put IPFS URL into NFT and mint
+        const ipfs = yield (0, $46137cfcfeb0552d$exports.default)();
+        const uploadedFile = yield ipfs.add(file);
+        const fileMetadata = {
+            title: file.name,
+            description: description,
+            media: `http://ipfs.io/ipfs/${uploadedFile.path}`,
+            media_hash: btoa(uploadedFile.path),
+            file_type: file.type,
+            issued_at: Date.now()
+        };
+        yield globalThis.storageContract.nft_mint({
+            token_id: $dSCMW$shortuuid.generate().toLowerCase(),
+            metadata: fileMetadata,
+            path: filepath,
+            receiver_id: globalThis.walletConnection.account().accountId
+        }, "300000000000000", "100000000000000000000000" // attached deposit in yoctoNEAR (optional)
+        );
+    });
+}
+function $ed3b8ded4dcf360c$export$c47c8b06a9966d9f(path) {
+    return $ed3b8ded4dcf360c$var$__awaiter(this, void 0, void 0, function*() {
+        const tokenMetaData = yield globalThis.storageContract.get_file({
+            file_path: path
+        });
+        return tokenMetaData;
+    });
+}
+function $ed3b8ded4dcf360c$export$23006a4c24fbadd0(path) {
+    return $ed3b8ded4dcf360c$var$__awaiter(this, void 0, void 0, function*() {
+        // add slash to end of path if not present
+        const folder = path.slice(-1) === "/" ? path : `${path}/`;
+        const list = yield globalThis.storageContract.list_files({
+            path: folder
+        });
+        return list;
+    });
+}
+
+
 
 var $020eab0e4dd81a46$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
@@ -982,6 +1028,7 @@ const $020eab0e4dd81a46$export$2cd8252107eb640b = (projectConfig)=>$020eab0e4dd8
         }
         yield (0, $6cad23d4edb5a464$exports.default)();
         yield (0, $c4225dfc37430fda$exports.default)();
+        yield (0, $e8d2b956588f388c$exports.default)();
     });
 const $020eab0e4dd81a46$export$334c29725a78c21d = {
     getAccountId: $268f5174a8123bd7$export$c1e0336bde96e2dc,
@@ -996,6 +1043,11 @@ const $020eab0e4dd81a46$export$6feb5ea51a7b0b47 = {
     DocStore: $c519e5c2d701af31$exports.DocStore,
     Feed: $c519e5c2d701af31$exports.Feed,
     EventLog: $c519e5c2d701af31$exports.EventLog
+};
+const $020eab0e4dd81a46$export$bf2a15d34f3c441c = {
+    uploadFile: $ed3b8ded4dcf360c$exports.uploadFile,
+    openFile: $ed3b8ded4dcf360c$exports.openFile,
+    getFileList: $ed3b8ded4dcf360c$exports.getFileList
 };
 
 

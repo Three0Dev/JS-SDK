@@ -57,6 +57,9 @@ interface ProjectConfig {
     contractName: string;
     projectId: string;
 }
+declare function uploadFile(file: File, path?: string, description?: string): Promise<void>;
+declare function openFile(path: string): Promise<any>;
+declare function getFileList(path: string): Promise<any>;
 export const init: (projectConfig: ProjectConfig) => Promise<void>;
 export const Auth: {
     getAccountId: typeof getAccountId;
@@ -71,6 +74,11 @@ export const Database: {
     DocStore: typeof DocStore;
     Feed: typeof Feed;
     EventLog: typeof EventLog;
+};
+export const Storage: {
+    uploadFile: typeof uploadFile;
+    openFile: typeof openFile;
+    getFileList: typeof getFileList;
 };
 
 //# sourceMappingURL=index.d.ts.map

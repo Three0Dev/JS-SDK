@@ -1,5 +1,4 @@
 import OrbitDB from 'orbit-db'
-import { Three0Contract } from '../../blockchain/NEAR'
 
 export const isValidDatabase = async (address: string) => {
 	if (!OrbitDB.isValidAddress(address)) {
@@ -7,9 +6,7 @@ export const isValidDatabase = async (address: string) => {
 	}
 
 	try {
-		const isProjectDatabase = await (
-			globalThis.contract as unknown as Three0Contract
-		).valid_database({
+		const isProjectDatabase = await globalThis.contract.valid_database({
 			address,
 		})
 
