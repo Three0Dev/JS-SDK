@@ -1,5 +1,10 @@
 import { utils } from 'near-api-js'
 
+export async function getMetadata() {
+	const metadata = await globalThis.tokenContract.ft_metadata()
+	return metadata
+}
+
 export async function isUserRegistered() {
 	const balance = await globalThis.tokenContract.storage_balance_of({
 		account_id: globalThis.walletConnection.getAccountId(),

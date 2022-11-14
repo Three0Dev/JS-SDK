@@ -148,7 +148,8 @@ function $bc09daf3d6fd99a8$export$2cd8252107eb640b() {
             viewMethods: [
                 "get_user",
                 "valid_database",
-                "get_storage"
+                "get_storage",
+                "get_tokenization", 
             ],
             // Change methods can modify the state. But you don't receive the returned value when called.
             changeMethods: [
@@ -466,6 +467,7 @@ function $a1479a46361190ed$export$2e2bcd8739ae039() {
             globalThis.tokenContract = new (0, $7uxh1$Contract)(globalThis.walletConnection.account(), tokenAccount, {
                 // View methods are read only. They don't modify the state, but usually return some value.
                 viewMethods: [
+                    "ft_metadata",
                     "ft_balance_of",
                     "storage_balance_of"
                 ],
@@ -1074,6 +1076,12 @@ var $850fc221bb4eb62c$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+function $850fc221bb4eb62c$export$8548546c0aa631e6() {
+    return $850fc221bb4eb62c$var$__awaiter(this, void 0, void 0, function*() {
+        const metadata = yield globalThis.tokenContract.ft_metadata();
+        return metadata;
+    });
+}
 function $850fc221bb4eb62c$export$295eb11480dc9713() {
     return $850fc221bb4eb62c$var$__awaiter(this, void 0, void 0, function*() {
         const balance = yield globalThis.tokenContract.storage_balance_of({

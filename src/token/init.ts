@@ -8,7 +8,7 @@ export default async function initToken() {
 			tokenAccount,
 			{
 				// View methods are read only. They don't modify the state, but usually return some value.
-				viewMethods: ['ft_balance_of', 'storage_balance_of'],
+				viewMethods: ['ft_metadata', 'ft_balance_of', 'storage_balance_of'],
 				// Change methods can modify the state. But you don't receive the returned value when called.
 				changeMethods: ['storage_deposit', 'ft_transfer'],
 			}
