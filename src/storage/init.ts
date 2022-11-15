@@ -14,6 +14,6 @@ export default async function initStorage() {
 			}
 		)
 	} catch (e) {
-		console.log('Error starting storage:', e)
+		// console.log('Error starting storage:', e)
 	}
 }

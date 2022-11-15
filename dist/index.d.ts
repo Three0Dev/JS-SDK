@@ -57,7 +57,7 @@ declare function openFile(path: string): Promise<any>;
 declare function getFileList(path: string): Promise<any>;
 declare function isUserRegistered(): Promise<boolean>;
 declare function registerUser(): Promise<void>;
-declare function getBalance(): Promise<any>;
+declare function getBalance(): Promise<number>;
 declare function transferTokens(receiver: string, amount: number): Promise<void>;
 interface ProjectConfig {
     chainType: string;

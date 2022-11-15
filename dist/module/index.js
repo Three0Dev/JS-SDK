@@ -423,7 +423,7 @@ function $30fd9ccd8434e85f$export$2e2bcd8739ae039() {
                 ]
             });
         } catch (e) {
-            console.log("Error starting storage:", e);
+        // console.log('Error starting storage:', e)
         }
     });
 }
@@ -474,7 +474,8 @@ function $a1479a46361190ed$export$2e2bcd8739ae039() {
                 // Change methods can modify the state. But you don't receive the returned value when called.
                 changeMethods: [
                     "storage_deposit",
-                    "ft_transfer"
+                    "ft_transfer",
+                    "ft_mint"
                 ]
             });
         } catch (e) {
@@ -1102,9 +1103,10 @@ function $850fc221bb4eb62c$export$16015adca85344a() {
 }
 function $850fc221bb4eb62c$export$df96cd8d56be0ab1() {
     return $850fc221bb4eb62c$var$__awaiter(this, void 0, void 0, function*() {
-        const balance = yield globalThis.tokenContract.ft_balance_of({
+        const { decimals: decimals  } = yield $850fc221bb4eb62c$export$8548546c0aa631e6();
+        const balance = (yield globalThis.tokenContract.ft_balance_of({
             account_id: globalThis.walletConnection.getAccountId()
-        });
+        })) / Math.pow(10, decimals);
         return balance;
     });
 }
@@ -1116,6 +1118,13 @@ function $850fc221bb4eb62c$export$9e27f52bc305dd99(receiver, amount) {
                 amount: `${amount}`
             },
             amount: "1"
+        });
+    });
+}
+function $850fc221bb4eb62c$export$174447ba4073ebd9(amount) {
+    return $850fc221bb4eb62c$var$__awaiter(this, void 0, void 0, function*() {
+        yield globalThis.tokenContract.ft_mint({
+            amount: `${amount / Math.pow(10, (yield $850fc221bb4eb62c$export$8548546c0aa631e6()).exchange_rate)}`
         });
     });
 }
