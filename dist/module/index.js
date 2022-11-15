@@ -107,7 +107,7 @@ function $bc09daf3d6fd99a8$export$31eac9c8bd069ff7() {
             return {
                 networkId: "local",
                 nodeUrl: "http://localhost:3030",
-                keyPath: `${"/Users/uneeb"}/.near/validator_key.json`,
+                keyPath: `${"/Users/sreegrandhe"}/.near/validator_key.json`,
                 walletUrl: "http://localhost:4000/wallet",
                 contractName: CONTRACT_NAME
             };
@@ -411,7 +411,8 @@ function $30fd9ccd8434e85f$export$2e2bcd8739ae039() {
     return $30fd9ccd8434e85f$var$__awaiter(this, void 0, void 0, function*() {
         try {
             const storageAccount = yield globalThis.contract.get_storage();
-            globalThis.storageContract = new (0, $7uxh1$Contract)(globalThis.walletConnection.account(), storageAccount, {
+            if (!storageAccount) return;
+            globalThis.storageContract = new (0, $7uxh1$Contract)(globalThis.walletConnection.account(), (yield globalThis.contract.get_storage()), {
                 // View methods are read only. They don't modify the state, but usually return some value.
                 viewMethods: [
                     "list_files",
@@ -423,7 +424,7 @@ function $30fd9ccd8434e85f$export$2e2bcd8739ae039() {
                 ]
             });
         } catch (e) {
-        // console.log('Error starting storage:', e)
+        // TODO
         }
     });
 }
