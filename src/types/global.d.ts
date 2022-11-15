@@ -3,7 +3,7 @@
 import { WalletConnection } from 'near-api-js'
 import OrbitDB from 'orbit-db'
 import { ProjectConfig } from './config'
-import { Three0Contract } from '../blockchain/NEAR'
+import { Three0Contract, StorageContract } from '../blockchain/NEAR'
 
 // TODO: Account for Contract Object
 declare global {
@@ -12,7 +12,8 @@ declare global {
 	var walletConnection: WalletConnection
 	var accountId: string
 	var contract: any
-	var storageContract: StorageContract
+	var storageContract: any
+	var tokenContract: any
 }
 
 export {}

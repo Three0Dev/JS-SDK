@@ -1,4 +1,4 @@
-import {connect as $7uxh1$connect, keyStores as $7uxh1$keyStores, WalletConnection as $7uxh1$WalletConnection, Contract as $7uxh1$Contract} from "near-api-js";
+import {connect as $7uxh1$connect, keyStores as $7uxh1$keyStores, WalletConnection as $7uxh1$WalletConnection, Contract as $7uxh1$Contract, utils as $7uxh1$utils} from "near-api-js";
 import $7uxh1$orbitdb from "orbit-db";
 import {create as $7uxh1$create} from "ipfs-core";
 import {v4 as $7uxh1$v4} from "uuid";
@@ -13,6 +13,7 @@ $parcel$export($5b16728422d4a076$exports, "init", function () { return $5b167284
 $parcel$export($5b16728422d4a076$exports, "Auth", function () { return $5b16728422d4a076$export$334c29725a78c21d; }, function (v) { return $5b16728422d4a076$export$334c29725a78c21d = v; });
 $parcel$export($5b16728422d4a076$exports, "Database", function () { return $5b16728422d4a076$export$6feb5ea51a7b0b47; }, function (v) { return $5b16728422d4a076$export$6feb5ea51a7b0b47 = v; });
 $parcel$export($5b16728422d4a076$exports, "Storage", function () { return $5b16728422d4a076$export$bf2a15d34f3c441c; }, function (v) { return $5b16728422d4a076$export$bf2a15d34f3c441c = v; });
+$parcel$export($5b16728422d4a076$exports, "Token", function () { return $5b16728422d4a076$export$50792b0e93539fde; }, function (v) { return $5b16728422d4a076$export$50792b0e93539fde = v; });
 var $bc09daf3d6fd99a8$exports = {};
 
 $parcel$export($bc09daf3d6fd99a8$exports, "UserActionType", function () { return $bc09daf3d6fd99a8$export$4d85d82e4ea34f7c; }, function (v) { return $bc09daf3d6fd99a8$export$4d85d82e4ea34f7c = v; });
@@ -106,7 +107,7 @@ function $bc09daf3d6fd99a8$export$31eac9c8bd069ff7() {
             return {
                 networkId: "local",
                 nodeUrl: "http://localhost:3030",
-                keyPath: `${"/Users/sreegrandhe"}/.near/validator_key.json`,
+                keyPath: `${"/Users/uneeb"}/.near/validator_key.json`,
                 walletUrl: "http://localhost:4000/wallet",
                 contractName: CONTRACT_NAME
             };
@@ -147,7 +148,8 @@ function $bc09daf3d6fd99a8$export$2cd8252107eb640b() {
             viewMethods: [
                 "get_user",
                 "valid_database",
-                "get_storage"
+                "get_storage",
+                "get_tokenization", 
             ],
             // Change methods can modify the state. But you don't receive the returned value when called.
             changeMethods: [
@@ -158,6 +160,65 @@ function $bc09daf3d6fd99a8$export$2cd8252107eb640b() {
 }
 
 
+
+
+var $129e7bb7b84cbd88$exports = {};
+
+$parcel$export($129e7bb7b84cbd88$exports, "default", function () { return $129e7bb7b84cbd88$export$2e2bcd8739ae039; }, function (v) { return $129e7bb7b84cbd88$export$2e2bcd8739ae039 = v; });
+
+function $701110f03c3de876$export$256a5a3564694cfc() {
+    return globalThis.walletConnection.isSignedIn();
+}
+function $701110f03c3de876$export$c1e0336bde96e2dc() {
+    return globalThis.walletConnection.getAccountId();
+}
+
+
+var $129e7bb7b84cbd88$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
+        });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+function $129e7bb7b84cbd88$export$2e2bcd8739ae039() {
+    return $129e7bb7b84cbd88$var$__awaiter(this, void 0, void 0, function*() {
+        if (!(0, $701110f03c3de876$export$256a5a3564694cfc)()) return;
+        let isLoggedIn = true;
+        try {
+            const user = yield globalThis.contract.get_user({
+                account_id: (0, $701110f03c3de876$export$c1e0336bde96e2dc)()
+            });
+            isLoggedIn = user.is_online;
+        } catch (e) {
+            isLoggedIn = false;
+            throw e;
+        }
+        if (!isLoggedIn) yield globalThis.contract.user_action({
+            action: (0, $bc09daf3d6fd99a8$exports.UserActionType).LOGIN
+        });
+    });
+}
 
 
 var $31f2ee8310cb2ee4$exports = {};
@@ -270,13 +331,6 @@ function $29671cfde807e590$export$596d806903d1f59e(successUrl, failureUrl) {
 }
 
 
-function $701110f03c3de876$export$256a5a3564694cfc() {
-    return globalThis.walletConnection.isSignedIn();
-}
-function $701110f03c3de876$export$c1e0336bde96e2dc() {
-    return globalThis.walletConnection.getAccountId();
-}
-
 
 
 
@@ -322,12 +376,11 @@ const $31f2ee8310cb2ee4$var$initOrbitDB = ()=>$31f2ee8310cb2ee4$var$__awaiter(vo
 var $31f2ee8310cb2ee4$export$2e2bcd8739ae039 = $31f2ee8310cb2ee4$var$initOrbitDB;
 
 
-var $129e7bb7b84cbd88$exports = {};
+var $30fd9ccd8434e85f$exports = {};
 
-$parcel$export($129e7bb7b84cbd88$exports, "default", function () { return $129e7bb7b84cbd88$export$2e2bcd8739ae039; }, function (v) { return $129e7bb7b84cbd88$export$2e2bcd8739ae039 = v; });
+$parcel$export($30fd9ccd8434e85f$exports, "default", function () { return $30fd9ccd8434e85f$export$2e2bcd8739ae039; }, function (v) { return $30fd9ccd8434e85f$export$2e2bcd8739ae039 = v; });
 
-
-var $129e7bb7b84cbd88$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $30fd9ccd8434e85f$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -354,22 +407,80 @@ var $129e7bb7b84cbd88$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-function $129e7bb7b84cbd88$export$2e2bcd8739ae039() {
-    return $129e7bb7b84cbd88$var$__awaiter(this, void 0, void 0, function*() {
-        if (!(0, $701110f03c3de876$export$256a5a3564694cfc)()) return;
-        let isLoggedIn = true;
+function $30fd9ccd8434e85f$export$2e2bcd8739ae039() {
+    return $30fd9ccd8434e85f$var$__awaiter(this, void 0, void 0, function*() {
         try {
-            const user = yield globalThis.contract.get_user({
-                account_id: (0, $701110f03c3de876$export$c1e0336bde96e2dc)()
+            const storageAccount = yield globalThis.contract.get_storage();
+            globalThis.storageContract = new (0, $7uxh1$Contract)(globalThis.walletConnection.account(), storageAccount, {
+                // View methods are read only. They don't modify the state, but usually return some value.
+                viewMethods: [
+                    "list_files",
+                    "get_file"
+                ],
+                // Change methods can modify the state. But you don't receive the returned value when called.
+                changeMethods: [
+                    "nft_mint"
+                ]
             });
-            isLoggedIn = user.is_online;
         } catch (e) {
-            isLoggedIn = false;
-            throw e;
+        // console.log('Error starting storage:', e)
         }
-        if (!isLoggedIn) yield globalThis.contract.user_action({
-            action: (0, $bc09daf3d6fd99a8$exports.UserActionType).LOGIN
+    });
+}
+
+
+var $a1479a46361190ed$exports = {};
+
+$parcel$export($a1479a46361190ed$exports, "default", function () { return $a1479a46361190ed$export$2e2bcd8739ae039; }, function (v) { return $a1479a46361190ed$export$2e2bcd8739ae039 = v; });
+
+var $a1479a46361190ed$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
         });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+function $a1479a46361190ed$export$2e2bcd8739ae039() {
+    return $a1479a46361190ed$var$__awaiter(this, void 0, void 0, function*() {
+        try {
+            const tokenAccount = yield globalThis.contract.get_tokenization();
+            globalThis.tokenContract = new (0, $7uxh1$Contract)(globalThis.walletConnection.account(), tokenAccount, {
+                // View methods are read only. They don't modify the state, but usually return some value.
+                viewMethods: [
+                    "ft_metadata",
+                    "ft_balance_of",
+                    "storage_balance_of"
+                ],
+                // Change methods can modify the state. But you don't receive the returned value when called.
+                changeMethods: [
+                    "storage_deposit",
+                    "ft_transfer",
+                    "ft_mint"
+                ]
+            });
+        } catch (e) {
+            console.log("Error starting tokens:", e);
+        }
     });
 }
 
@@ -852,61 +963,6 @@ function $654c4db4d93f05ad$export$fc00ee57782020aa() {
 }
 
 
-var $30fd9ccd8434e85f$exports = {};
-
-$parcel$export($30fd9ccd8434e85f$exports, "default", function () { return $30fd9ccd8434e85f$export$2e2bcd8739ae039; }, function (v) { return $30fd9ccd8434e85f$export$2e2bcd8739ae039 = v; });
-
-var $30fd9ccd8434e85f$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
-    function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve) {
-            resolve(value);
-        });
-    }
-    return new (P || (P = Promise))(function(resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-function $30fd9ccd8434e85f$export$2e2bcd8739ae039() {
-    return $30fd9ccd8434e85f$var$__awaiter(this, void 0, void 0, function*() {
-        let hasStorage = false;
-        try {
-            hasStorage = yield globalThis.contract.get_storage();
-        } catch (e) {
-            console.log("Error starting storage:", e);
-        }
-        if (!hasStorage) return;
-        globalThis.storageContract = new (0, $7uxh1$Contract)(globalThis.walletConnection.account(), (yield globalThis.contract.get_storage()), {
-            // View methods are read only. They don't modify the state, but usually return some value.
-            viewMethods: [
-                "list_files",
-                "get_file"
-            ],
-            // Change methods can modify the state. But you don't receive the returned value when called.
-            changeMethods: [
-                "nft_mint"
-            ]
-        });
-    });
-}
-
-
 var $c1ec8daeb266bd8b$exports = {};
 
 $parcel$export($c1ec8daeb266bd8b$exports, "uploadFile", function () { return $c1ec8daeb266bd8b$export$a5575dbeeffdad98; }, function (v) { return $c1ec8daeb266bd8b$export$a5575dbeeffdad98 = v; });
@@ -987,6 +1043,93 @@ function $c1ec8daeb266bd8b$export$23006a4c24fbadd0(path) {
 }
 
 
+var $850fc221bb4eb62c$exports = {};
+
+$parcel$export($850fc221bb4eb62c$exports, "isUserRegistered", function () { return $850fc221bb4eb62c$export$295eb11480dc9713; }, function (v) { return $850fc221bb4eb62c$export$295eb11480dc9713 = v; });
+$parcel$export($850fc221bb4eb62c$exports, "registerUser", function () { return $850fc221bb4eb62c$export$16015adca85344a; }, function (v) { return $850fc221bb4eb62c$export$16015adca85344a = v; });
+$parcel$export($850fc221bb4eb62c$exports, "getBalance", function () { return $850fc221bb4eb62c$export$df96cd8d56be0ab1; }, function (v) { return $850fc221bb4eb62c$export$df96cd8d56be0ab1 = v; });
+$parcel$export($850fc221bb4eb62c$exports, "transferTokens", function () { return $850fc221bb4eb62c$export$9e27f52bc305dd99; }, function (v) { return $850fc221bb4eb62c$export$9e27f52bc305dd99 = v; });
+
+var $850fc221bb4eb62c$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
+        });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+function $850fc221bb4eb62c$export$8548546c0aa631e6() {
+    return $850fc221bb4eb62c$var$__awaiter(this, void 0, void 0, function*() {
+        const metadata = yield globalThis.tokenContract.ft_metadata();
+        return metadata;
+    });
+}
+function $850fc221bb4eb62c$export$295eb11480dc9713() {
+    return $850fc221bb4eb62c$var$__awaiter(this, void 0, void 0, function*() {
+        const balance = yield globalThis.tokenContract.storage_balance_of({
+            account_id: globalThis.walletConnection.getAccountId()
+        });
+        return balance > 0.00125;
+    });
+}
+function $850fc221bb4eb62c$export$16015adca85344a() {
+    return $850fc221bb4eb62c$var$__awaiter(this, void 0, void 0, function*() {
+        yield globalThis.tokenContract.storage_deposit({
+            args: {
+                account_id: globalThis.walletConnection.getAccountId()
+            },
+            amount: (0, $7uxh1$utils).format.parseNearAmount("0.00125")
+        });
+    });
+}
+function $850fc221bb4eb62c$export$df96cd8d56be0ab1() {
+    return $850fc221bb4eb62c$var$__awaiter(this, void 0, void 0, function*() {
+        const { decimals: decimals  } = yield $850fc221bb4eb62c$export$8548546c0aa631e6();
+        const balance = (yield globalThis.tokenContract.ft_balance_of({
+            account_id: globalThis.walletConnection.getAccountId()
+        })) / Math.pow(10, decimals);
+        return balance;
+    });
+}
+function $850fc221bb4eb62c$export$9e27f52bc305dd99(receiver, amount) {
+    return $850fc221bb4eb62c$var$__awaiter(this, void 0, void 0, function*() {
+        yield globalThis.tokenContract.ft_transfer({
+            args: {
+                receiver_id: receiver,
+                amount: `${amount}`
+            },
+            amount: "1"
+        });
+    });
+}
+function $850fc221bb4eb62c$export$174447ba4073ebd9(amount) {
+    return $850fc221bb4eb62c$var$__awaiter(this, void 0, void 0, function*() {
+        yield globalThis.tokenContract.ft_mint({
+            amount: `${amount / Math.pow(10, (yield $850fc221bb4eb62c$export$8548546c0aa631e6()).exchange_rate)}`
+        });
+    });
+}
+
+
 
 var $5b16728422d4a076$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
@@ -1027,6 +1170,7 @@ const $5b16728422d4a076$export$2cd8252107eb640b = (projectConfig)=>$5b16728422d4
         yield (0, $129e7bb7b84cbd88$exports.default)();
         yield (0, $31f2ee8310cb2ee4$exports.default)();
         yield (0, $30fd9ccd8434e85f$exports.default)();
+        yield (0, $a1479a46361190ed$exports.default)();
     });
 const $5b16728422d4a076$export$334c29725a78c21d = {
     getAccountId: $701110f03c3de876$export$c1e0336bde96e2dc,
@@ -1047,7 +1191,13 @@ const $5b16728422d4a076$export$bf2a15d34f3c441c = {
     openFile: $c1ec8daeb266bd8b$exports.openFile,
     getFileList: $c1ec8daeb266bd8b$exports.getFileList
 };
+const $5b16728422d4a076$export$50792b0e93539fde = {
+    isUserRegistered: $850fc221bb4eb62c$exports.isUserRegistered,
+    registerUser: $850fc221bb4eb62c$exports.registerUser,
+    getBalance: $850fc221bb4eb62c$exports.getBalance,
+    transferTokens: $850fc221bb4eb62c$exports.transferTokens
+};
 
 
-export {$5b16728422d4a076$export$2cd8252107eb640b as init, $5b16728422d4a076$export$334c29725a78c21d as Auth, $5b16728422d4a076$export$6feb5ea51a7b0b47 as Database, $5b16728422d4a076$export$bf2a15d34f3c441c as Storage, $5b16728422d4a076$exports as default};
+export {$5b16728422d4a076$export$2cd8252107eb640b as init, $5b16728422d4a076$export$334c29725a78c21d as Auth, $5b16728422d4a076$export$6feb5ea51a7b0b47 as Database, $5b16728422d4a076$export$bf2a15d34f3c441c as Storage, $5b16728422d4a076$export$50792b0e93539fde as Token, $5b16728422d4a076$exports as default};
 //# sourceMappingURL=index.js.map

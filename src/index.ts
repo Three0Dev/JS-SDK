@@ -1,6 +1,8 @@
 import { NEAR } from './blockchain'
-import initOrbitDB from './database/Init'
 import initAuth from './auth/Init'
+import initOrbitDB from './database/Init'
+import initStorage from './storage/init'
+import initToken from './token/init'
 import { getAccountId, login, logout, isLoggedIn } from './auth'
 import {
 	timestamp,
@@ -10,9 +12,14 @@ import {
 	Feed,
 	EventLog,
 } from './database'
-import { ProjectConfig } from './types/config'
-import initStorage from './storage/init'
 import { uploadFile, openFile, getFileList } from './storage'
+import {
+	isUserRegistered,
+	registerUser,
+	getBalance,
+	transferTokens,
+} from './token'
+import { ProjectConfig } from './types/config'
 import { BlockchainNetwork } from './utils'
 
 const init = async (projectConfig: ProjectConfig) => {
@@ -29,6 +36,7 @@ const init = async (projectConfig: ProjectConfig) => {
 	await initAuth()
 	await initOrbitDB()
 	await initStorage()
+	await initToken()
 }
 
 const Auth = {
@@ -53,4 +61,11 @@ const Storage = {
 	getFileList,
 }
 
-export { init, Auth, Database, Storage }
+const Token = {
+	isUserRegistered,
+	registerUser,
+	getBalance,
+	transferTokens,
+}
+
+export { init, Auth, Database, Storage, Token }
