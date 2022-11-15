@@ -1,6 +1,7 @@
 import {connect as $7uxh1$connect, keyStores as $7uxh1$keyStores, WalletConnection as $7uxh1$WalletConnection, Contract as $7uxh1$Contract, utils as $7uxh1$utils} from "near-api-js";
 import $7uxh1$orbitdb from "orbit-db";
 import {create as $7uxh1$create} from "ipfs-core";
+import {Web3Storage as $7uxh1$Web3Storage} from "web3.storage/dist/bundle.esm.min.js";
 import {v4 as $7uxh1$v4} from "uuid";
 import {generate as $7uxh1$generate} from "short-uuid";
 
@@ -380,6 +381,7 @@ var $30fd9ccd8434e85f$exports = {};
 
 $parcel$export($30fd9ccd8434e85f$exports, "default", function () { return $30fd9ccd8434e85f$export$2e2bcd8739ae039; }, function (v) { return $30fd9ccd8434e85f$export$2e2bcd8739ae039 = v; });
 
+
 var $30fd9ccd8434e85f$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
@@ -421,6 +423,10 @@ function $30fd9ccd8434e85f$export$2e2bcd8739ae039() {
                 changeMethods: [
                     "nft_mint"
                 ]
+            });
+            const token = prompt("Enter a Web3Storage API Key");
+            globalThis.web3StorageClient = new (0, $7uxh1$Web3Storage)({
+                token: token
             });
         } catch (e) {
         // console.log('Error starting storage:', e)
@@ -969,7 +975,6 @@ $parcel$export($c1ec8daeb266bd8b$exports, "uploadFile", function () { return $c1
 $parcel$export($c1ec8daeb266bd8b$exports, "openFile", function () { return $c1ec8daeb266bd8b$export$c47c8b06a9966d9f; }, function (v) { return $c1ec8daeb266bd8b$export$c47c8b06a9966d9f = v; });
 $parcel$export($c1ec8daeb266bd8b$exports, "getFileList", function () { return $c1ec8daeb266bd8b$export$23006a4c24fbadd0; }, function (v) { return $c1ec8daeb266bd8b$export$23006a4c24fbadd0 = v; });
 
-
 var $c1ec8daeb266bd8b$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
@@ -997,20 +1002,21 @@ var $c1ec8daeb266bd8b$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+const $c1ec8daeb266bd8b$export$24565abfaaf66531 = "https://w3s.link/ipfs";
 function $c1ec8daeb266bd8b$export$a5575dbeeffdad98(file, path = "", description = "") {
     return $c1ec8daeb266bd8b$var$__awaiter(this, void 0, void 0, function*() {
         let filepath = path;
         if (path === "") filepath = file.name;
         else filepath = `${path}/${file.name}`;
         // Upload to IPFS
-        // Put IPFS URL into NFT and mint
-        const ipfs = yield (0, $f1f4ca456620baa2$exports.default)();
-        const uploadedFile = yield ipfs.add(file);
+        const cid = yield web3StorageClient.put([
+            file
+        ]);
         const fileMetadata = {
             title: file.name,
             description: description,
-            media: `http://ipfs.io/ipfs/${uploadedFile.path}`,
-            media_hash: btoa(uploadedFile.path),
+            media: `${$c1ec8daeb266bd8b$export$24565abfaaf66531}/${cid}/${file.name}`,
+            media_hash: btoa(cid),
             file_type: file.type,
             issued_at: Date.now()
         };

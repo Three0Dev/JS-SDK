@@ -1,4 +1,5 @@
 import { Contract } from 'near-api-js'
+import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
 
 export default async function initStorage() {
 	try {
@@ -13,6 +14,8 @@ export default async function initStorage() {
 				changeMethods: ['nft_mint'],
 			}
 		)
+		const token = prompt('Enter a Web3Storage API Key')
+		globalThis.web3StorageClient = new Web3Storage({ token })
 	} catch (e) {
 		// console.log('Error starting storage:', e)
 	}

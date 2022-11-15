@@ -1,5 +1,6 @@
 import * as short from 'short-uuid'
-import initIPFS from '../database/ipfs'
+
+export const gateway = 'https://w3s.link/ipfs'
 
 export async function uploadFile(
 	file: File,
@@ -14,16 +15,13 @@ export async function uploadFile(
 	}
 
 	// Upload to IPFS
-
-	// Put IPFS URL into NFT and mint
-	const ipfs = await initIPFS()
-	const uploadedFile = await ipfs.add(file)
+	const cid = await web3StorageClient.put([file])
 
 	const fileMetadata = {
 		title: file.name,
 		description,
-		media: `http://ipfs.io/ipfs/${uploadedFile.path}`,
-		media_hash: btoa(uploadedFile.path),
+		media: `${gateway}/${cid}/${file.name}`,
+		media_hash: btoa(cid),
 		file_type: file.type,
 		issued_at: Date.now(),
 	}

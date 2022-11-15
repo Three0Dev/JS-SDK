@@ -1,6 +1,7 @@
 var $dSCMW$nearapijs = require("near-api-js");
 var $dSCMW$orbitdb = require("orbit-db");
 var $dSCMW$ipfscore = require("ipfs-core");
+var $dSCMW$web3storagedistbundleesmminjs = require("web3.storage/dist/bundle.esm.min.js");
 var $dSCMW$uuid = require("uuid");
 var $dSCMW$shortuuid = require("short-uuid");
 
@@ -382,6 +383,7 @@ var $e8d2b956588f388c$exports = {};
 
 $parcel$export($e8d2b956588f388c$exports, "default", function () { return $e8d2b956588f388c$export$2e2bcd8739ae039; }, function (v) { return $e8d2b956588f388c$export$2e2bcd8739ae039 = v; });
 
+
 var $e8d2b956588f388c$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
@@ -423,6 +425,10 @@ function $e8d2b956588f388c$export$2e2bcd8739ae039() {
                 changeMethods: [
                     "nft_mint"
                 ]
+            });
+            const token = prompt("Enter a Web3Storage API Key");
+            globalThis.web3StorageClient = new (0, $dSCMW$web3storagedistbundleesmminjs.Web3Storage)({
+                token: token
             });
         } catch (e) {
         // console.log('Error starting storage:', e)
@@ -971,7 +977,6 @@ $parcel$export($ed3b8ded4dcf360c$exports, "uploadFile", function () { return $ed
 $parcel$export($ed3b8ded4dcf360c$exports, "openFile", function () { return $ed3b8ded4dcf360c$export$c47c8b06a9966d9f; }, function (v) { return $ed3b8ded4dcf360c$export$c47c8b06a9966d9f = v; });
 $parcel$export($ed3b8ded4dcf360c$exports, "getFileList", function () { return $ed3b8ded4dcf360c$export$23006a4c24fbadd0; }, function (v) { return $ed3b8ded4dcf360c$export$23006a4c24fbadd0 = v; });
 
-
 var $ed3b8ded4dcf360c$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
@@ -999,20 +1004,21 @@ var $ed3b8ded4dcf360c$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+const $ed3b8ded4dcf360c$export$24565abfaaf66531 = "https://w3s.link/ipfs";
 function $ed3b8ded4dcf360c$export$a5575dbeeffdad98(file, path = "", description = "") {
     return $ed3b8ded4dcf360c$var$__awaiter(this, void 0, void 0, function*() {
         let filepath = path;
         if (path === "") filepath = file.name;
         else filepath = `${path}/${file.name}`;
         // Upload to IPFS
-        // Put IPFS URL into NFT and mint
-        const ipfs = yield (0, $46137cfcfeb0552d$exports.default)();
-        const uploadedFile = yield ipfs.add(file);
+        const cid = yield web3StorageClient.put([
+            file
+        ]);
         const fileMetadata = {
             title: file.name,
             description: description,
-            media: `http://ipfs.io/ipfs/${uploadedFile.path}`,
-            media_hash: btoa(uploadedFile.path),
+            media: `${$ed3b8ded4dcf360c$export$24565abfaaf66531}/${cid}/${file.name}`,
+            media_hash: btoa(cid),
             file_type: file.type,
             issued_at: Date.now()
         };
