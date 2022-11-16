@@ -1,39 +1,31 @@
 import * as short from 'short-uuid'
-import initIPFS from '../database/ipfs'
+import uploadWeb3Files, { web3StorageGateway } from './Web3Storage'
 
 export async function uploadFile(
 	file: File,
 	path: string = '',
 	description: string = ''
 ) {
-	let filepath = path
-	if (path === '') {
-		filepath = file.name
-	} else {
-		filepath = `${path}/${file.name}`
-	}
+	const filepath = path === '' ? file.name : `${path.slice(1)}/${file.name}`
 
-	// Upload to IPFS
-
-	// Put IPFS URL into NFT and mint
-	const ipfs = await initIPFS()
-	const uploadedFile = await ipfs.add(file)
+	const cid = await uploadWeb3Files([file])
 
 	const fileMetadata = {
 		title: file.name,
 		description,
-		media: `http://ipfs.io/ipfs/${uploadedFile.path}`,
-		media_hash: btoa(uploadedFile.path),
+		media: `${web3StorageGateway}/${cid}/${file.name}`,
+		media_hash: btoa(cid),
 		file_type: file.type,
 		issued_at: Date.now(),
 	}
 
-	await globalThis.storageContract.nft_mint(
+	return globalThis.storageContract.nft_mint(
 		{
 			token_id: short.generate().toLowerCase(),
 			metadata: fileMetadata,
 			path: filepath,
-			receiver_id: globalThis.walletConnection.account().accountId,
+			receiver_id: window.walletConnection.account().accountId,
+			//   perpetual_royalties: royalties
 		},
 		'300000000000000', // attached GAS (optional)
 		'100000000000000000000000' // attached deposit in yoctoNEAR (optional)

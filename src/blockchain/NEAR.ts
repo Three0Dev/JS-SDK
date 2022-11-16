@@ -6,6 +6,7 @@ export interface Three0Contract extends Contract {
 	get_user: GetUserFunction
 	user_action: UserActionFunction
 	get_storage: GetStorageFunction
+	set_nonce: SetNonceFunction
 }
 
 type ValidDatabaseFunction = (
@@ -14,6 +15,7 @@ type ValidDatabaseFunction = (
 type GetUserFunction = (user_id: GetUserParams) => Promise<User>
 type UserActionFunction = (action: UserActionParams) => Promise<void>
 type GetStorageFunction = () => Promise<string>
+type SetNonceFunction = () => Promise<number>
 
 interface User {
 	account_id: string
@@ -147,7 +149,6 @@ export async function init() {
 	const near = await connect({
 		keyStore: new keyStores.BrowserLocalStorageKeyStore(),
 		...nearConfig,
-		headers: {},
 	})
 
 	// Initializing Wallet based Account. It can work with NEAR testnet wallet that
