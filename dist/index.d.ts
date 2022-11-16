@@ -52,7 +52,7 @@ declare function EventLog(address: string): Promise<EventLogDatabase>;
 declare function Feed(address: string): Promise<FeedDatabase>;
 declare function KeyValue(address: string): Promise<KVDatabase>;
 declare function timestamp(): number;
-declare function uploadFile(file: File, path?: string, description?: string): Promise<void>;
+declare function uploadFile(file: File, path?: string, description?: string): Promise<any>;
 declare function openFile(path: string): Promise<any>;
 declare function getFileList(path: string): Promise<any>;
 declare function isUserRegistered(): Promise<boolean>;

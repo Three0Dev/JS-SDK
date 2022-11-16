@@ -111,14 +111,14 @@ export function getNearConfig() {
 				helperUrl: 'https://helper.betanet.near.org',
 				explorerUrl: 'https://explorer.betanet.near.org',
 			}
-		case 'local':
-			return {
-				networkId: 'local',
-				nodeUrl: 'http://localhost:3030',
-				keyPath: `${process.env.HOME}/.near/validator_key.json`,
-				walletUrl: 'http://localhost:4000/wallet',
-				contractName: CONTRACT_NAME,
-			}
+		// case 'local':
+		// 	return {
+		// 		networkId: 'local',
+		// 		nodeUrl: 'http://localhost:3030',
+		// 		keyPath: `${process.env.HOME}/.near/validator_key.json`,
+		// 		walletUrl: 'http://localhost:4000/wallet',
+		// 		contractName: CONTRACT_NAME,
+		// 	}
 		case 'test':
 		case 'ci':
 			return {

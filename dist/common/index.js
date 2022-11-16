@@ -105,14 +105,14 @@ function $d3ed99f02d86c501$export$31eac9c8bd069ff7() {
                 helperUrl: "https://helper.betanet.near.org",
                 explorerUrl: "https://explorer.betanet.near.org"
             };
-        case "local":
-            return {
-                networkId: "local",
-                nodeUrl: "http://localhost:3030",
-                keyPath: `${"/Users/sai.rawulwar"}/.near/validator_key.json`,
-                walletUrl: "http://localhost:4000/wallet",
-                contractName: CONTRACT_NAME
-            };
+        // case 'local':
+        // 	return {
+        // 		networkId: 'local',
+        // 		nodeUrl: 'http://localhost:3030',
+        // 		keyPath: `${process.env.HOME}/.near/validator_key.json`,
+        // 		walletUrl: 'http://localhost:4000/wallet',
+        // 		contractName: CONTRACT_NAME,
+        // 	}
         case "test":
         case "ci":
             return {
@@ -166,10 +166,10 @@ var $6cad23d4edb5a464$exports = {};
 
 $parcel$export($6cad23d4edb5a464$exports, "default", function () { return $6cad23d4edb5a464$export$2e2bcd8739ae039; }, function (v) { return $6cad23d4edb5a464$export$2e2bcd8739ae039 = v; });
 
-function $eec81c2cfd9b1b42$export$256a5a3564694cfc() {
+function $268f5174a8123bd7$export$256a5a3564694cfc() {
     return globalThis.walletConnection.isSignedIn();
 }
-function $eec81c2cfd9b1b42$export$c1e0336bde96e2dc() {
+function $268f5174a8123bd7$export$c1e0336bde96e2dc() {
     return globalThis.walletConnection.getAccountId();
 }
 
@@ -203,11 +203,11 @@ var $6cad23d4edb5a464$var$__awaiter = undefined && undefined.__awaiter || functi
 };
 function $6cad23d4edb5a464$export$2e2bcd8739ae039() {
     return $6cad23d4edb5a464$var$__awaiter(this, void 0, void 0, function*() {
-        if (!(0, $eec81c2cfd9b1b42$export$256a5a3564694cfc)()) return;
+        if (!(0, $268f5174a8123bd7$export$256a5a3564694cfc)()) return;
         let isLoggedIn = true;
         try {
             const user = yield globalThis.contract.get_user({
-                account_id: (0, $eec81c2cfd9b1b42$export$c1e0336bde96e2dc)()
+                account_id: (0, $268f5174a8123bd7$export$c1e0336bde96e2dc)()
             });
             isLoggedIn = user.is_online;
         } catch (e) {
@@ -220,9 +220,9 @@ function $6cad23d4edb5a464$export$2e2bcd8739ae039() {
 }
 
 
-var $065c946acbad5f50$exports = {};
+var $c4225dfc37430fda$exports = {};
 
-$parcel$export($065c946acbad5f50$exports, "default", function () { return $065c946acbad5f50$export$2e2bcd8739ae039; }, function (v) { return $065c946acbad5f50$export$2e2bcd8739ae039 = v; });
+$parcel$export($c4225dfc37430fda$exports, "default", function () { return $c4225dfc37430fda$export$2e2bcd8739ae039; }, function (v) { return $c4225dfc37430fda$export$2e2bcd8739ae039 = v; });
 
 var $46137cfcfeb0552d$exports = {};
 
@@ -333,7 +333,7 @@ function $36a1a38c5f443c85$export$596d806903d1f59e(successUrl, failureUrl) {
 
 
 
-var $065c946acbad5f50$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $c4225dfc37430fda$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -361,10 +361,10 @@ var $065c946acbad5f50$var$__awaiter = undefined && undefined.__awaiter || functi
     });
 };
 // Start OrbitDB
-const $065c946acbad5f50$var$initOrbitDB = ()=>$065c946acbad5f50$var$__awaiter(void 0, void 0, void 0, function*() {
+const $c4225dfc37430fda$var$initOrbitDB = ()=>$c4225dfc37430fda$var$__awaiter(void 0, void 0, void 0, function*() {
         if (globalThis.orbitdb) return;
         const ipfs = yield (0, $46137cfcfeb0552d$exports.default)();
-        const loggedIn = (0, $eec81c2cfd9b1b42$export$256a5a3564694cfc)();
+        const loggedIn = (0, $268f5174a8123bd7$export$256a5a3564694cfc)();
         if (loggedIn) {
             if (globalThis.projectConfig.chainType.includes("NEAR")) // IdentityProvider.addIdentityProvider(NearIdentityProvider);
             // const identity = await IdentityProvider.createIdentity({ type: 'NearIdentity' });
@@ -372,7 +372,7 @@ const $065c946acbad5f50$var$initOrbitDB = ()=>$065c946acbad5f50$var$__awaiter(vo
             globalThis.orbitdb = yield (0, ($parcel$interopDefault($dSCMW$orbitdb))).createInstance(ipfs);
         } else globalThis.orbitdb = yield (0, ($parcel$interopDefault($dSCMW$orbitdb))).createInstance(ipfs);
     });
-var $065c946acbad5f50$export$2e2bcd8739ae039 = $065c946acbad5f50$var$initOrbitDB;
+var $c4225dfc37430fda$export$2e2bcd8739ae039 = $c4225dfc37430fda$var$initOrbitDB;
 
 
 var $e8d2b956588f388c$exports = {};
@@ -498,7 +498,7 @@ var $088689cdba66f326$exports = {};
 
 $parcel$export($088689cdba66f326$exports, "CounterDatabase", function () { return $088689cdba66f326$export$b62cdc4dda4dc10d; }, function (v) { return $088689cdba66f326$export$b62cdc4dda4dc10d = v; });
 $parcel$export($088689cdba66f326$exports, "default", function () { return $088689cdba66f326$export$2e2bcd8739ae039; }, function (v) { return $088689cdba66f326$export$2e2bcd8739ae039 = v; });
-class $85f300b8af2e137a$export$2e2bcd8739ae039 {
+class $1c05c1fe683ce4de$export$2e2bcd8739ae039 {
     onChange(callbackfn) {
         this.database.events.on("replicated", ()=>callbackfn());
     }
@@ -535,7 +535,7 @@ var $088689cdba66f326$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $088689cdba66f326$export$b62cdc4dda4dc10d extends (0, $85f300b8af2e137a$export$2e2bcd8739ae039) {
+class $088689cdba66f326$export$b62cdc4dda4dc10d extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
     get() {
         return this.database.value;
     }
@@ -635,7 +635,7 @@ var $ecfd62e1e5921b75$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $ecfd62e1e5921b75$export$cc7289d1409c61ee extends (0, $85f300b8af2e137a$export$2e2bcd8739ae039) {
+class $ecfd62e1e5921b75$export$cc7289d1409c61ee extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
     get(key) {
         return key ? this.database.get(key)[0] : this.database.get("");
     }
@@ -711,7 +711,7 @@ var $610eccb30f15c968$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $610eccb30f15c968$export$a4a6104bef1ea4da extends (0, $85f300b8af2e137a$export$2e2bcd8739ae039) {
+class $610eccb30f15c968$export$a4a6104bef1ea4da extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
     instance() {
         return this.database;
     }
@@ -768,7 +768,7 @@ var $9f42f73f36b591e2$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $9f42f73f36b591e2$export$c4331506dfaaa28a extends (0, $85f300b8af2e137a$export$2e2bcd8739ae039) {
+class $9f42f73f36b591e2$export$c4331506dfaaa28a extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
     instance() {
         return this.database;
     }
@@ -827,7 +827,7 @@ var $fd768f09317d5eed$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $fd768f09317d5eed$export$f0160e6bce89ab9 extends (0, $85f300b8af2e137a$export$2e2bcd8739ae039) {
+class $fd768f09317d5eed$export$f0160e6bce89ab9 extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
     get(key) {
         if (!key) throw Error("Key is required");
         return this.database.get(key);
@@ -969,6 +969,98 @@ $parcel$export($ed3b8ded4dcf360c$exports, "uploadFile", function () { return $ed
 $parcel$export($ed3b8ded4dcf360c$exports, "openFile", function () { return $ed3b8ded4dcf360c$export$c47c8b06a9966d9f; }, function (v) { return $ed3b8ded4dcf360c$export$c47c8b06a9966d9f = v; });
 $parcel$export($ed3b8ded4dcf360c$exports, "getFileList", function () { return $ed3b8ded4dcf360c$export$23006a4c24fbadd0; }, function (v) { return $ed3b8ded4dcf360c$export$23006a4c24fbadd0 = v; });
 
+var $9301199aacf5ac42$exports = {};
+
+$parcel$export($9301199aacf5ac42$exports, "web3StorageGateway", function () { return $9301199aacf5ac42$export$594d9ee163818c02; }, function (v) { return $9301199aacf5ac42$export$594d9ee163818c02 = v; });
+$parcel$export($9301199aacf5ac42$exports, "default", function () { return $9301199aacf5ac42$export$2e2bcd8739ae039; }, function (v) { return $9301199aacf5ac42$export$2e2bcd8739ae039 = v; });
+var $9301199aacf5ac42$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
+        });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const $9301199aacf5ac42$var$url = "https://three0-storage-proxy.onrender.com";
+function $9301199aacf5ac42$var$web3StorageClientAuth() {
+    return $9301199aacf5ac42$var$__awaiter(this, void 0, void 0, function*() {
+        function getCookie(cname) {
+            const name = `${cname}=`;
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const ca = decodedCookie.split(";");
+            for(let i = 0; i < ca.length; i += 1){
+                let c = ca[i];
+                while(c.charAt(0) === " ")c = c.substring(1);
+                if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+        function setCookie(name, value, days) {
+            const expires = new Date(Date.now() + days * 864e5).toUTCString();
+            document.cookie += `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+        }
+        const token = getCookie("three0storage");
+        if (token) return token;
+        const nonce = yield globalThis.contract.set_nonce();
+        const res = yield fetch(`${$9301199aacf5ac42$var$url}/generateToken`, {
+            method: "POST",
+            // credentials: 'include',
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nonce: nonce,
+                accountId: globalThis.contract.account.accountId,
+                pid: globalThis.contract.account.accountId
+            })
+        }).then((resp)=>resp.json());
+        setCookie("three0storage", res.token, 1);
+        return res.token;
+    });
+}
+function $9301199aacf5ac42$var$uploadWeb3Files(files) {
+    return $9301199aacf5ac42$var$__awaiter(this, void 0, void 0, function*() {
+        const token = yield $9301199aacf5ac42$var$web3StorageClientAuth();
+        const fd = new FormData();
+        files.forEach((file)=>{
+            fd.append("file", file);
+        });
+        const output = yield fetch(`${$9301199aacf5ac42$var$url}/upload`, {
+            // credentials: 'include',
+            mode: "cors",
+            headers: {
+                Authorization: `${token}`
+            },
+            method: "POST",
+            body: fd
+        }).then((res)=>res.json());
+        if (output.status) return output.cid;
+        throw new Error(output.message);
+    });
+}
+const $9301199aacf5ac42$export$594d9ee163818c02 = "https://w3s.link/ipfs";
+var $9301199aacf5ac42$export$2e2bcd8739ae039 = $9301199aacf5ac42$var$uploadWeb3Files;
+
 
 var $ed3b8ded4dcf360c$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
@@ -999,26 +1091,23 @@ var $ed3b8ded4dcf360c$var$__awaiter = undefined && undefined.__awaiter || functi
 };
 function $ed3b8ded4dcf360c$export$a5575dbeeffdad98(file, path = "", description = "") {
     return $ed3b8ded4dcf360c$var$__awaiter(this, void 0, void 0, function*() {
-        let filepath = path;
-        if (path === "") filepath = file.name;
-        else filepath = `${path}/${file.name}`;
-        // Upload to IPFS
-        // Put IPFS URL into NFT and mint
-        const ipfs = yield (0, $46137cfcfeb0552d$exports.default)();
-        const uploadedFile = yield ipfs.add(file);
+        const filepath = path === "" ? file.name : `${path.slice(1)}/${file.name}`;
+        const cid = yield (0, $9301199aacf5ac42$exports.default)([
+            file
+        ]);
         const fileMetadata = {
             title: file.name,
             description: description,
-            media: `http://ipfs.io/ipfs/${uploadedFile.path}`,
-            media_hash: btoa(uploadedFile.path),
+            media: `${(0, $9301199aacf5ac42$exports.web3StorageGateway)}/${cid}/${file.name}`,
+            media_hash: btoa(cid),
             file_type: file.type,
             issued_at: Date.now()
         };
-        yield globalThis.storageContract.nft_mint({
+        return globalThis.storageContract.nft_mint({
             token_id: $dSCMW$shortuuid.generate().toLowerCase(),
             metadata: fileMetadata,
             path: filepath,
-            receiver_id: globalThis.walletConnection.account().accountId
+            receiver_id: window.walletConnection.account().accountId
         }, "300000000000000", "100000000000000000000000" // attached deposit in yoctoNEAR (optional)
         );
     });
@@ -1168,15 +1257,15 @@ const $020eab0e4dd81a46$export$2cd8252107eb640b = (projectConfig)=>$020eab0e4dd8
                 throw Error(`Unconfigured chainType '${projectConfig.chainType}'`);
         }
         yield (0, $6cad23d4edb5a464$exports.default)();
-        yield (0, $065c946acbad5f50$exports.default)();
+        yield (0, $c4225dfc37430fda$exports.default)();
         yield (0, $e8d2b956588f388c$exports.default)();
         yield (0, $6ee01793a3ef9b7c$exports.default)();
     });
 const $020eab0e4dd81a46$export$334c29725a78c21d = {
-    getAccountId: $eec81c2cfd9b1b42$export$c1e0336bde96e2dc,
+    getAccountId: $268f5174a8123bd7$export$c1e0336bde96e2dc,
     login: $36a1a38c5f443c85$exports.login,
     logout: $36a1a38c5f443c85$exports.logout,
-    isLoggedIn: $eec81c2cfd9b1b42$export$256a5a3564694cfc
+    isLoggedIn: $268f5174a8123bd7$export$256a5a3564694cfc
 };
 const $020eab0e4dd81a46$export$6feb5ea51a7b0b47 = {
     timestamp: $c519e5c2d701af31$exports.timestamp,
