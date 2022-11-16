@@ -147,7 +147,6 @@ export async function init() {
 	const near = await connect({
 		keyStore: new keyStores.BrowserLocalStorageKeyStore(),
 		...nearConfig,
-		headers: {},
 	})
 
 	// Initializing Wallet based Account. It can work with NEAR testnet wallet that
