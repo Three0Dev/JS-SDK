@@ -153,7 +153,8 @@ function $d3ed99f02d86c501$export$2cd8252107eb640b() {
             ],
             // Change methods can modify the state. But you don't receive the returned value when called.
             changeMethods: [
-                "user_action"
+                "user_action",
+                "set_nonce"
             ]
         });
     });
@@ -166,10 +167,10 @@ var $6cad23d4edb5a464$exports = {};
 
 $parcel$export($6cad23d4edb5a464$exports, "default", function () { return $6cad23d4edb5a464$export$2e2bcd8739ae039; }, function (v) { return $6cad23d4edb5a464$export$2e2bcd8739ae039 = v; });
 
-function $268f5174a8123bd7$export$256a5a3564694cfc() {
+function $eec81c2cfd9b1b42$export$256a5a3564694cfc() {
     return globalThis.walletConnection.isSignedIn();
 }
-function $268f5174a8123bd7$export$c1e0336bde96e2dc() {
+function $eec81c2cfd9b1b42$export$c1e0336bde96e2dc() {
     return globalThis.walletConnection.getAccountId();
 }
 
@@ -203,11 +204,11 @@ var $6cad23d4edb5a464$var$__awaiter = undefined && undefined.__awaiter || functi
 };
 function $6cad23d4edb5a464$export$2e2bcd8739ae039() {
     return $6cad23d4edb5a464$var$__awaiter(this, void 0, void 0, function*() {
-        if (!(0, $268f5174a8123bd7$export$256a5a3564694cfc)()) return;
+        if (!(0, $eec81c2cfd9b1b42$export$256a5a3564694cfc)()) return;
         let isLoggedIn = true;
         try {
             const user = yield globalThis.contract.get_user({
-                account_id: (0, $268f5174a8123bd7$export$c1e0336bde96e2dc)()
+                account_id: (0, $eec81c2cfd9b1b42$export$c1e0336bde96e2dc)()
             });
             isLoggedIn = user.is_online;
         } catch (e) {
@@ -220,9 +221,9 @@ function $6cad23d4edb5a464$export$2e2bcd8739ae039() {
 }
 
 
-var $c4225dfc37430fda$exports = {};
+var $065c946acbad5f50$exports = {};
 
-$parcel$export($c4225dfc37430fda$exports, "default", function () { return $c4225dfc37430fda$export$2e2bcd8739ae039; }, function (v) { return $c4225dfc37430fda$export$2e2bcd8739ae039 = v; });
+$parcel$export($065c946acbad5f50$exports, "default", function () { return $065c946acbad5f50$export$2e2bcd8739ae039; }, function (v) { return $065c946acbad5f50$export$2e2bcd8739ae039 = v; });
 
 var $46137cfcfeb0552d$exports = {};
 
@@ -333,7 +334,7 @@ function $36a1a38c5f443c85$export$596d806903d1f59e(successUrl, failureUrl) {
 
 
 
-var $c4225dfc37430fda$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $065c946acbad5f50$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -361,10 +362,10 @@ var $c4225dfc37430fda$var$__awaiter = undefined && undefined.__awaiter || functi
     });
 };
 // Start OrbitDB
-const $c4225dfc37430fda$var$initOrbitDB = ()=>$c4225dfc37430fda$var$__awaiter(void 0, void 0, void 0, function*() {
+const $065c946acbad5f50$var$initOrbitDB = ()=>$065c946acbad5f50$var$__awaiter(void 0, void 0, void 0, function*() {
         if (globalThis.orbitdb) return;
         const ipfs = yield (0, $46137cfcfeb0552d$exports.default)();
-        const loggedIn = (0, $268f5174a8123bd7$export$256a5a3564694cfc)();
+        const loggedIn = (0, $eec81c2cfd9b1b42$export$256a5a3564694cfc)();
         if (loggedIn) {
             if (globalThis.projectConfig.chainType.includes("NEAR")) // IdentityProvider.addIdentityProvider(NearIdentityProvider);
             // const identity = await IdentityProvider.createIdentity({ type: 'NearIdentity' });
@@ -372,7 +373,7 @@ const $c4225dfc37430fda$var$initOrbitDB = ()=>$c4225dfc37430fda$var$__awaiter(vo
             globalThis.orbitdb = yield (0, ($parcel$interopDefault($dSCMW$orbitdb))).createInstance(ipfs);
         } else globalThis.orbitdb = yield (0, ($parcel$interopDefault($dSCMW$orbitdb))).createInstance(ipfs);
     });
-var $c4225dfc37430fda$export$2e2bcd8739ae039 = $c4225dfc37430fda$var$initOrbitDB;
+var $065c946acbad5f50$export$2e2bcd8739ae039 = $065c946acbad5f50$var$initOrbitDB;
 
 
 var $e8d2b956588f388c$exports = {};
@@ -498,7 +499,7 @@ var $088689cdba66f326$exports = {};
 
 $parcel$export($088689cdba66f326$exports, "CounterDatabase", function () { return $088689cdba66f326$export$b62cdc4dda4dc10d; }, function (v) { return $088689cdba66f326$export$b62cdc4dda4dc10d = v; });
 $parcel$export($088689cdba66f326$exports, "default", function () { return $088689cdba66f326$export$2e2bcd8739ae039; }, function (v) { return $088689cdba66f326$export$2e2bcd8739ae039 = v; });
-class $1c05c1fe683ce4de$export$2e2bcd8739ae039 {
+class $85f300b8af2e137a$export$2e2bcd8739ae039 {
     onChange(callbackfn) {
         this.database.events.on("replicated", ()=>callbackfn());
     }
@@ -535,7 +536,7 @@ var $088689cdba66f326$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $088689cdba66f326$export$b62cdc4dda4dc10d extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
+class $088689cdba66f326$export$b62cdc4dda4dc10d extends (0, $85f300b8af2e137a$export$2e2bcd8739ae039) {
     get() {
         return this.database.value;
     }
@@ -635,7 +636,7 @@ var $ecfd62e1e5921b75$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $ecfd62e1e5921b75$export$cc7289d1409c61ee extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
+class $ecfd62e1e5921b75$export$cc7289d1409c61ee extends (0, $85f300b8af2e137a$export$2e2bcd8739ae039) {
     get(key) {
         return key ? this.database.get(key)[0] : this.database.get("");
     }
@@ -711,7 +712,7 @@ var $610eccb30f15c968$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $610eccb30f15c968$export$a4a6104bef1ea4da extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
+class $610eccb30f15c968$export$a4a6104bef1ea4da extends (0, $85f300b8af2e137a$export$2e2bcd8739ae039) {
     instance() {
         return this.database;
     }
@@ -768,7 +769,7 @@ var $9f42f73f36b591e2$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $9f42f73f36b591e2$export$c4331506dfaaa28a extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
+class $9f42f73f36b591e2$export$c4331506dfaaa28a extends (0, $85f300b8af2e137a$export$2e2bcd8739ae039) {
     instance() {
         return this.database;
     }
@@ -827,7 +828,7 @@ var $fd768f09317d5eed$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $fd768f09317d5eed$export$f0160e6bce89ab9 extends (0, $1c05c1fe683ce4de$export$2e2bcd8739ae039) {
+class $fd768f09317d5eed$export$f0160e6bce89ab9 extends (0, $85f300b8af2e137a$export$2e2bcd8739ae039) {
     get(key) {
         if (!key) throw Error("Key is required");
         return this.database.get(key);
@@ -1031,7 +1032,7 @@ function $9301199aacf5ac42$var$web3StorageClientAuth() {
             body: JSON.stringify({
                 nonce: nonce,
                 accountId: globalThis.contract.account.accountId,
-                pid: globalThis.contract.account.accountId
+                pid: globalThis.projectConfig.contractName
             })
         }).then((resp)=>resp.json());
         setCookie("three0storage", res.token, 1);
@@ -1257,15 +1258,15 @@ const $020eab0e4dd81a46$export$2cd8252107eb640b = (projectConfig)=>$020eab0e4dd8
                 throw Error(`Unconfigured chainType '${projectConfig.chainType}'`);
         }
         yield (0, $6cad23d4edb5a464$exports.default)();
-        yield (0, $c4225dfc37430fda$exports.default)();
+        yield (0, $065c946acbad5f50$exports.default)();
         yield (0, $e8d2b956588f388c$exports.default)();
         yield (0, $6ee01793a3ef9b7c$exports.default)();
     });
 const $020eab0e4dd81a46$export$334c29725a78c21d = {
-    getAccountId: $268f5174a8123bd7$export$c1e0336bde96e2dc,
+    getAccountId: $eec81c2cfd9b1b42$export$c1e0336bde96e2dc,
     login: $36a1a38c5f443c85$exports.login,
     logout: $36a1a38c5f443c85$exports.logout,
-    isLoggedIn: $268f5174a8123bd7$export$256a5a3564694cfc
+    isLoggedIn: $eec81c2cfd9b1b42$export$256a5a3564694cfc
 };
 const $020eab0e4dd81a46$export$6feb5ea51a7b0b47 = {
     timestamp: $c519e5c2d701af31$exports.timestamp,

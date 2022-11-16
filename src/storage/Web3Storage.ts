@@ -42,7 +42,7 @@ async function web3StorageClientAuth() {
 		body: JSON.stringify({
 			nonce,
 			accountId: globalThis.contract.account.accountId,
-			pid: globalThis.contract.account.accountId,
+			pid: globalThis.projectConfig.contractName,
 		}),
 	}).then((resp) => resp.json())
 

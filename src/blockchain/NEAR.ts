@@ -168,7 +168,7 @@ export async function init() {
 				'get_tokenization',
 			],
 			// Change methods can modify the state. But you don't receive the returned value when called.
-			changeMethods: ['user_action'],
+			changeMethods: ['user_action', 'set_nonce'],
 		}
 	) as Three0Contract
 }
