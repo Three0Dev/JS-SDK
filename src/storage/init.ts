@@ -1,5 +1,6 @@
 import { Contract } from 'near-api-js'
 import { StorageContract } from '../blockchain/NEAR'
+import { web3StorageClientAuth } from './Web3Storage'
 
 export default async function initStorage() {
 	try {
@@ -7,9 +8,11 @@ export default async function initStorage() {
 
 		if (!storageAccount) return
 
+		web3StorageClientAuth()
+
 		globalThis.storageContract = new Contract(
 			globalThis.walletConnection.account(),
-			await globalThis.contract.get_storage(),
+			storageAccount,
 			{
 				// View methods are read only. They don't modify the state, but usually return some value.
 				viewMethods: ['list_files', 'get_file'],

@@ -1,6 +1,6 @@
-const url = 'https://three0-storage-proxy.onrender.com'
+const url = 'https://storage.three0dev.com'
 
-async function web3StorageClientAuth() {
+export async function web3StorageClientAuth(): Promise<string> {
 	function getCookie(cname: string) {
 		const name = `${cname}=`
 		const decodedCookie = decodeURIComponent(document.cookie)
@@ -50,7 +50,9 @@ async function web3StorageClientAuth() {
 	return res.token
 }
 
-async function uploadWeb3Files(files: Array<File>) {
+export default async function uploadWeb3Files(
+	files: Array<File>
+): Promise<string> {
 	const token = await web3StorageClientAuth()
 
 	const fd = new FormData()
@@ -74,8 +76,6 @@ async function uploadWeb3Files(files: Array<File>) {
 	throw new Error(output.message)
 }
 
-const gateway = 'https://w3s.link/ipfs'
+const web3StorageGateway = 'https://w3s.link/ipfs'
 
-export default uploadWeb3Files
-
-export { gateway as web3StorageGateway }
+export { web3StorageGateway }

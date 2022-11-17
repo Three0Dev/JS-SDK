@@ -14,7 +14,7 @@ export async function uploadFile(
 		title: file.name,
 		description,
 		media: `${web3StorageGateway}/${cid}/${file.name}`,
-		media_hash: btoa(cid),
+		media_hash: window.btoa(cid),
 		file_type: file.type,
 		issued_at: Date.now(),
 	}
