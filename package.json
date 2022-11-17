@@ -15,7 +15,8 @@
     "test": "jest --verbose --coverage",
     "lint": "eslint 'src/**/*.ts' --no-error-on-unmatched-pattern",
     "lint:fix": "eslint 'src/**/*.ts' --no-error-on-unmatched-pattern --fix",
-    "generate:docs": "typedoc src/index.ts"
+    "generate:docs": "typedoc",
+    "prepublishOnly": "npm run lint:fix & npm run build"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,6 @@
   },
   "homepage": "https://github.com/Three0Dev/JS-SDK#readme",
   "dependencies": {
-    "@constl/orbit-db-types": "^1.0.5",
     "@swc/helpers": "^0.4.3",
     "@types/orbit-db": "npm:@constl/orbit-db-types@^1.0.5",
     "@types/uuid": "^8.3.4",
@@ -51,7 +51,7 @@
     "@types/jest": "^29.2.1",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
-    "eslint": "^8.25.0",
+    "eslint": "^8.27.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",
