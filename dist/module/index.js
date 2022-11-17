@@ -165,10 +165,10 @@ var $129e7bb7b84cbd88$exports = {};
 
 $parcel$export($129e7bb7b84cbd88$exports, "default", function () { return $129e7bb7b84cbd88$export$2e2bcd8739ae039; }, function (v) { return $129e7bb7b84cbd88$export$2e2bcd8739ae039 = v; });
 
-function $21a7ffe029c332ed$export$256a5a3564694cfc() {
+function $701110f03c3de876$export$256a5a3564694cfc() {
     return globalThis.walletConnection.isSignedIn();
 }
-function $21a7ffe029c332ed$export$c1e0336bde96e2dc() {
+function $701110f03c3de876$export$c1e0336bde96e2dc() {
     return globalThis.walletConnection.getAccountId();
 }
 
@@ -202,11 +202,11 @@ var $129e7bb7b84cbd88$var$__awaiter = undefined && undefined.__awaiter || functi
 };
 function $129e7bb7b84cbd88$export$2e2bcd8739ae039() {
     return $129e7bb7b84cbd88$var$__awaiter(this, void 0, void 0, function*() {
-        if (!(0, $21a7ffe029c332ed$export$256a5a3564694cfc)()) return;
+        if (!(0, $701110f03c3de876$export$256a5a3564694cfc)()) return;
         let isLoggedIn = true;
         try {
             const user = yield globalThis.contract.get_user({
-                account_id: (0, $21a7ffe029c332ed$export$c1e0336bde96e2dc)()
+                account_id: (0, $701110f03c3de876$export$c1e0336bde96e2dc)()
             });
             isLoggedIn = user.is_online;
         } catch (e) {
@@ -219,9 +219,9 @@ function $129e7bb7b84cbd88$export$2e2bcd8739ae039() {
 }
 
 
-var $226b74ba2923973f$exports = {};
+var $31f2ee8310cb2ee4$exports = {};
 
-$parcel$export($226b74ba2923973f$exports, "default", function () { return $226b74ba2923973f$export$2e2bcd8739ae039; }, function (v) { return $226b74ba2923973f$export$2e2bcd8739ae039 = v; });
+$parcel$export($31f2ee8310cb2ee4$exports, "default", function () { return $31f2ee8310cb2ee4$export$2e2bcd8739ae039; }, function (v) { return $31f2ee8310cb2ee4$export$2e2bcd8739ae039 = v; });
 
 var $f1f4ca456620baa2$exports = {};
 
@@ -266,7 +266,7 @@ const $f1f4ca456620baa2$var$IPFS_CONFIG = {
     config: {
         Addresses: {
             Swarm: [
-                "/dns4/three0-rtc-node.herokuapp.com/tcp/443/wss/p2p-webrtc-star/", 
+                "/dns4/signal-rtc.three0dev.com/tcp/443/wss/p2p-webrtc-star/"
             ]
         }
     }
@@ -332,7 +332,7 @@ function $29671cfde807e590$export$596d806903d1f59e(successUrl, failureUrl) {
 
 
 
-var $226b74ba2923973f$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+var $31f2ee8310cb2ee4$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
         return value instanceof P ? value : new P(function(resolve) {
             resolve(value);
@@ -360,10 +360,10 @@ var $226b74ba2923973f$var$__awaiter = undefined && undefined.__awaiter || functi
     });
 };
 // Start OrbitDB
-const $226b74ba2923973f$var$initOrbitDB = ()=>$226b74ba2923973f$var$__awaiter(void 0, void 0, void 0, function*() {
+const $31f2ee8310cb2ee4$var$initOrbitDB = ()=>$31f2ee8310cb2ee4$var$__awaiter(void 0, void 0, void 0, function*() {
         if (globalThis.orbitdb) return;
         const ipfs = yield (0, $f1f4ca456620baa2$exports.default)();
-        const loggedIn = (0, $21a7ffe029c332ed$export$256a5a3564694cfc)();
+        const loggedIn = (0, $701110f03c3de876$export$256a5a3564694cfc)();
         if (loggedIn) {
             if (globalThis.projectConfig.chainType.includes("NEAR")) // IdentityProvider.addIdentityProvider(NearIdentityProvider);
             // const identity = await IdentityProvider.createIdentity({ type: 'NearIdentity' });
@@ -371,12 +371,105 @@ const $226b74ba2923973f$var$initOrbitDB = ()=>$226b74ba2923973f$var$__awaiter(vo
             globalThis.orbitdb = yield (0, $7uxh1$orbitdb).createInstance(ipfs);
         } else globalThis.orbitdb = yield (0, $7uxh1$orbitdb).createInstance(ipfs);
     });
-var $226b74ba2923973f$export$2e2bcd8739ae039 = $226b74ba2923973f$var$initOrbitDB;
+var $31f2ee8310cb2ee4$export$2e2bcd8739ae039 = $31f2ee8310cb2ee4$var$initOrbitDB;
 
 
 var $30fd9ccd8434e85f$exports = {};
 
 $parcel$export($30fd9ccd8434e85f$exports, "default", function () { return $30fd9ccd8434e85f$export$2e2bcd8739ae039; }, function (v) { return $30fd9ccd8434e85f$export$2e2bcd8739ae039 = v; });
+
+var $71c4024da85ce832$exports = {};
+
+$parcel$export($71c4024da85ce832$exports, "web3StorageClientAuth", function () { return $71c4024da85ce832$export$8a5d2da6070a9018; }, function (v) { return $71c4024da85ce832$export$8a5d2da6070a9018 = v; });
+$parcel$export($71c4024da85ce832$exports, "default", function () { return $71c4024da85ce832$export$2e2bcd8739ae039; }, function (v) { return $71c4024da85ce832$export$2e2bcd8739ae039 = v; });
+$parcel$export($71c4024da85ce832$exports, "web3StorageGateway", function () { return $71c4024da85ce832$export$594d9ee163818c02; }, function (v) { return $71c4024da85ce832$export$594d9ee163818c02 = v; });
+var $71c4024da85ce832$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
+        });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const $71c4024da85ce832$var$url = "https://storage.three0dev.com";
+function $71c4024da85ce832$export$8a5d2da6070a9018() {
+    return $71c4024da85ce832$var$__awaiter(this, void 0, void 0, function*() {
+        function getCookie(cname) {
+            const name = `${cname}=`;
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const ca = decodedCookie.split(";");
+            for(let i = 0; i < ca.length; i += 1){
+                let c = ca[i];
+                while(c.charAt(0) === " ")c = c.substring(1);
+                if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+        function setCookie(name, value, days) {
+            const expires = new Date(Date.now() + days * 864e5).toUTCString();
+            document.cookie += `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+        }
+        const token = getCookie("three0storage");
+        if (token) return token;
+        const nonce = yield globalThis.contract.set_nonce();
+        const res = yield fetch(`${$71c4024da85ce832$var$url}/generateToken`, {
+            method: "POST",
+            // credentials: 'include',
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nonce: nonce,
+                accountId: globalThis.contract.account.accountId,
+                pid: globalThis.projectConfig.contractName
+            })
+        }).then((resp)=>resp.json());
+        setCookie("three0storage", res.token, 1);
+        return res.token;
+    });
+}
+function $71c4024da85ce832$export$2e2bcd8739ae039(files) {
+    return $71c4024da85ce832$var$__awaiter(this, void 0, void 0, function*() {
+        const token = yield $71c4024da85ce832$export$8a5d2da6070a9018();
+        const fd = new FormData();
+        files.forEach((file)=>{
+            fd.append("file", file);
+        });
+        const output = yield fetch(`${$71c4024da85ce832$var$url}/upload`, {
+            // credentials: 'include',
+            mode: "cors",
+            headers: {
+                Authorization: `${token}`
+            },
+            method: "POST",
+            body: fd
+        }).then((res)=>res.json());
+        if (output.status) return output.cid;
+        throw new Error(output.message);
+    });
+}
+const $71c4024da85ce832$export$594d9ee163818c02 = "https://w3s.link/ipfs";
+
 
 var $30fd9ccd8434e85f$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
@@ -410,7 +503,8 @@ function $30fd9ccd8434e85f$export$2e2bcd8739ae039() {
         try {
             const storageAccount = yield globalThis.contract.get_storage();
             if (!storageAccount) return;
-            globalThis.storageContract = new (0, $7uxh1$Contract)(globalThis.walletConnection.account(), (yield globalThis.contract.get_storage()), {
+            (0, $71c4024da85ce832$exports.web3StorageClientAuth)();
+            globalThis.storageContract = new (0, $7uxh1$Contract)(globalThis.walletConnection.account(), storageAccount, {
                 // View methods are read only. They don't modify the state, but usually return some value.
                 viewMethods: [
                     "list_files",
@@ -497,7 +591,7 @@ var $8ef4373c29a8ef17$exports = {};
 
 $parcel$export($8ef4373c29a8ef17$exports, "CounterDatabase", function () { return $8ef4373c29a8ef17$export$b62cdc4dda4dc10d; }, function (v) { return $8ef4373c29a8ef17$export$b62cdc4dda4dc10d = v; });
 $parcel$export($8ef4373c29a8ef17$exports, "default", function () { return $8ef4373c29a8ef17$export$2e2bcd8739ae039; }, function (v) { return $8ef4373c29a8ef17$export$2e2bcd8739ae039 = v; });
-class $16ff7c48a4295bf7$export$2e2bcd8739ae039 {
+class $d1b5d3ae4b75a4c6$export$2e2bcd8739ae039 {
     onChange(callbackfn) {
         this.database.events.on("replicated", ()=>callbackfn());
     }
@@ -534,7 +628,7 @@ var $8ef4373c29a8ef17$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $8ef4373c29a8ef17$export$b62cdc4dda4dc10d extends (0, $16ff7c48a4295bf7$export$2e2bcd8739ae039) {
+class $8ef4373c29a8ef17$export$b62cdc4dda4dc10d extends (0, $d1b5d3ae4b75a4c6$export$2e2bcd8739ae039) {
     get() {
         return this.database.value;
     }
@@ -634,7 +728,7 @@ var $739a37eae7f01d37$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $739a37eae7f01d37$export$cc7289d1409c61ee extends (0, $16ff7c48a4295bf7$export$2e2bcd8739ae039) {
+class $739a37eae7f01d37$export$cc7289d1409c61ee extends (0, $d1b5d3ae4b75a4c6$export$2e2bcd8739ae039) {
     get(key) {
         return key ? this.database.get(key)[0] : this.database.get("");
     }
@@ -710,7 +804,7 @@ var $7f01ca951b4d6c7e$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $7f01ca951b4d6c7e$export$a4a6104bef1ea4da extends (0, $16ff7c48a4295bf7$export$2e2bcd8739ae039) {
+class $7f01ca951b4d6c7e$export$a4a6104bef1ea4da extends (0, $d1b5d3ae4b75a4c6$export$2e2bcd8739ae039) {
     instance() {
         return this.database;
     }
@@ -767,7 +861,7 @@ var $75daf015ee5b198c$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $75daf015ee5b198c$export$c4331506dfaaa28a extends (0, $16ff7c48a4295bf7$export$2e2bcd8739ae039) {
+class $75daf015ee5b198c$export$c4331506dfaaa28a extends (0, $d1b5d3ae4b75a4c6$export$2e2bcd8739ae039) {
     instance() {
         return this.database;
     }
@@ -826,7 +920,7 @@ var $5933033ace426ad7$var$__awaiter = undefined && undefined.__awaiter || functi
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class $5933033ace426ad7$export$f0160e6bce89ab9 extends (0, $16ff7c48a4295bf7$export$2e2bcd8739ae039) {
+class $5933033ace426ad7$export$f0160e6bce89ab9 extends (0, $d1b5d3ae4b75a4c6$export$2e2bcd8739ae039) {
     get(key) {
         if (!key) throw Error("Key is required");
         return this.database.get(key);
@@ -968,98 +1062,6 @@ $parcel$export($c1ec8daeb266bd8b$exports, "uploadFile", function () { return $c1
 $parcel$export($c1ec8daeb266bd8b$exports, "openFile", function () { return $c1ec8daeb266bd8b$export$c47c8b06a9966d9f; }, function (v) { return $c1ec8daeb266bd8b$export$c47c8b06a9966d9f = v; });
 $parcel$export($c1ec8daeb266bd8b$exports, "getFileList", function () { return $c1ec8daeb266bd8b$export$23006a4c24fbadd0; }, function (v) { return $c1ec8daeb266bd8b$export$23006a4c24fbadd0 = v; });
 
-var $71c4024da85ce832$exports = {};
-
-$parcel$export($71c4024da85ce832$exports, "web3StorageGateway", function () { return $71c4024da85ce832$export$594d9ee163818c02; }, function (v) { return $71c4024da85ce832$export$594d9ee163818c02 = v; });
-$parcel$export($71c4024da85ce832$exports, "default", function () { return $71c4024da85ce832$export$2e2bcd8739ae039; }, function (v) { return $71c4024da85ce832$export$2e2bcd8739ae039 = v; });
-var $71c4024da85ce832$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
-    function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve) {
-            resolve(value);
-        });
-    }
-    return new (P || (P = Promise))(function(resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-const $71c4024da85ce832$var$url = "https://three0-storage-proxy.onrender.com";
-function $71c4024da85ce832$var$web3StorageClientAuth() {
-    return $71c4024da85ce832$var$__awaiter(this, void 0, void 0, function*() {
-        function getCookie(cname) {
-            const name = `${cname}=`;
-            const decodedCookie = decodeURIComponent(document.cookie);
-            const ca = decodedCookie.split(";");
-            for(let i = 0; i < ca.length; i += 1){
-                let c = ca[i];
-                while(c.charAt(0) === " ")c = c.substring(1);
-                if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-            }
-            return "";
-        }
-        function setCookie(name, value, days) {
-            const expires = new Date(Date.now() + days * 864e5).toUTCString();
-            document.cookie += `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
-        }
-        const token = getCookie("three0storage");
-        if (token) return token;
-        const nonce = yield globalThis.contract.set_nonce();
-        const res = yield fetch(`${$71c4024da85ce832$var$url}/generateToken`, {
-            method: "POST",
-            // credentials: 'include',
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                nonce: nonce,
-                accountId: globalThis.contract.account.accountId,
-                pid: globalThis.projectConfig.contractName
-            })
-        }).then((resp)=>resp.json());
-        setCookie("three0storage", res.token, 1);
-        return res.token;
-    });
-}
-function $71c4024da85ce832$var$uploadWeb3Files(files) {
-    return $71c4024da85ce832$var$__awaiter(this, void 0, void 0, function*() {
-        const token = yield $71c4024da85ce832$var$web3StorageClientAuth();
-        const fd = new FormData();
-        files.forEach((file)=>{
-            fd.append("file", file);
-        });
-        const output = yield fetch(`${$71c4024da85ce832$var$url}/upload`, {
-            // credentials: 'include',
-            mode: "cors",
-            headers: {
-                Authorization: `${token}`
-            },
-            method: "POST",
-            body: fd
-        }).then((res)=>res.json());
-        if (output.status) return output.cid;
-        throw new Error(output.message);
-    });
-}
-const $71c4024da85ce832$export$594d9ee163818c02 = "https://w3s.link/ipfs";
-var $71c4024da85ce832$export$2e2bcd8739ae039 = $71c4024da85ce832$var$uploadWeb3Files;
-
 
 var $c1ec8daeb266bd8b$var$__awaiter = undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
     function adopt(value) {
@@ -1098,7 +1100,7 @@ function $c1ec8daeb266bd8b$export$a5575dbeeffdad98(file, path = "", description 
             title: file.name,
             description: description,
             media: `${(0, $71c4024da85ce832$exports.web3StorageGateway)}/${cid}/${file.name}`,
-            media_hash: btoa(cid),
+            media_hash: window.btoa(cid),
             file_type: file.type,
             issued_at: Date.now()
         };
@@ -1256,15 +1258,15 @@ const $5b16728422d4a076$export$2cd8252107eb640b = (projectConfig)=>$5b16728422d4
                 throw Error(`Unconfigured chainType '${projectConfig.chainType}'`);
         }
         yield (0, $129e7bb7b84cbd88$exports.default)();
-        yield (0, $226b74ba2923973f$exports.default)();
+        yield (0, $31f2ee8310cb2ee4$exports.default)();
         yield (0, $30fd9ccd8434e85f$exports.default)();
         yield (0, $a1479a46361190ed$exports.default)();
     });
 const $5b16728422d4a076$export$334c29725a78c21d = {
-    getAccountId: $21a7ffe029c332ed$export$c1e0336bde96e2dc,
+    getAccountId: $701110f03c3de876$export$c1e0336bde96e2dc,
     login: $29671cfde807e590$exports.login,
     logout: $29671cfde807e590$exports.logout,
-    isLoggedIn: $21a7ffe029c332ed$export$256a5a3564694cfc
+    isLoggedIn: $701110f03c3de876$export$256a5a3564694cfc
 };
 const $5b16728422d4a076$export$6feb5ea51a7b0b47 = {
     timestamp: $654c4db4d93f05ad$exports.timestamp,
