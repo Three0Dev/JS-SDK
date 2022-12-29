@@ -1,6 +1,6 @@
 import FeedStore from 'orbit-db-feedstore'
+import { getOrbitDBInstance } from '../Instance'
 import Database from './Database'
-import { isValidDatabase } from './Utils'
 
 export class FeedDatabase extends Database {
 	instance() {
@@ -29,11 +29,7 @@ export class FeedDatabase extends Database {
 const getFeed = async (address: string) => {
 	throw Error('Not implemented')
 
-	if (!orbitdb) throw Error('OrbitDB is not initialized')
-	const isValid = await isValidDatabase(address)
-	if (!isValid) throw Error('Invalid database address')
-
-	const database = await orbitdb.log(address)
+	const database = await getOrbitDBInstance().log(address)
 	return new FeedDatabase(database)
 }
 

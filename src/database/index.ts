@@ -1,3 +1,4 @@
+import { getOrbitDBInstance } from './Instance'
 import {
 	getCounter,
 	getDocStore,
@@ -33,7 +34,7 @@ async function getDB(
 	options: DocStoreOptions = {}
 ): Promise<Database> {
 	let db: Database | null = null
-	if (!globalThis.orbitdb) throw Error('OrbitDB is not initialized')
+	if (!getOrbitDBInstance()) throw Error('OrbitDB is not initialized')
 	const isValid = await isValidDatabase(address)
 	if (!isValid) throw Error('Invalid database address')
 

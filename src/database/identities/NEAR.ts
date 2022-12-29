@@ -12,7 +12,7 @@ export default class NearIdentityProvider extends IdentityProvider {
 	// return identifier of external id (eg. a public key)
 	// eslint-disable-next-line class-methods-use-this
 	getId() {
-		return globalThis.accountId
+		return ''
 	}
 
 	// return a signature of data (signature of the OrbitDB public key)

@@ -1,4 +1,6 @@
 import * as short from 'short-uuid'
+import { NEAR } from '../blockchain'
+import { getStorageContract } from './init'
 import uploadWeb3Files, { web3StorageGateway } from './Web3Storage'
 
 export async function uploadFile(
@@ -19,12 +21,12 @@ export async function uploadFile(
 		issued_at: Date.now(),
 	}
 
-	return globalThis.storageContract.nft_mint(
+	return getStorageContract().nft_mint(
 		{
 			token_id: short.generate().toLowerCase(),
 			metadata: fileMetadata,
 			path: filepath,
-			receiver_id: window.walletConnection.account().accountId,
+			receiver_id: NEAR.getAccount().accountId,
 			//   perpetual_royalties: royalties
 		},
 		'300000000000000', // attached GAS (optional)
@@ -33,7 +35,7 @@ export async function uploadFile(
 }
 
 export async function openFile(path: string) {
-	const tokenMetaData = await globalThis.storageContract.get_file({
+	const tokenMetaData = await getStorageContract().get_file({
 		file_path: path,
 	})
 	return tokenMetaData
@@ -42,6 +44,6 @@ export async function openFile(path: string) {
 export async function getFileList(path: string) {
 	// add slash to end of path if not present
 	const folder = path.slice(-1) === '/' ? path : `${path}/`
-	const list = await globalThis.storageContract.list_files({ path: folder })
+	const list = await getStorageContract().list_files({ path: folder })
 	return list
 }

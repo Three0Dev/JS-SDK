@@ -1,4 +1,5 @@
 import CounterStore from 'orbit-db-counterstore'
+import { getOrbitDBInstance } from '../Instance'
 import Database from './Database'
 
 export class CounterDatabase extends Database {
@@ -14,7 +15,7 @@ export class CounterDatabase extends Database {
 }
 
 const getCounter = async (address: string) => {
-	const database = await globalThis.orbitdb.counter(address)
+	const database = await getOrbitDBInstance().counter(address)
 	await database.load()
 	return new CounterDatabase(database)
 }

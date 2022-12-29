@@ -1,9 +1,17 @@
+import { ProjectConfig } from './types/config'
 import { NEAR } from './blockchain'
 import initAuth from './auth/Init'
-import initOrbitDB from './database/Init'
+import initDB from './database/Init'
 import initStorage from './storage/init'
 import initToken from './token/init'
-import { getAccountId, login, logout, isLoggedIn } from './auth'
+import {
+	getAccountId,
+	loginWithPass,
+	loginWithWallet,
+	signUpWithPass,
+	logout,
+	isLoggedIn,
+} from './auth'
 import {
 	timestamp,
 	Counter,
@@ -19,11 +27,11 @@ import {
 	getBalance,
 	transferTokens,
 } from './token'
-import { ProjectConfig } from './types/config'
 import { BlockchainNetwork } from './utils'
+import { setProjectConfig } from './core'
 
 const init = async (projectConfig: ProjectConfig) => {
-	globalThis.projectConfig = projectConfig
+	setProjectConfig(projectConfig)
 
 	switch (projectConfig.chainType) {
 		case BlockchainNetwork.NEAR_TESTNET:
@@ -34,14 +42,16 @@ const init = async (projectConfig: ProjectConfig) => {
 	}
 
 	await initAuth()
-	await initOrbitDB()
+	await initDB()
 	await initStorage()
 	await initToken()
 }
 
 const Auth = {
 	getAccountId,
-	login,
+	loginWithWallet,
+	signUpWithPass,
+	loginWithPass,
 	logout,
 	isLoggedIn,
 }
