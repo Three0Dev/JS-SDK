@@ -4,6 +4,8 @@ import * as IPFS from 'ipfs-core'
 import { IPFSOptions } from 'ipfs-core/src/components/network'
 import Store from 'orbit-db-store'
 import { Counter, DocStore, KeyValue, timestamp } from '../src/database'
+import { NEAR } from '../src/blockchain'
+import * as dbInstance from '../src/database/instance'
 
 const IPFS_CONFIG: IPFSOptions = {
 	start: true,
@@ -22,20 +24,25 @@ const IPFS_CONFIG: IPFSOptions = {
 
 let db: Store
 let ipfs: IPFS.IPFS
+let orbitdb: OrbitDB
 
 beforeAll(async () => {
 	ipfs = await IPFS.create(IPFS_CONFIG)
-	globalThis.orbitdb = await OrbitDB.createInstance(ipfs)
+	orbitdb = await OrbitDB.createInstance(ipfs)
 
+	jest.spyOn(dbInstance, 'getOrbitDBInstance').mockImplementation(() => orbitdb)
+})
+
+beforeEach(() => {
 	const invalidDatabaseMock = jest.fn()
 	invalidDatabaseMock.mockReturnValue(Promise.resolve(true))
-	globalThis.contract = {
+	NEAR.getProjectContract = jest.fn().mockReturnValue({
 		valid_database: invalidDatabaseMock,
-	}
+	})
 })
 
 afterAll(async () => {
-	await globalThis.orbitdb.stop()
+	await orbitdb.stop()
 
 	setTimeout(async () => {
 		await ipfs.stop()
@@ -44,7 +51,7 @@ afterAll(async () => {
 
 describe('Counter Testing', () => {
 	beforeAll(async () => {
-		db = await globalThis.orbitdb.counter('counter-database-test')
+		db = await orbitdb.counter('counter-database-test')
 	})
 
 	afterAll(async () => {
@@ -52,9 +59,9 @@ describe('Counter Testing', () => {
 	})
 
 	test('Invalid Database from Contract', async () => {
-		globalThis.contract.valid_database.mockReturnValueOnce(
-			Promise.resolve(false)
-		)
+		NEAR.getProjectContract().valid_database = jest
+			.fn()
+			.mockReturnValueOnce(Promise.resolve(false))
 
 		await expect(Counter(db.address.toString())).rejects.toThrow(
 			'Invalid database address'
@@ -62,14 +69,14 @@ describe('Counter Testing', () => {
 	})
 
 	test('Invalid OrbitDB', async () => {
-		const { orbitdb } = globalThis
-		globalThis.orbitdb = null as unknown as OrbitDB
+		const temp = orbitdb
+		orbitdb = null as unknown as OrbitDB
 
 		await expect(Counter(db.address.toString())).rejects.toThrow(
 			'OrbitDB is not initialized'
 		)
 
-		globalThis.orbitdb = orbitdb
+		orbitdb = temp
 	})
 
 	test('Invalid Database Address', async () => {
@@ -110,7 +117,7 @@ describe('Counter Testing', () => {
 
 describe('Keyvalue Testing', () => {
 	beforeAll(async () => {
-		db = await globalThis.orbitdb.keyvalue('keyvalue-database-test')
+		db = await orbitdb.keyvalue('keyvalue-database-test')
 	})
 
 	afterAll(async () => {
@@ -118,9 +125,9 @@ describe('Keyvalue Testing', () => {
 	})
 
 	test('Invalid Database from Contract', async () => {
-		globalThis.contract.valid_database.mockReturnValueOnce(
-			Promise.resolve(false)
-		)
+		NEAR.getProjectContract().valid_database = jest
+			.fn()
+			.mockReturnValueOnce(Promise.resolve(false))
 
 		await expect(KeyValue(db.address.toString())).rejects.toThrow(
 			'Invalid database address'
@@ -128,14 +135,14 @@ describe('Keyvalue Testing', () => {
 	})
 
 	test('Invalid OrbitDB', async () => {
-		const { orbitdb } = globalThis
-		globalThis.orbitdb = null as unknown as OrbitDB
+		const temp = orbitdb
+		orbitdb = null as unknown as OrbitDB
 
 		await expect(KeyValue(db.address.toString())).rejects.toThrow(
 			'OrbitDB is not initialized'
 		)
 
-		globalThis.orbitdb = orbitdb
+		orbitdb = temp
 	})
 
 	test('Invalid Database Address', async () => {
@@ -203,7 +210,7 @@ describe('Keyvalue Testing', () => {
 
 describe('Docstore Testing', () => {
 	beforeAll(async () => {
-		db = await globalThis.orbitdb.docstore('docstore-database-test')
+		db = await orbitdb.docstore('docstore-database-test')
 	})
 
 	afterAll(async () => {
@@ -211,9 +218,9 @@ describe('Docstore Testing', () => {
 	})
 
 	test('Invalid Database from Contract', async () => {
-		globalThis.contract.valid_database.mockReturnValueOnce(
-			Promise.resolve(false)
-		)
+		NEAR.getProjectContract().valid_database = jest
+			.fn()
+			.mockReturnValueOnce(Promise.resolve(false))
 
 		await expect(DocStore(db.address.toString())).rejects.toThrow(
 			'Invalid database address'
@@ -221,14 +228,14 @@ describe('Docstore Testing', () => {
 	})
 
 	test('Invalid OrbitDB', async () => {
-		const { orbitdb } = globalThis
-		globalThis.orbitdb = null as unknown as OrbitDB
+		const temp = orbitdb
+		orbitdb = null as unknown as OrbitDB
 
 		await expect(DocStore(db.address.toString())).rejects.toThrow(
 			'OrbitDB is not initialized'
 		)
 
-		globalThis.orbitdb = orbitdb
+		orbitdb = temp
 	})
 
 	test('Invalid Database Address', async () => {

@@ -1,5 +1,5 @@
 {
-    "include": ["src/**/*", "jest.config.ts", "test/**.*"],
+    "include": ["src/**/*", "test/**/*", "jest.config.ts"],
     "compilerOptions": {
       "target": "ES6",
       "strict": true,
@@ -7,12 +7,4 @@
       "skipLibCheck": true,
       "esModuleInterop": true,
     },
-    "files": [
-      "src/types/global.d.ts"
-    ],
-    "typedocOptions": {
-      "entryPoints": ["src/index.ts", "src/auth/index.ts", "src/database/index.ts", "src/storage/index.ts"],
-      "exclude": ["**/*+(.test|.e2e).ts"],
-      "out": "docs"
-  }
 }
