@@ -4,3 +4,4 @@ node_modules
 orbitdb
 coverage
 playground.js
+dist

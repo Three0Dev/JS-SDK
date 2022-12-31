@@ -1,4 +1,16 @@
-import { login, logout } from './Actions'
-import { getAccountId, isLoggedIn } from './Session'
+import {
+	loginWithPass,
+	signUpWithPass,
+	loginWithWallet,
+	logout,
+} from './Actions'
+import { getAccountId, isLoggedIn } from './session'
 
-export { login, logout, getAccountId, isLoggedIn }
+export {
+	loginWithPass,
+	signUpWithPass,
+	loginWithWallet,
+	logout,
+	getAccountId,
+	isLoggedIn,
+}

@@ -1,3 +1,6 @@
+import { NEAR } from '../blockchain'
+import { getProjectConfig } from '../core'
+
 const url = 'https://storage.three0dev.com'
 
 export async function web3StorageClientAuth(): Promise<string> {
@@ -30,7 +33,7 @@ export async function web3StorageClientAuth(): Promise<string> {
 		return token
 	}
 
-	const nonce = await globalThis.contract.set_nonce()
+	const nonce = await NEAR.getProjectContract().set_nonce()
 
 	const res = await fetch(`${url}/generateToken`, {
 		method: 'POST',
@@ -41,8 +44,8 @@ export async function web3StorageClientAuth(): Promise<string> {
 		},
 		body: JSON.stringify({
 			nonce,
-			accountId: globalThis.contract.account.accountId,
-			pid: globalThis.projectConfig.contractName,
+			accountId: NEAR.getAccount().accountId,
+			pid: getProjectConfig().projectId,
 		}),
 	}).then((resp) => resp.json())
 

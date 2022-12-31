@@ -1,13 +1,13 @@
 import DocumentStore from 'orbit-db-docstore'
-import { v4 as uuidv4 } from 'uuid'
+import * as short from 'short-uuid'
+import { getOrbitDBInstance } from '../Instance'
 import Database from './Database'
 import { isValidKey } from './Utils'
 
 export class DocumentDatabase extends Database {
 	get(key?: string) {
-		return key
-			? (this.database as DocumentStore<Object>).get(key)[0]
-			: (this.database as DocumentStore<Object>).get('')
+		const db = this.database as DocumentStore<Object>
+		return key ? db.get(key)[0] : db.get('')
 	}
 
 	where(callbackfn: (value: Object) => boolean): Array<Object> {
@@ -20,7 +20,7 @@ export class DocumentDatabase extends Database {
 	}
 
 	async add(value: Object) {
-		const id = uuidv4()
+		const id = short.generate()
 		await this.set(id, value)
 		return id
 	}
@@ -39,10 +39,7 @@ export class DocumentDatabase extends Database {
 }
 
 const getDocStore = async (address: string, indexBy: Object) => {
-	const database = (await globalThis.orbitdb.docs(
-		address,
-		indexBy
-	)) as DocumentStore<Object>
+	const database = await getOrbitDBInstance().docs(address, indexBy)
 	await database.load()
 	return new DocumentDatabase(database)
 }

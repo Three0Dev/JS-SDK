@@ -1,7 +1,11 @@
-export function isLoggedIn(): boolean {
-	return globalThis.walletConnection.isSignedIn()
-}
+import { NEAR } from '../blockchain'
 
 export function getAccountId(): string {
-	return globalThis.walletConnection.getAccountId()
+	return NEAR.getAccount().accountId
+}
+
+export function isLoggedIn() {
+	return NEAR.isWalletAccount()
+		? NEAR.getWalletConnection().isSignedIn()
+		: !!localStorage.getItem('three0loggedIn')
 }

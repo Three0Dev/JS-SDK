@@ -3,24 +3,25 @@ import OrbitDB from 'orbit-db'
 import initIPFS from './ipfs'
 // import NearIdentityProvider from './identities/NEAR';
 import { isLoggedIn } from '../auth'
+import { getProjectConfig } from '../core'
+import { getOrbitDBInstance, setOrbitDBInstance } from './instance'
 
-// Start OrbitDB
-const initOrbitDB = async () => {
-	if (globalThis.orbitdb) return
+const initDB = async () => {
+	if (getOrbitDBInstance()) return
 
 	const ipfs = await initIPFS()
-	const loggedIn = isLoggedIn()
+	const loggedIn = await isLoggedIn()
 
 	if (loggedIn) {
-		if (globalThis.projectConfig.chainType.includes('NEAR')) {
+		if (getProjectConfig().chainType.includes('NEAR')) {
 			// IdentityProvider.addIdentityProvider(NearIdentityProvider);
 			// const identity = await IdentityProvider.createIdentity({ type: 'NearIdentity' });
 			// const orbitdb = await OrbitDB.createInstance(ipfs, {identity});
-			globalThis.orbitdb = await OrbitDB.createInstance(ipfs)
+			setOrbitDBInstance(await OrbitDB.createInstance(ipfs))
 		}
 	} else {
-		globalThis.orbitdb = await OrbitDB.createInstance(ipfs)
+		setOrbitDBInstance(await OrbitDB.createInstance(ipfs))
 	}
 }
 
-export default initOrbitDB
+export default initDB

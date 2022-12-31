@@ -1,15 +1,15 @@
+import { getProjectConfig } from './core'
+
 export const enum BlockchainNetwork {
 	NEAR_TESTNET = 'NEAR_TESTNET',
 }
 
 export function getBlockchainType() {
-	switch (globalThis.projectConfig.chainType) {
+	switch (getProjectConfig().chainType) {
 		case BlockchainNetwork.NEAR_TESTNET:
 			return 'testnet'
 		default:
-			throw Error(
-				`Unconfigured chainType '${globalThis.projectConfig.chainType}'`
-			)
+			throw Error(`Unconfigured chainType '${getProjectConfig().chainType}'`)
 	}
 }
 

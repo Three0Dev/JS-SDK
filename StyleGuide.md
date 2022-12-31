@@ -8,7 +8,7 @@ This document will give Three0 coding standards, file formatting, and styling re
 - Use camelCase for function names
 - Use camelCase for method names
 - Use this-case for directory names
-- Use ThisCase for file names (excluding index files)
+- Use thisCase for file names (excluding index files)
 
 ## Imports
 - Use import for importing modules
@@ -21,13 +21,7 @@ This document will give Three0 coding standards, file formatting, and styling re
   - external modules
   - modules from a parent directory
   - modules from the same or a sibling's directory
-  - modules from a child's directory
-    - directory import order
-      - assets
-      - components
-      - services
-      - state
-      - views
+  - modules from a child's director
 - Group similar import together
 - Don't skip lines between import
 
@@ -39,33 +33,8 @@ This document will give Three0 coding standards, file formatting, and styling re
 
 ## Directory Structure
 - Use this-case for directory names
-- Use this_case for file names
+- Use thisCase for file names
 - Use index.ts for the main entry point of a module
-- Include the following directories pathing from the root of the project
-  - src
-    - assets
-      - images
-      - styles
-      - fonts
-    - components
-      - component1 directory
-        - component1 files
-      - component2 directory
-        - component2 files
-    - services
-    - state
-    - views
-      - view1 directory
-        - view1 files
-      - view2 directory
-        - view2 files
-    - Core.ts (entry point for the application)
-    - config.ts (configuration file for the application)
-    - index.ts 
-    - index.html (main html file for the application)
-    - global.css (global css file for the application)
-
-    visit https://www.taniarascia.com/react-architecture-directory-structure/ for more information
 
 ## Classes
 - Use class for declaring classes

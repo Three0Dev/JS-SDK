@@ -1,4 +1,5 @@
 import EventStore from 'orbit-db-eventstore'
+import { getOrbitDBInstance } from '../Instance'
 import Database from './Database'
 
 export class EventLogDatabase extends Database {
@@ -24,7 +25,7 @@ export class EventLogDatabase extends Database {
 const getEventLog = async (address: string) => {
 	throw Error('Not implemented')
 
-	const database = await orbitdb.log(address)
+	const database = await getOrbitDBInstance().log(address)
 	return new EventLogDatabase(database)
 }
 

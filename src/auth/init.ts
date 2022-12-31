@@ -1,24 +1,25 @@
-import { UserActionType } from '../blockchain/NEAR'
-import { isLoggedIn as isLoggedInLocally, getAccountId } from './Session'
+import { UserActionType } from '../types/near'
+import { NEAR } from '../blockchain'
+import { isLoggedIn as isLoggedInLocally } from './session'
 
 export default async function initAuth() {
-	if (!isLoggedInLocally()) return
+	let isLoggedIn = isLoggedInLocally()
 
-	let isLoggedIn = true
+	if (!isLoggedIn) return
 
 	try {
-		const user = await globalThis.contract.get_user({
-			account_id: getAccountId(),
+		const user = await NEAR.getProjectContract().get_user({
+			account_id: NEAR.getAccount().accountId,
 		})
+
 		isLoggedIn = user.is_online
 	} catch (e) {
 		isLoggedIn = false
-		throw e
 	}
 
-	if (!isLoggedIn) {
-		await globalThis.contract.user_action({
-			action: UserActionType.LOGIN,
-		})
-	}
+	if (isLoggedIn) return
+
+	await NEAR.getProjectContract().user_action({
+		action: UserActionType.LOGIN,
+	})
 }
